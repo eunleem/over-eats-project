@@ -16,9 +16,13 @@ ng serve -o
 ```
 
 npm install로 필요한 패키지를 설치한 뒤 실행 해 주세요.
+
 json-server, faker.js로 더미데이터 필요시 사용합니다.
+
 git flow를 사용해 feature 브랜치로 각각의 기능별로 작업합니다.
+
 css는 scss를 사용하고 공용변수는 _variables.scss에 있습니다.
+
 전체 적용 가능한 엘리먼트 스타일은 style.scss에 입력합니다.
 
 
