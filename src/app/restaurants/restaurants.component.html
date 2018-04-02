@@ -1,3 +1,27 @@
-<p>
-  restaurants works!
-</p>
+<ng-container>
+  <div class="restaraunt-container">
+    <div class="main-container">
+      <div class="location">
+        <div>
+          <h1> restaraunt-name </h1>
+        </div>
+      </div>
+      <div class="content-list">
+        <div class="contents" *ngFor="let list of restaraunt">
+          <div class="content">
+            <a>
+              <div class="title">{{list.name}}</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="goUp" (click)="goUp()">위로</button>
+    </div>
+    <div>
+      <button class="loadMore" (click)="loadMore()">더 보기</button>
+    </div>
+  </div>
+
+</ng-container>

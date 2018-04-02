@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 // custom module
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
+import { RestaurantsModule } from './restaurants/restaurants.module';
 
 // routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +26,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     // custom module
     HomeModule,
-    SharedModule
+    SharedModule,
+    RestaurantsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
