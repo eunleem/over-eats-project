@@ -8,6 +8,9 @@ import { RestaurantsComponent } from './restaurants.component';
   ],
   declarations: [
     RestaurantsComponent
+  ],
+  exports: [
+    RestaurantsComponent
   ]
 })
 export class RestaurantsModule { }
