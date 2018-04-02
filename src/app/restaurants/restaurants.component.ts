@@ -8,7 +8,6 @@ interface Restaurant {
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
-  // template: `test`,
   styleUrls: ['./restaurants.component.scss']
 })
 export class RestaurantsComponent implements OnInit {
