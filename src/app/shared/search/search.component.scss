@@ -11,3 +11,13 @@ label {
   height: 34px;
   left: 10px;
 }
+
+ul {
+  position: absolute;
+  width: 100%;
+
+  & li {
+    height: 34px;
+    line-height: 34px;
+  }
+}
