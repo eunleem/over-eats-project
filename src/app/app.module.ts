@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 // custom component
 import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
+import { RestaurantsModule } from './restaurants/restaurants.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { UserModule } from './user/user.module';
     // custom module
     HomeModule,
     SharedModule,
-    UserModule
+    UserModule,
+    RestaurantsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
