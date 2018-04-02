@@ -1,0 +1,116 @@
+// 공용 스타일 여기에 작성합니다.
+@import './sass/variables';
+@import './sass/reset';
+
+// 사이즈 제한 있는 컨테이너 작업시 사용가능한 클래스
+.constraint {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 10px 20px;
+
+  @media only screen and (min-width: $large) {
+		// padding: 10px 0;
+	}
+}
+
+// 버튼 기본 스타일 클래스
+// class="button uber" 이렇게 다양한 색 적용 가능
+.button {
+  min-width: 85px;
+  height: 34px;
+  text-decoration: none;
+  border-radius: $border;
+  border: 1px solid $light-grey;
+  color: rgb(36,36,36);
+  background: white;
+  margin-left: 2px;
+  margin-right: 2px;
+  transition: background 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  
+  &.button-large {
+    height: 50px;
+    margin: 0;
+    width: 90px;
+    margin-left: -4px;
+  }
+  
+  &.disabled {
+    opacity: 0.5;
+  }
+  
+  &:hover {
+    background: rgb(245,245,245);
+  }
+
+  &.dark {
+    color: white;
+    background: $dark;
+    border-color: $dark;
+    
+    &:hover {
+      background: #000;
+      border-color: #000;
+    }
+  }
+
+  &.uber {
+    color: white;
+    background: $uber-green;
+    border-color: $uber-green;
+
+    &:hover {
+      background: $uber-green-hover;
+      border-color: $uber-green-hover;
+    }
+  }
+}
+
+// input text 기본 스타일입니다. 
+// 기본은 박스형 line 클래스로 라인형으로 사용가능
+input[type="text"] {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px 0 30px;
+  border-radius: $border;
+  border: 1px solid $light-grey;
+
+  transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  
+  font-size: inherit;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+  color: $dark;
+
+  &::placeholder {
+    color: $dark;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  &:focus {
+    border-color: black;
+  }
+
+  &.light:focus {
+    border-color: white;
+  }
+
+  &.uber:focus {
+    border-color: $uber-green-hover;
+  }
+
+  &.select {
+    width: 100px;
+    padding-left: 10px;
+  }
+
+  &.line {
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid $light-grey;
+
+    &:focus {
+      border-color: black;
+    }
+  }
+}
