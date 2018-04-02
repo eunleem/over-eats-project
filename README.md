@@ -1,30 +1,62 @@
-![Logo of the project](./logo.png)
+![Logo of the project](./readme/logo.png)
 
 # OVER EATS &middot; [![Build Status](https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square)](https://travis-ci.org/npm/npm) [![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/npm) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/your/your-project/blob/master/LICENSE)
 > 패스트캠퍼스 프론트앤드 스쿨 팀프로젝트
 
 Over Eats not Uber Eats!
+FDS : 오다혜 강승훈 나은해
 
 ---
 
 ## Installing / Getting started
 
-A quick introduction of the minimal setup you need to get a hello world up &
-running.
-
 ```shell
+git clone https://github.com/yogicat/over-eats-project
+cd over-eats-project/
 npm install
-ng serve -o
 ```
-
+- 프로젝트 포크떠주세요
 - npm install로 필요한 패키지를 설치한 뒤 실행 해 주세요.
-- json-server, faker.js로 더미데이터 필요시 사용합니다.
-- git flow를 사용해 feature 브랜치로 각각의 기능별로 작업합니다.
-- css는 scss를 사용하고 공용변수는 _variables.scss에 있습니다.
-- 전체 적용 가능한 엘리먼트 스타일은 style.scss에 입력합니다.
 
-
-## Developing
 
 ### Built With
-Angular 
+Angular 4+
+
+
+### Prerequisites
+
+### Setting up Dev
+
+- 항상 자신이 `develop brunch`에 있는지 확입합시다.
+- 작업시 [git flow](https://danielkummer.github.io/git-flow-cheatsheet/index.ko_KR.html)를 이용해 feature로 나눠서 작업합니다.
+- `git add .` 사용시 늘 주의합시다.
+
+```shell
+// 기능별로 feature를 따주세요
+git flow feature start MYFEATURE
+// feature 작업 완성후
+git flow feature finish MYFEATURE
+```
+
+
+### Project Layout
+
+![project layout](./readme/layout.png)
+
+- 시작 구조는 다음과 같습니다.
+
+
+## Style guide
+
+- css framework로 scss를 사용하고 공용스타일은 style.scss에 작성합니다.(버튼, 컨테이너 스타일)
+- 공용변수는 _variables.scss에 작성합니다. (공용칼라, 미디어쿼리 등)
+
+## Api Reference
+
+
+## Database
+
+- 백엔드 작업 전까지 더미데이터를 활용합니다.
+- [Faker.js](https://github.com/marak/Faker.js/) 사용해 더미데이터 생성 가능.
+
+## Licensing
