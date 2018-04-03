@@ -3,10 +3,10 @@
 .auth-form {
 
   width: 100vw;
-  max-width: 500px;
+  max-width: 460px;
   min-width: 300px;
   border-radius: 2px;
-  padding: 3.6em;
+  padding: 3em;
   background: white;
 
   margin: 0 auto;
@@ -18,16 +18,15 @@
   }
 
   @media only screen and (min-width: $medium) {
-    max-width: 700px;
-    min-width: 500px;
+    max-width: 600px;
+    min-width: 460px;
     width: 40vw;
-    box-shadow: 0px 0 20px 10px #b6b6b64d;
+    box-shadow: 0px 0 30px 10px #3535354d;
   }
 }
 
 
 label {
-  margin: 20px 0;
   width: 100%;
 
   & input {
@@ -38,21 +37,22 @@ label {
 
 .form-group {
   position: relative;
+  margin-top: 30px;
 }
 
 .error {
   font-size: 1em;
-  color: red;
+  color: #FF5722;
   position: absolute;
-  top: 75px;
-  right: 0px;
+  top: 53px;
+  right: 3px;
 }
 
 .auth-form-action {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .auth-form-toggle {
-  padding: 10px 0;
   margin: 0 auto;
+  margin-top: 20px;
 }

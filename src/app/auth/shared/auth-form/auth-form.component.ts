@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
       <ng-content select="h1"></ng-content>
+      <ng-content select="p"></ng-content>
       <div class="form-group">
         <label>
           <input
@@ -40,6 +41,7 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
         </div>
 
         <div class="auth-form-toggle">
+          <ng-content select="span"></ng-content>
           <ng-content select="a"></ng-content>
         </div>
 
