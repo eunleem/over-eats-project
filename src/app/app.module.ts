@@ -14,6 +14,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { MenuListModule } from './menu-list/menu-list.module';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { AuthModule } from './auth/auth.module';
     SharedModule,
     UserModule,
     RestaurantsModule,
-    AuthModule
+    AuthModule,
+    MenuListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +27,7 @@ import { FormGroup } from '@angular/forms';
   `
 })
 export class LoginComponent implements OnInit {
+  message: string;
 
   constructor() { }
 
@@ -32,6 +35,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(event: FormGroup) {
-    console.log(event.value);
+    const userName = event.value.email;
+    const password = event.value.password;
+    console.log(userName, password);
+
   }
+
 }

@@ -15,12 +15,12 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
             class="uber"
             type="email"
             placeholder="이메일주소"
-            formControlName="email">
+            formControlName="userid">
         </label>
-          <span class="error" *ngIf="emailFormat">
+          <span class="error" *ngIf="useridFormat">
             이메일을 입력해 주세요.
           </span>
-          <span class="error" *ngIf="emailPattern">
+          <span class="error" *ngIf="useridPattern">
             이메일 형식에 맞게 입력해 주세요.
           </span>
         </div>
@@ -33,7 +33,7 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
             formControlName="password">
         </label>
         <span class="error" *ngIf="passwordInvalid">
-          Password is required
+          비밀번호를 입력해 주세요.
         </span>
         </div>
         <ng-content select=".error"></ng-content>
@@ -65,7 +65,7 @@ export class AuthFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      email: ['', [
+      userid: ['', [
         Validators.required,
         Validators.pattern(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/)
       ]],
@@ -88,12 +88,12 @@ export class AuthFormComponent implements OnInit {
     return control.hasError('required') && control.touched;
   }
 
-  get emailFormat() {
-    const control = this.form.get('email');
+  get useridFormat() {
+    const control = this.form.get('userid');
     return control.hasError('required') && control.touched;
   }
-  get emailPattern() {
-    const control = this.form.get('email');
+  get useridPattern() {
+    const control = this.form.get('userid');
     return control.hasError('pattern') && control.touched;
   }
 
