@@ -1,83 +1,84 @@
-@media (max-width: 599px) {
+@import '../../sass/variables';
 
-    .main-container {
-        border: 1px solid black;
-    }
-
-    .restaraunt-name{
-        border: 1px solid black;
-        display: flex;
-    }
-
-    .main-content {
+    .restaraunt-container{
         position: relative;
     }
 
-    .content-list {
-        padding-top: 20px;
-        background-color: gray;
-        height: 1500px;
+    .restaurat-name > h1 {
+        font-size: 22px;
+        padding-left: 60px;
     }
 
     /* content */
 
+    .content-list {
+        // border: 1px solid black;
+        margin-right: -18px;
+        height: 1500px;
+        overflow: auto;
+        transition: all 3s ease-in;
+    }
+
     .contents {
-        margin-left: -22px;
-        margin-bottom: 30px;
-        display: flex;
+        padding: 0 30px;
     }
 
     .content {
-        /* border: 1px solid black; */
+        // border: 1px solid black;
+        margin: 30px;
+        float: left;
+        width: 27%;
+        height: 330px;
+        transition: all 0.5s ease;
+    }
+    .content:hover {
+        background-color: rgba(201, 175, 175, 0.1);
+        transition: all 0.5s ease;
+    }
+
+
+    .img {
         width: 100%;
+        height: 240px;
+        background-image: url("../../assets/images/bg-left.png"),
+        url("../../assets/images/123.png");
+        background-size: 100% 100%;
     }
 
-    .content > a > div {
-        border: 1px solid black;
-        flex-grow: 1;
-        background-color: green;
-        height: 150px;
-        margin: 0.2em;
-        margin-left: 32px;
+    .name {
+        // border: 1px solid black;
+        height: 10px;
+        display: block;
     }
 
-    .title {
-        text-align: center;
-        background-color: yellow;
+    /* load more */
+
+    .load-more {
         margin-top: 100px;
-        padding-top: 12px;
-        height: 30px;
-    }
-
-/* load more */
-
-    .loadmore {
         display: flex;
         justify-content: center;
-        margin-bottom: 32px;
-        height: 60px;
-        background-color: yellowgreen;
     }
 
-    .loadmore > button {
-        padding: 8px 16px;
+    .load-more > button {
+        border: 1px solid black;
         font-size: 14px;
+        padding: 8px 16px;
+        height: 60px;
         cursor: pointer;
     }
 
     /* scroll up */
 
     .go-up {
-        display: flex;
+        float: right;
+        position: fixed;
+        bottom: 100px;
+        right: 40px;
         width: 60px;
         height: 60px;
-        float: both;
-        /* position: fixed; */
-        right: 60px;
+        background-color: $uber-green;
     }
 
     .go-up > button {
         cursor: pointer;
     }
-
-}

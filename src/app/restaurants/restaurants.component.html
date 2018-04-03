@@ -1,27 +1,23 @@
-<ng-container>
   <div class="restaraunt-container">
     <div class="main-container">
-      <div class="location">
-        <div>
-          <h1> restaraunt-name </h1>
-        </div>
+      <div class="restaurat-name">
+        <h1> restaraunt-name </h1>
       </div>
       <div class="content-list">
         <div class="contents" *ngFor="let list of restaraunt">
-          <div class="content">
-            <a>
-              <div class="title">{{list.name}}</div>
-            </a>
-          </div>
+          <a>
+            <div class="content">
+              <div class="img" ></div>
+              <p class="name">{{list.name}}</p>
+              <p class="name">{{list.tag}}</p>
+              <p class="making-time"> 조리시간 : {{list.time}}분 </p>
+            </div>
+          </a>
         </div>
       </div>
     </div>
-    <div>
-      <button class="goUp" (click)="goUp()">위로</button>
-    </div>
-    <div>
-      <button class="loadMore" (click)="loadMore()">더 보기</button>
+    <button class="go-up" (click)="goUp()"> 위로 </button>
+    <div class="load-more">
+      <button (click)="loadMore($event)">더 로드하기</button>
     </div>
   </div>
-
-</ng-container>

@@ -4,6 +4,7 @@ interface Restaurant {
   id: number;
   name: string;
   tag: string;
+  time: string;
 }
 @Component({
   selector: 'app-restaurants',
@@ -20,9 +21,16 @@ export class RestaurantsComponent implements OnInit {
 
   getList() {
     this.restaraunt = [
-      { id: 1, name: 'mcDonald', tag: 'burger'} ,
-      { id: 2, name: 'burgerking', tag: 'burger'} ,
-      { id: 3, name: 'lotteria', tag: 'burger'} ,
+      { id: 1, name: 'mcDonald', tag: 'burger', time: '10~15'},
+      { id: 2, name: 'burgerking', tag: 'potato', time: '10~15'},
+      { id: 3, name: 'lotteria', tag: 'burger', time: '10~15'},
+      { id: 4, name: 'momskitchin', tag: 'burger', time: '10~15'},
+      { id: 5, name: 'starbucks', tag: 'coffee', time: '15~20' },
+      { id: 6, name: 'coffeebean', tag: 'coffee', time: '10~15' },
+      { id: 7, name: 'caffebene', tag: 'coffee', time: '10~15' },
+      { id: 8, name: 'sandwich', tag: 'sandwich', time: '10~15' },
+      { id: 9, name: 'JOEsandwich', tag: 'sandwich', time: '10~15' },
+      { id: 10, name: 'KIMs sandwich', tag: 'sandwich', time: '10~15' },
     ];
   }
 
@@ -30,8 +38,10 @@ export class RestaurantsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  loadMore() {
-    console.log(this.restaraunt);
+  loadMore(event) {
+    // const goUp = document.querySelector('go-up');
+    // const Height = document.querySelector('.content-list');
+    console.log('a');
   }
 
 }
