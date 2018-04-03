@@ -15,7 +15,6 @@ import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,5 +1,14 @@
 @import '../../../../sass/variables';
 
+@keyframes show {
+  0% {
+    transform: translateY(-200%)
+  }
+  100% {
+    transform: translateY(0)
+  }
+}
+
 .auth-form {
 
   width: 100vw;
@@ -10,6 +19,7 @@
   background: white;
 
   margin: 0 auto;
+  animation: show 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 
   & form {
     display: flex;
@@ -40,12 +50,22 @@ label {
   margin-top: 30px;
 }
 
+@keyframes errorIn {
+  0% {
+    transform: translateX(-2px);
+  }
+  100%{
+    transform: translateX(2px);
+  }
+}
 .error {
   font-size: 1em;
   color: #FF5722;
   position: absolute;
   top: 53px;
   right: 3px;
+  animation: errorIn 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-iteration-count: 4;
 }
 
 .auth-form-action {
