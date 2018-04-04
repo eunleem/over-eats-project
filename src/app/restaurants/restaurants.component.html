@@ -1,5 +1,5 @@
   <div class="restaraunt-container">
-    <div class="main-container elevator">
+    <div class="main-container">
       <div class="restaurat-name">
         <h1> restaraunt-name </h1>
       </div>
@@ -8,17 +8,15 @@
           <a>
             <div class="content">
               <div class="img" ></div>
-              <div class="name">{{list.name}}</div>
-              <div class="tag">{{list.tag}}</div>
-              <div>
-                <span class="making-time"> 조리시간 : {{list.time}}분 </span>
-              </div>
+              <p class="name">{{list.name}}</p>
+              <p class="name">{{list.tag}}</p>
+              <p class="making-time"> 조리시간 : {{list.time}}분 </p>
             </div>
           </a>
         </div>
       </div>
     </div>
-    <button class="go-up elevator" (click)="goUp()"> 위로 </button>
+    <button class="go-up" (click)="goUp()"> 위로 </button>
     <div class="load-more">
       <button (click)="loadMore($event)">더 로드하기</button>
     </div>
