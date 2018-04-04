@@ -35,7 +35,11 @@ export class RestaurantsComponent implements OnInit {
   }
 
   goUp() {
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      'behavior': 'smooth',
+      'left': 0,
+      'top': 0
+    });
   }
 
   loadMore(event) {
