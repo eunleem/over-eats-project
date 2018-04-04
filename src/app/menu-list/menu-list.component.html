@@ -1,33 +1,44 @@
-<section class="card-header">
-  <div class="card">
-    <h2>Denny's (1065 Camino Del Rio)</h2>
-    <span class="category">American | Diner</span>
-    <span class="cooking-time">25 ~ 35분</span>
+<section 
+  class="card-header"
+  [ngStyle]="{'background-image': 'url(../../assets/images/yakynina-anastasia-543605-unsplash.jpg)'}">
+  <div class="card-group constraint">
+    <div class="card">
+      <h2>Denny's (1065 Camino Del Rio)</h2>
+      <p class="category">American | Diner</p>
+      <p class="cooking-time">25 ~ 35분</p>
+    </div>
   </div>
 </section>
 
 <div class="category-nav">
-  <ul>
-    <li>Most Popular</li>
-    <li>Breakfast Slams</li>
-    <li>Breakfast Favorites</li>
-    <li>Buttermilk Pancakes</li>
+  <ul class="constraint">
+    <li class="category-item active-item"><a href="#">Most Popular</a></li>
+    <li class="category-item"><a href="#">Breakfast Slams</a></li>
+    <li class="category-item"><a href="#">Breakfast Favorites</a></li>
+    <li class="category-item"><a href="#">Buttermilk Pancakes</a></li>
+    <li class="category-item"><a href="#">Breakfast Side</a></li>
   </ul>
 </div>
-
-<section class="menu-list">
-  <h2>Most Popular</h2>
-  <ul class="menu-group">
-    <li class="menu-item">
-      <div class="menu-text">
-        <h3>Country-Fried Steak & Eggs</h3>
-        <p>A golden-fried chopped beef steak smothered in rich country gravy.
-          Served with two eggs, hash browns and bread.</p>
-        <p>$11.79</p>
-      </div>
-      <div class="menu-img">
-        <img src="#" alt="">
-      </div>
-    </li>
-  </ul>
-</section>
+<div class="menu-wrapper constraint">
+  <section class="menu-list">
+    <h2>Most Popular</h2>
+    <ul class="menu-group">
+      <li 
+        class="menu-item"
+        *ngFor="let item of items"
+        (click)="addToCart()">
+        <div class="menu-text">
+          <h3>{{ item.title }}</h3>
+          <p class="menu-disc">{{ item.disc }}</p>
+          <p class="menu-price">{{ item.price | currency:'KRW' }}</p>
+        </div>
+        <div class="menu-img">
+          <img src="{{ item.img }}" width="400" height="auto" alt="">
+        </div>
+      </li>
+    </ul>
+  </section>
+  <section class="cart-group">
+    <app-cart></app-cart>
+  </section>
+</div>

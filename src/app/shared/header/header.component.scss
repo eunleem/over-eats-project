@@ -15,7 +15,7 @@
 }
 
 .header {
-    max-width: 1024px;
+    max-width: $large;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,4 +28,11 @@
 
 }
 
+button {
+  a {
+    width: 100% ;
+    display: inline-block;
+    line-height: 34px;
+  }
+}
 // ------ end of header

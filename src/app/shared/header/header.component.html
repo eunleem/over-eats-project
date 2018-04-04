@@ -25,7 +25,7 @@
       <button class="button dark">
         <a routerLink="/signup" *ngIf="!isLoggedIn">회원가입</a>
       </button>
-      <button class="icon-group" *ngIf="isLoggedIn">
+      <button class="icon-group" *ngIf="onMenu">
         <a routerLink="/cart" class="icon">
           <i class="fas fa-shopping-cart"></i>
         </a>

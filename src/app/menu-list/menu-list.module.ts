@@ -14,7 +14,7 @@ import { MenuRoutingModule } from './menu-routing.module';
     CartComponent
   ],
   exports: [
-    MenuListComponent
+    CartComponent
   ]
 })
 export class MenuListModule { }
