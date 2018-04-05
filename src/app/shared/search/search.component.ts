@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -8,12 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  @Input()
+  onMenu: boolean;
 
   constructor(
     private router: Router
   ) { }
 
   ngOnInit() {
+    console.log(this.onMenu);
   }
   onEnter() {
     this.router.navigate(['menu']);

@@ -29,16 +29,17 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   message: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
+
 
   loginUser(event: FormGroup) {
     const userName = event.value.email;
     const password = event.value.password;
     console.log(userName, password);
-
   }
 
 }

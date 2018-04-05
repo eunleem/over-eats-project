@@ -4,10 +4,9 @@
     (click)="goCheckout()">장바구니 담기</button>
   <ul class="cart-list">
     <li class="cart-item">
-      <select name="number" id="">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
+      <select name="selectedNumber">
+        <option 
+          *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12]" value="{{item}}">{{item}}</option>
       </select>
     </li>
   </ul>

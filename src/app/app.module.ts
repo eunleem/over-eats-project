@@ -16,6 +16,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { MenuListModule } from './menu-list/menu-list.module';
 import { CheckoutModule } from './checkout/checkout.module';
+import { CartModule } from './cart/cart.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { CheckoutModule } from './checkout/checkout.module';
     RestaurantsModule,
     AuthModule,
     MenuListModule,
-    CheckoutModule
+    CheckoutModule,
+    CartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 <div 
   class="search-group" 
-  [ngClass]="{'onHeader': onSearchBar, 'onMain': !onSearchBar}">
+  [ngClass]="{'onHeader': onMenu, 'onMain': !onMenu}">
   <div class="input-group">
     <label>
       <i class="fas fa-map-marker-alt"></i>
@@ -17,6 +17,7 @@
     </label>
     <button 
       class="button uber button-main hideOnMobile"
+      *ngIf="!onMenu"
       (click)="onEnter()">음식 찾기</button>
   </div>
 </div>

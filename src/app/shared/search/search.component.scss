@@ -1,6 +1,5 @@
-.input-search {
-  background: white;
-}
+@import '../../../sass/_variables.scss';
+
 
 label {
   position: relative;
@@ -15,23 +14,70 @@ label {
 }
 
 .fa-map-marker-alt {
-  position: absolute;
-  height: 46px;
-  left: 10px;
+    position: absolute;
+    height: 46px;
+    left: 10px;
+    color: rgb(160, 160, 160);
 }
 
-ul {
-  position: absolute;
-  width: 100%;
 
-  & li {
-    height: 46px;
-    line-height: 46px;
-    padding: 0 10px;
+
+.onMain {
+  .input-search {
+    background: white;
+  }
+
+  ul {
+    position: absolute;
+    width: 100%;
+
+    & li {
+      height: 46px;
+      line-height: 46px;
+      padding: 0 10px;
+    }
+  }
+
+  .button-main {
+    height:46px;
+    margin-left: -5px;
   }
 }
+.onHeader {
+  position: absolute;
+  width: 100%;
+  top: 71px;
+  left: 0;
+  background: white;
 
-.button-main {
-  height:46px;
-  margin-left: -5px;
+  & input {
+    height: 40px;
+    width: 100vw;
+  }
+
+  .fa-map-marker-alt {
+    height: 40px;
+    width: 12px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    display: initial;
+
+    position: initial;
+
+    label {
+    width: 40vw;
+    min-width: 200px;
+    max-width: 400px;
+
+      & input {
+        height: 34px;
+        width: 40vw;
+      }
+    }
+  
+  .fa-map-marker-alt {
+    height: 34px;
+    }
+  }
 }

@@ -13,7 +13,7 @@
         </g>
       </svg>
     </a>
-    <!-- <app-search></app-search> -->
+    <app-search *ngIf="onMenu" [onMenu]="onMenu"></app-search>
     <div class="menus">
       <!-- <button class="icon-search" (click)="onSearchBar = !onSearchBar">
         <i class="fas fa-search"></i>
@@ -25,11 +25,20 @@
       <button class="button dark">
         <a routerLink="/signup" *ngIf="!isLoggedIn">회원가입</a>
       </button>
-      <button class="icon-group" *ngIf="onMenu">
-        <a routerLink="/cart" class="icon">
-          <i class="fas fa-shopping-cart"></i>
+      <button class="icon-group" *ngIf="isCart">
+        <a routerLink="/checkout" class="icon">
+          <svg width="22px" height="20px" viewBox="0 0 20 22" version="1.1">
+            <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="Group-3" fill-rule="nonzero" fill="#262626">
+                <path d="M1.5,17.9907121 C1.5,19.3714239 2.61928813,20.4907121 4,20.4907121 L14.9473684,20.4907121 C16.3280803,20.4907121 17.4473684,19.3714239 17.4473684,17.9907121 L17.4473684,7.70123839 L1.5,7.70123839 L1.5,17.9907121 Z M0,6.20123839 L18.9473684,6.20123839 L18.9473684,17.9907121 C18.9473684,20.1998511 17.1565074,21.9907121 14.9473684,21.9907121 L4,21.9907121 C1.790861,21.9907121 0,20.1998511 0,17.9907121 L0,6.20123839 Z"
+                  id="Rectangle-10"></path>
+                <path d="M6.01315789,11.4024768 L6.01315789,5.21052632 C6.01315789,3.29933041 7.5624883,1.75 9.47368421,1.75 C11.3848801,1.75 12.9342105,3.29933041 12.9342105,5.21052632 L12.9342105,11.4024768 C12.9342105,11.8166903 13.269997,12.1524768 13.6842105,12.1524768 C14.0984241,12.1524768 14.4342105,11.8166903 14.4342105,11.4024768 L14.4342105,5.21052632 C14.4342105,2.47090328 12.2133072,0.25 9.47368421,0.25 C6.73406118,0.25 4.51315789,2.47090328 4.51315789,5.21052632 L4.51315789,11.4024768 C4.51315789,11.8166903 4.84894433,12.1524768 5.26315789,12.1524768 C5.67737146,12.1524768 6.01315789,11.8166903 6.01315789,11.4024768 Z"
+                  id="Rectangle-3"></path>
+              </g>
+            </g>
+          </svg>
+          <span class="number">2</span>
         </a>
-        <span class="number"></span>
       </button>
     </div>
   </header>

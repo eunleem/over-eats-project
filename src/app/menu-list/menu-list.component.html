@@ -22,23 +22,29 @@
 <div class="menu-wrapper constraint">
   <section class="menu-list">
     <h2>Most Popular</h2>
+    <app-selector 
+      *ngIf="onClick"
+      [thisItem]="thisItem"
+      (added)="addToCart($event)"
+      (close)="onClick = false"
+      ></app-selector>
     <ul class="menu-group">
       <li 
         class="menu-item"
         *ngFor="let item of items"
-        (click)="addToCart()">
+        (click)="showSelector(item)">
         <div class="menu-text">
           <h3>{{ item.title }}</h3>
           <p class="menu-disc">{{ item.disc }}</p>
           <p class="menu-price">{{ item.price | currency:'KRW' }}</p>
         </div>
-        <div class="menu-img">
-          <img src="{{ item.img }}" width="400" height="auto" alt="">
+        <div class="menu-img" *ngIf="item.img">
+          <img src="{{ item.img }}" width="400" height="auto" alt="{{item.title}}">
         </div>
       </li>
     </ul>
   </section>
   <section class="cart-group">
-    <app-cart></app-cart>
+    <app-cart [cart]="cart"></app-cart>
   </section>
 </div>

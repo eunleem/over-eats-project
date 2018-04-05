@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
         <label>
           <input
             class="uber"
-            type="email"
+            type="userid"
             placeholder="이메일주소"
             formControlName="userid">
         </label>
