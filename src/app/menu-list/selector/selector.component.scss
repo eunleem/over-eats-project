@@ -1,0 +1,62 @@
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-background {
+  animation: show 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  top: 0;
+  background: #0000006e;
+  left: 0;
+  display: flex;
+  overflow-y: scroll;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 70%;
+  max-width: 580px;
+  background: white;
+  height: 600px;
+  padding: 30px;
+
+  .closeButton {
+    margin-left: 96%;
+  }
+
+  h3 {
+    font-size: 2em;
+    font-weight: 300;
+  }
+
+  p {
+    font-size: 1.1em;
+    color: rgb(117, 117, 117);
+    line-height: 1.5;
+  }
+
+  form {
+    height: 120px;
+    display: flex;
+    border-top: 1px solid #E0E0E0;
+    align-items: center;
+
+    span {
+
+    }
+
+    em {
+      padding: 0 10px;
+      font-style: normal;
+    }
+  }
+}

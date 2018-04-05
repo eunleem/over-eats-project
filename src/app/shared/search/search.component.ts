@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgModel } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -7,10 +8,17 @@ import { NgModel } from '@angular/forms';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  @Input()
+  onMenu: boolean;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    console.log(this.onMenu);
   }
-
+  onEnter() {
+    this.router.navigate(['menu']);
+  }
 }

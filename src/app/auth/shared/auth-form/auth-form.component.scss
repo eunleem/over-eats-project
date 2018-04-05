@@ -1,0 +1,78 @@
+@import '../../../../sass/variables';
+
+@keyframes show {
+  0% {
+    transform: translateY(-200%)
+  }
+  100% {
+    transform: translateY(0)
+  }
+}
+
+.auth-form {
+
+  width: 100vw;
+  max-width: 460px;
+  min-width: 300px;
+  border-radius: 2px;
+  padding: 3em;
+  background: white;
+
+  margin: 0 auto;
+  animation: show 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  & form {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+  }
+
+  @media only screen and (min-width: $medium) {
+    max-width: 600px;
+    min-width: 460px;
+    width: 40vw;
+    box-shadow: 0px 0 30px 10px #3535354d;
+  }
+}
+
+
+label {
+  width: 100%;
+
+  & input {
+    height: 50px;
+    padding: 0 20px;
+  }
+}
+
+.form-group {
+  position: relative;
+  margin-top: 30px;
+}
+
+@keyframes errorIn {
+  0% {
+    transform: translateX(-2px);
+  }
+  100%{
+    transform: translateX(2px);
+  }
+}
+.error {
+  font-size: 1em;
+  color: #FF5722;
+  position: absolute;
+  top: 53px;
+  right: 3px;
+  animation: errorIn 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-iteration-count: 4;
+}
+
+.auth-form-action {
+  margin-top: 40px;
+}
+
+.auth-form-toggle {
+  margin: 0 auto;
+  margin-top: 20px;
+}

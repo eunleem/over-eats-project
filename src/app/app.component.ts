@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
   <div class="wrapper">
     <app-header></app-header>
     <router-outlet></router-outlet>
-    <app-footer></app-footer>
   </div>
   `
 })
