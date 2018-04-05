@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
 interface Restaurant {
   id: number;
   name: string;
-  tag: string;
-  time: string;
+  image: string;
+  address: string;
+  open: boolean;
+  deliveryMin: number;
+  foodTypes: string[];
 }
 @Component({
   selector: 'app-restaurants',
@@ -13,35 +16,38 @@ interface Restaurant {
 })
 export class RestaurantsComponent implements OnInit {
   restaraunt: Restaurant[];
-  constructor() { }
+  open: Restaurant['open'];
+  url = 'http://localhost:3000/restaurants';
+  constructor(public http: HttpClient) { }
 
   ngOnInit() {
-    this.getList();
-  }
+    this.http.get<Restaurant[]>(this.url)
+      .subscribe(restaraunt => this.restaraunt = restaraunt);
+    }
 
-  getList() {
-    this.restaraunt = [
-      { id: 1, name: 'mcDonald', tag: 'burger', time: '10~15'},
-      { id: 2, name: 'burgerking', tag: 'potato', time: '10~15'},
-      { id: 3, name: 'lotteria', tag: 'burger', time: '10~15'},
-      { id: 4, name: 'momskitchin', tag: 'burger', time: '10~15'},
-      { id: 5, name: 'starbucks', tag: 'coffee', time: '15~20' },
-      { id: 6, name: 'coffeebean', tag: 'coffee', time: '10~15' },
-      { id: 7, name: 'caffebene', tag: 'coffee', time: '10~15' },
-      { id: 8, name: 'sandwich', tag: 'sandwich', time: '10~15' },
-      { id: 9, name: 'JOEsandwich', tag: 'sandwich', time: '10~15' },
-      { id: 10, name: 'KIMs sandwich', tag: 'sandwich', time: '10~15' },
-    ];
-  }
 
   goUp() {
-    window.scrollTo(0, 0);
+    console.log();
+    window.scrollTo({
+      'behavior': 'smooth',
+      'left': 0,
+      'top': 0
+    });
   }
 
-  loadMore(event) {
-    // const goUp = document.querySelector('go-up');
-    // const Height = document.querySelector('.content-list');
+  loadMore() {
     console.log('a');
   }
+  move(id: number) {
+    console.log(id);
+    console.log(this.restaraunt[id].open);
+    // const a = this.restaraunt[4] ? id : 'false';
+    // console.log(a);
+  }
 
+  storeOpen(id: number) {
+    const a = this.restaraunt[id].open ? 'true' : 'false';
+    console.log(a);
+  }
+  
 }
