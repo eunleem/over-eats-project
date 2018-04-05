@@ -1,0 +1,184 @@
+@import '../../sass/_variables.scss';
+
+.card-header {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+
+  @media only screen and (min-width: $large) {
+    height: 360px;
+  }
+}
+
+.card-group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    height: 100%;
+
+  @media only screen and (min-width: $medium) {
+    align-items: center;
+  }
+}
+
+.card {
+  width: 100%;
+  border-radius: 4px;
+  background: white;
+  padding: 30px;
+  text-align: center;
+
+  h2 {
+    font-size: 2em;
+    font-weight: 300;
+  }
+
+  .category {
+    color: $grey;
+  }
+
+  .cooking-time {
+    background-color: #ececec;
+    border-radius: 2px;
+    width: 100%;
+    display: inline;
+    padding: 5px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    max-width: 480px;
+    min-width: 320px;
+    text-align: left;
+  }
+}
+// ----- end of header ---- //
+
+.category-nav {
+  border-bottom: 1px solid rgb(224, 224, 224);
+  position: sticky;
+  top: 72px;
+  background: white;
+
+  & ul {
+    display: flex;
+    justify-content: flex-start; 
+  }
+}
+
+.category-item {
+  padding: 10px 24px 10px 0px;
+  & a {
+    font-size: 14px;
+  }
+
+  &:hover {
+    color: $uber-green;
+  }
+}
+
+.active-item {
+  color: $uber-green;
+}
+
+// ----- end of category ---- //
+.menu-wrapper {
+  display:block;
+
+  @media only screen and (min-width: $medium) {
+    display: flex;
+    justify-content: space-between;
+  }
+
+}
+.menu-list {
+  width: 100%;
+
+  h2 {
+    margin: 50px 0 30px 0;
+    font-size: 20px;
+    font-weight: 300;
+  }
+
+  @media only screen and (min-width: $medium) {
+    // width: 50%;
+  }
+
+  @media only screen and (min-width: $large) {
+    width: initial;
+  }
+}
+.menu-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+.menu-item {
+  border-radius: 2px;
+  border: 1px solid $grey;
+  cursor: pointer;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  margin-right: 24px;
+  margin-bottom: 24px;
+  height: 160px;
+  width: 100%;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: rgb(250, 250, 250);
+    transform: translateY(-2px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 25px 0px;
+  }
+
+  @media only screen and (min-width: $large) {
+    width: calc(50% - 24px);
+  }
+}
+
+.menu-text {
+  flex-grow: 1;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  h3 {
+    line-height: 20px;
+    font-size: 16px;
+    margin: 0;
+    font-weight: 300;
+  }
+}
+
+.menu-disc {
+  max-height: 42px;
+  -webkit-line-clamp: 2;
+  line-height: 21px;
+  font-size: 13px;
+  overflow: hidden;
+  color: rgb(117, 117, 117);
+  margin: 0;
+}
+.menu-price {
+  color: $uber-green;
+  font-weight: 600;
+  margin: 0
+}
+.menu-img {
+  flex-basis: 160px;
+
+  & img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+.cart-group {
+  margin-top: 80px;
+  min-width: 360px;
+
+  @media only screen and (min-width: $large) {
+    width: 380px;
+    min-width: 380px;
+  }
+}

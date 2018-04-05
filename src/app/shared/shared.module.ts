@@ -12,17 +12,17 @@ import { SharedRoutingModule } from './shared-routing.module';
   imports: [
     CommonModule,
     FormsModule,
-    SharedRoutingModule
+    SharedRoutingModule,
   ],
   declarations: [
     HeaderComponent,
     FooterComponent,
-    SearchComponent
+    SearchComponent,
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
-    SearchComponent
+    SearchComponent,
   ]
 })
 export class SharedModule { }
