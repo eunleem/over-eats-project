@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
 interface Restaurant {
   id: number;
   name: string;
-  tag: string;
+  image: string;
+  address: string;
+  open: boolean;
+  deliveryMin: number;
+  foodTypes: string[];
 }
 @Component({
   selector: 'app-restaurants',
@@ -12,26 +16,38 @@ interface Restaurant {
 })
 export class RestaurantsComponent implements OnInit {
   restaraunt: Restaurant[];
-  constructor() { }
+  open: Restaurant['open'];
+  url = 'http://localhost:3000/restaurants';
+  constructor(public http: HttpClient) { }
 
   ngOnInit() {
-    this.getList();
-  }
+    this.http.get<Restaurant[]>(this.url)
+      .subscribe(restaraunt => this.restaraunt = restaraunt);
+    }
 
-  getList() {
-    this.restaraunt = [
-      { id: 1, name: 'mcDonald', tag: 'burger'} ,
-      { id: 2, name: 'burgerking', tag: 'burger'} ,
-      { id: 3, name: 'lotteria', tag: 'burger'} ,
-    ];
-  }
 
   goUp() {
-    window.scrollTo(0, 0);
+    console.log();
+    window.scrollTo({
+      'behavior': 'smooth',
+      'left': 0,
+      'top': 0
+    });
   }
 
   loadMore() {
-    console.log(this.restaraunt);
+    console.log('a');
+  }
+  move(id: number) {
+    console.log(id);
+    console.log(this.restaraunt[id].open);
+    // const a = this.restaraunt[4] ? id : 'false';
+    // console.log(a);
   }
 
+  storeOpen(id: number) {
+    const a = this.restaraunt[id].open ? 'true' : 'false';
+    console.log(a);
+  }
+  
 }
