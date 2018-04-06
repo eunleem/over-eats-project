@@ -1,56 +1,168 @@
 @import '../../sass/variables';
 
+.restaraunt-component-container {
+    // padding: 0 100px;
+    display: flex;
+    justify-content: center;
+}
+
+// .container {
+//     width: 100%;
+// }
+
+.search {
+    height: 50px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 1px solid $grey;
+    input {
+        min-height: 30px;
+        border: none;
+        font-size: 20px;
+    }
+    button {
+        background-color: black;
+        border: 1px solid whitesmoke;
+        color: white;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: 5px;
+        top: 5px;
+        box-shadow: gray;
+    }
+}
+
+    .input-value {
+        position: absolute;
+        right: 10px;
+        height: 20px;
+        color: $grey;
+        font-size: 20px;
+    }
+
+.categorys {
+    // background-color: blue;
+    margin-top: 20px;
+    padding-left: 10px;
+    h1 {
+        font-size: 25px;
+        display: inline-block;
+    }
+}
+
+.category-list, .more-category-list {
+    margin-top: 30px;
+    min-height: 600px;
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    vertical-align: top;
+}
+
+.category, .more-category {
+    width: 25%;
+    padding: 0 10px 10px 10px;
+}
+
+.category-image, .more-category-image {
+    width: 100%;
+    height: 150px;
+    background: 100% 100%;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+
+// restaurant-container
+
     .restaurat-name > h1 {
+        display: block;
         font-size: 22px;
-        padding-left: 65px;
+        padding-left: 25px;
     }
 
     /* content */
 
     .content-list {
-        margin-right: -18px;
         min-height: 1500px;
         overflow: auto;
-    }
-
-    .contents {
-        padding: 0 35px;
+        display: flex;
+        flex-wrap: wrap;
+        // justify-content: space-around;
     }
 
     .content {
+        position: relative;
         cursor: pointer;
-        margin: 20px 30px;
-        float: left;
-        width: 27%;
+        width: 50%;
         height: 330px;
-        border-radius: 2px;
+        &:hover {
+            background-color: rgba(201, 175, 175, 0.1);
+            transition: all 1s ease;
+            cursor: pointer;
+            transform: translateY(-2px);
+        }
+        @media only screen and (min-width: $large) {
+            width: 33.3%;
+        }
     }
 
-    .content:hover {
-        background-color: rgba(201, 175, 175, 0.1);
-        transition: all 1s ease;
-        cursor: pointer;
+    .content-wrap {
+        margin: 0 10px;
+        position: relative;
     }
 
+    .name, .detail {
+        line-height: 10px;
+    }
+    .name {
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        font-weight: 800;
+        line-height: 0px;
+    }
 
-    .name, .foodTypes {
-        font-size: 1.2em;
-        margin-top: -2px;
+    .detail {
+        padding: 10px 0 5px 0;
+    }
+
+    .food-types {
+        font-size: 14px;
+        color: $grey;
+        margin-bottom: 10px;
     }
 
     .making-time {
-        background-color: rgba(201, 175, 175, 0.1);
+        display: inline-block;
+        text-align: center;
+        flex-direction: column;
     }
 
     .img{
+        border-radius: 4px;
         width: 100%;
         height: 240px;
         background-size: 100% 100%;
     }
 
     // 가게가 안열었을 때
-    .img.store-close {
-        background: rgba(0,0,0,0.6);
+    .ready {
+        background-color: rgba(0, 0, 0, 0.6);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        color: white;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        height: 240px;
+        border-radius: 4px;
     }
 
     /* load more */
@@ -59,14 +171,14 @@
         margin: 30px 0;
         display: flex;
         justify-content: center;
-    }
 
-    .load-more > button {
-        border: 1px solid $grey;
-        font-size: 14px;
-        padding: 8px 16px;
-        height: 50px;
-        cursor: pointer;
+        button {
+            border: 1px solid $grey;
+            font-size: 14px;
+            padding: 8px 16px;
+            height: 50px;
+            cursor: pointer;
+        }
     }
 
     /* scroll up */
@@ -74,14 +186,20 @@
     .go-up {
         float: right;
         position: fixed;
-        bottom: 100px;
+        bottom: 40px;
         right: 40px;
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
         background-color: $uber-green;
-        transition: all 3s ease;
+        // transition: all 3s ease;
         cursor: pointer;
+        color:white;
+        font-size: 20px;
     }
 
+    .go-up:hover {
+        background-color: rgb(48, 133, 19);
+        transition: all 0.7s ease;
+    }
 
 

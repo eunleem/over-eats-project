@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { RestaurantsComponent } from './restaurants.component';
 
 import { RestaurantRoutingModule } from './restaurants-routing.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    RestaurantRoutingModule
+    RestaurantRoutingModule,
+    FormsModule
   ],
   declarations: [
     RestaurantsComponent
