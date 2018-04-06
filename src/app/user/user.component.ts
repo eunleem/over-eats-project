@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/services/auth.service';
+import { User } from '../auth/user';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
+  template: `
+    <div>hello users</div>
+  `
 })
 export class UserComponent implements OnInit {
-
-  constructor() { }
+  user: any;
+  constructor(private auth: AuthService) {
+    this.user = this.auth.getUser();
+  }
 
   ngOnInit() {
+    console.log('who is user?', this.user);
   }
 
 }
