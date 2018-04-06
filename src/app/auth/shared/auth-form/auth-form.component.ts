@@ -13,14 +13,15 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
         <label>
           <input
             class="uber"
-            type="userid"
+            type="username"
             placeholder="이메일주소"
-            formControlName="userid">
+            autocomplete="email"
+            formControlName="username">
         </label>
-          <span class="error" *ngIf="useridFormat">
+          <span class="error" *ngIf="usernameFormat">
             이메일을 입력해 주세요.
           </span>
-          <span class="error" *ngIf="useridPattern">
+          <span class="error" *ngIf="usernamePattern">
             이메일 형식에 맞게 입력해 주세요.
           </span>
         </div>
@@ -30,6 +31,7 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
             class="uber"
             type="password"
             placeholder="비밀번호 입력"
+            autocomplete="on"
             formControlName="password">
         </label>
         <span class="error" *ngIf="passwordInvalid">
@@ -65,13 +67,13 @@ export class AuthFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      userid: ['', [
+      username: ['', [
         Validators.required,
         Validators.pattern(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/)
       ]],
       password: ['', [Validators.required,
         Validators.pattern(/[a-zA-Z0-9]/),
-        Validators.minLength(4),
+        Validators.minLength(5),
         Validators.maxLength(10)
       ]]
     });
@@ -88,12 +90,12 @@ export class AuthFormComponent implements OnInit {
     return control.hasError('required') && control.touched;
   }
 
-  get useridFormat() {
-    const control = this.form.get('userid');
+  get usernameFormat() {
+    const control = this.form.get('username');
     return control.hasError('required') && control.touched;
   }
-  get useridPattern() {
-    const control = this.form.get('userid');
+  get usernamePattern() {
+    const control = this.form.get('username');
     return control.hasError('pattern') && control.touched;
   }
 
