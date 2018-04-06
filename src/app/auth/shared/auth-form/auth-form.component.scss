@@ -2,9 +2,11 @@
 
 @keyframes show {
   0% {
+    opacity: 0;
     transform: translateY(-200%)
   }
   100% {
+    opacity: 1;
     transform: translateY(0)
   }
 }
@@ -17,9 +19,11 @@
   border-radius: 2px;
   padding: 3em;
   background: white;
-
-  margin: 0 auto;
+  opacity: 0;
   animation: show 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-fill-mode:forwards;
+  animation-delay: 1.5s;
+  margin: 0 auto;
 
   & form {
     display: flex;

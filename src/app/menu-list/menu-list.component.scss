@@ -31,10 +31,12 @@
   h2 {
     font-size: 2em;
     font-weight: 300;
+    margin: 0;
   }
 
   .category {
     color: $grey;
+    font-size: 1.2em;
   }
 
   .cooking-time {
@@ -56,8 +58,9 @@
 .category-nav {
   border-bottom: 1px solid rgb(224, 224, 224);
   position: sticky;
-  top: 72px;
+  top: 70px;
   background: white;
+  z-index: 50;
 
   & ul {
     display: flex;
@@ -69,6 +72,7 @@
   padding: 10px 24px 10px 0px;
   & a {
     font-size: 14px;
+    font-weight: 400;
   }
 
   &:hover {
@@ -95,8 +99,8 @@
 
   h2 {
     margin: 50px 0 30px 0;
-    font-size: 20px;
-    font-weight: 300;
+    font-size: 1.6em;
+    font-weight: 400;
   }
 
   @media only screen and (min-width: $medium) {
@@ -144,9 +148,9 @@
 
   h3 {
     line-height: 20px;
-    font-size: 16px;
+    font-size: 1.3em;
     margin: 0;
-    font-weight: 300;
+    font-weight: 400;
   }
 }
 
