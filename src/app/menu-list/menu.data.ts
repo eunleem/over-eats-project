@@ -2,7 +2,7 @@ export class MenuData {
   items = [
     {
       id: 1,
-      title: 'Country-Fried Steak & Eggs',
+      name: 'Country-Fried Steak & Eggs',
       disc: 'A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.',
       price: 9.25,
       category: 'Breakfast Slams',
@@ -10,7 +10,7 @@ export class MenuData {
     },
     {
       id: 2,
-      title: 'All-American Slam',
+      name: 'All-American Slam',
       disc: 'Three scrambled eggs with Cheddar cheese, two bacon strips and two sausage links, plus hash browns and bread.',
       price: 9.25,
       category: 'Breakfast Slams',
@@ -18,7 +18,7 @@ export class MenuData {
     },
     {
       id: 3,
-      title: 'Lumberjack Slam',
+      name: 'Lumberjack Slam',
       disc: 'Two buttermilk pancakes, a slice of grilled ham, two bacon strips, two sausage links and two eggs, plus hash browns and bread.',
       price: 7.75,
       category: 'Breakfast Slams',
@@ -26,7 +26,7 @@ export class MenuData {
     },
     {
       id: 4,
-      title: 'Ultimate Omelette',
+      name: 'Ultimate Omelette',
       disc: 'Three-egg omelette with crumbled sausage, bacon, fire-roasted bell peppers & onions, mushrooms, diced tomatoes and shredded Cheddar cheese. Served with hash browns and bread.',
       price: 10.25,
       category: 'Breakfast Favorites',
@@ -34,7 +34,7 @@ export class MenuData {
     },
     {
       id: 5,
-      title: 'Moons Over My Hammy',
+      name: 'Moons Over My Hammy',
       disc: 'Our classic ham and scrambled egg sandwich with Swiss and American cheeses on grilled sourdough. Served with hash browns.',
       price: 9.25,
       category: 'Breakfast Favorites',
@@ -42,7 +42,7 @@ export class MenuData {
     },
     {
       id: 6,
-      title: 'Philly Cheesesteak Omelette',
+      name: 'Philly Cheesesteak Omelette',
       disc: 'Three-egg omelette with grilled prime rib, fire-roasted bell peppers & onions, sauteed mushrooms and melted Swiss cheese. Served with hash browns and bread.',
       price: 11.75,
       category: 'Breakfast Favorites',
@@ -50,7 +50,7 @@ export class MenuData {
     },
     {
       id: 7,
-      title: 'Loaded Veggie Omelette',
+      name: 'Loaded Veggie Omelette',
       disc: 'Three-egg omelette with fresh spinach, mushrooms, sautéed zucchini & squash, diced tomatoes and melted Swiss cheese. Served with hash browns and bread.',
       price: 9.25,
       category: 'Breakfast Sides',
@@ -58,7 +58,7 @@ export class MenuData {
     },
     {
       id: 8,
-      title: 'Bacon Strips(4)',
+      name: 'Bacon Strips(4)',
       disc: 'Bacon Strips 4',
       price: 3.25,
       category: 'Breakfast Sides',
@@ -66,7 +66,7 @@ export class MenuData {
     },
     {
       id: 9,
-      title: 'Yogurt',
+      name: 'Yogurt',
       disc: 'Yogurt',
       price: 2.75,
       category: 'Breakfast Sides',

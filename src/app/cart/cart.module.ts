@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { CartComponent } from './cart.component';
 import { SelectorModule } from '../menu-list/selector/selector.module';
+import { CartService } from '../core/cart.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { SelectorModule } from '../menu-list/selector/selector.module';
     SelectorModule
   ],
   declarations: [ CartComponent ],
-  exports: [CartComponent]
+  exports: [CartComponent],
+  providers: [CartService]
 })
 export class CartModule { }
