@@ -1,39 +1,34 @@
-@import '../../sass/variables';
+    @import '../../sass/variables';
 
-.restaraunt-component-container {
-    // padding: 0 100px;
-    display: flex;
-    justify-content: center;
-}
-
-// .container {
-//     width: 100%;
-// }
-
-.search {
-    height: 50px;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    flex-direction: column;
-    border-bottom: 1px solid $grey;
-    input {
-        min-height: 30px;
-        border: none;
-        font-size: 20px;
+    .restaraunt-component-container {
+        display: flex;
+        justify-content: center;
     }
-    button {
-        background-color: black;
-        border: 1px solid whitesmoke;
-        color: white;
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        right: 5px;
-        top: 5px;
-        box-shadow: gray;
+
+    .search {
+        height: 50px;
+        display: flex;
+        position: relative;
+        justify-content: center;
+        flex-direction: column;
+        border-bottom: 1px solid $grey;
+        input {
+            min-height: 30px;
+            border: none;
+            font-size: 20px;
+        }
+        button {
+            background-color: black;
+            border: 1px solid whitesmoke;
+            color: white;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 5px;
+            top: 5px;
+            box-shadow: gray;
+        }
     }
-}
 
     .input-value {
         position: absolute;
@@ -43,37 +38,49 @@
         font-size: 20px;
     }
 
-.categorys {
-    // background-color: blue;
-    margin-top: 20px;
-    padding-left: 10px;
-    h1 {
-        font-size: 25px;
-        display: inline-block;
+    .categorys {
+        margin-top: 20px;
+        padding-left: 10px;
+        h1 {
+            font-size: 25px;
+            display: inline-block;
+        }
     }
-}
 
-.category-list, .more-category-list {
-    margin-top: 30px;
-    min-height: 600px;
-    width: 100%;
-    display: inline-flex;
-    flex-wrap: wrap;
-    vertical-align: top;
-}
+    .category-list, .more-category-list {
+        margin-top: 30px;
+        min-height: 600px;
+        width: 100%;
+        display: inline-flex;
+        flex-wrap: wrap;
+        vertical-align: top;
+    }
 
-.category, .more-category {
-    width: 25%;
-    padding: 0 10px 10px 10px;
-}
+    .category, .more-category {
+        width: 100%;
+        max-width: 450px;
+        padding: 0 10px 10px 10px;
+        @media only screen and (min-width: $medium) {
+            width: 50%;
+            max-width: 350px;
+        }
+        @media only screen and (min-width: $m-large) {
+            width: 33.33%;
+            min-width: 300px;
+        }
+        @media only screen and (min-width: $large) {
+            width: 25%;
+            min-width: 280px;
+        }
+    }
 
-.category-image, .more-category-image {
-    width: 100%;
-    height: 150px;
-    background: 100% 100%;
-    cursor: pointer;
-    border-radius: 2px;
-}
+    .category-image, .more-category-image {
+        width: 100%;
+        height: 150px;
+        background: 100% 100%;
+        cursor: pointer;
+        border-radius: 2px;
+    }
 
 
 // restaurant-container
@@ -83,7 +90,9 @@
         font-size: 22px;
         padding-left: 25px;
     }
-
+    .main-container {
+        padding-left: 10px;
+    }
     /* content */
 
     .content-list {
@@ -91,13 +100,12 @@
         overflow: auto;
         display: flex;
         flex-wrap: wrap;
-        // justify-content: space-around;
     }
 
     .content {
         position: relative;
         cursor: pointer;
-        width: 50%;
+        width: 100%;
         height: 330px;
         &:hover {
             background-color: rgba(201, 175, 175, 0.1);
@@ -105,13 +113,18 @@
             cursor: pointer;
             transform: translateY(-2px);
         }
+        @media only screen and (min-width: $medium) {
+            width: 50%;
+            max-width: 380px;
+        }
         @media only screen and (min-width: $large) {
-            width: 33.3%;
+            width: 33.33%;
+            min-width: 300px;
         }
     }
 
     .content-wrap {
-        margin: 0 10px;
+        margin: 0 0.8em;
         position: relative;
     }
 
@@ -191,7 +204,6 @@
         width: 70px;
         height: 70px;
         background-color: $uber-green;
-        // transition: all 3s ease;
         cursor: pointer;
         color:white;
         font-size: 20px;

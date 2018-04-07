@@ -62,7 +62,7 @@ export class RestaurantsComponent implements OnInit {
   }
     // 텍스트를 지우면 카테고리 컨테이너가 사라짐
   input() {
-    if (event.target.value === 0) {
+    if (event.target.value == 0) {
       this.showContainer = false;
     }
   }
