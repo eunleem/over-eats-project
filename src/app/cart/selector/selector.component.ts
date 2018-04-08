@@ -2,8 +2,8 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators, NgModel } from '@angular/forms';
 
-import { Menu } from '../../models/menu.interface';
-import { Cart } from '../../models/cart.interface';
+import { Product } from '../../models/product.interface';
+import { CartItem } from '../../models/cart-item.model';
 import { CartService } from '../../core/cart.service';
 
 @Component({
@@ -26,20 +26,20 @@ import { CartService } from '../../core/cart.service';
             <input
               type="text"
               class="comment"
-              [(ngModel)]="thisItem.comments || comment"
+              [(ngModel)]="comment"
               placeholder="음식 조리 시 요청할 사항을 적어주세요">
           </label>
           <div class="group">
             <input
               type="number"
               step="1" min="0" max="20"
-              [(ngModel)]="thisItem.quantity || quantity"
+              [(ngModel)]="quantity"
               required>
             <button type="button"
               (click)="onAdd()"
               class="button uber button-fluid">
-              <span>장바구니 {{ thisItem.quantity || quantity }} 추가</span>
-              <em>{{ thisItem.price * thisItem.quantity || thisItem.price * quantity }} 원</em>
+              <span>장바구니 {{ quantity }} 추가</span>
+              <em>{{ thisItem.price * quantity }} 원</em>
             </button>
           </div>
         </div>
@@ -51,43 +51,22 @@ import { CartService } from '../../core/cart.service';
 export class SelectorComponent implements OnInit {
   @Input() thisItem: any;
   @Output() close = new EventEmitter();
-  @Output() added = new EventEmitter();
 
-  cart: Cart[] = [];
-  value: 1;
-  comment: string;
+  comment = '';
   quantity = 1;
 
+  constructor(private cartService: CartService) {}
 
-  constructor(
-    private cartService: CartService,
-  ) {}
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
   toggle() {
     this.close.emit(null);
   }
 
   onAdd() {
-    const cartItem = {
-      id: this.thisItem.id,
-      name: this.thisItem.name,
-      comments: this.comment,
-      quantity: this.quantity,
-      price: this.thisItem.price,
-      totalPrice: this.thisItem.price * this.quantity
-    };
-    this.cart = [...this.cart, cartItem];
-    // this.cartService.addToCart(cartItem);
-    this.cartService.addToLocalCart(cartItem);
-    console.log(this.cart);
-    // this.added.emit(this.cart);
+    this.cartService.addItem(this.thisItem, this.quantity, this.comment);
     this.close.emit(null);
   }
 
-  onEdit() {
-    this.close.emit(null);
-  }
 }
 

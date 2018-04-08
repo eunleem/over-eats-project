@@ -19,7 +19,7 @@ import { CartModule } from '../cart/cart.module';
     CartModule
   ],
   declarations: [
-    CheckoutComponent
+    CheckoutComponent,
   ]
 })
 export class CheckoutModule { }

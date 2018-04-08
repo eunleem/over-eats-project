@@ -18,6 +18,10 @@ import { MenuListModule } from './menu-list/menu-list.module';
 import { CheckoutModule } from './checkout/checkout.module';
 import { CartModule } from './cart/cart.module';
 
+// Services
+import { ProductsService } from './core/products.service';
+import { CartService } from './core/cart.service';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +42,10 @@ import { CartModule } from './cart/cart.module';
     CheckoutModule,
     CartModule
   ],
-  providers: [],
+  providers: [
+    ProductsService,
+    CartService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

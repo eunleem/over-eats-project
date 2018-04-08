@@ -1,40 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
-import { MenuData } from './menu.data';
-import { Menu } from '../models/menu.interface';
-import { Cart } from '../models/cart.interface';
+import { Product } from '../models/product.interface';
 
 import { CartService } from '../core/cart.service';
+import { ProductsService } from '../core/products.service';
+import { EventEmitter } from 'protractor';
 @Component({
   selector: 'app-menu-list',
   templateUrl: './menu-list.component.html',
   styleUrls: ['./menu-list.component.scss']
 })
 export class MenuListComponent implements OnInit {
-  items: any[];
-  thisItem: any[];
-  cart: Cart[];
+  products: Product[];
+  selectedItem: Product[];
   onClick = false;
 
   constructor(
+    private productsService: ProductsService,
     private cartService: CartService
   ) { }
+
   ngOnInit() {
-    this.items = new MenuData().items;
+    this.productsService.getProducts()
+      .subscribe((data: Product[]) => this.products = data);
   }
 
-  showSelector(item) {
+  clickItem(item) {
     this.onClick = true;
-    this.thisItem = item;
+    this.selectedItem = item;
   }
- 
-  // addCart(cartItem) {
-  //   console.log('added to Cart database');
-  //   this.cartService.addToCart(cartItem);
-  // }
 
-  onEdit(item) {
-    this.onClick = true;
-    this.thisItem = item;
-  }
 }

@@ -1,4 +1,4 @@
-export interface Menu {
+export interface Product {
   id: number;
   name: string;
   disc: string;
@@ -6,4 +6,3 @@ export interface Menu {
   category: string;
   img: string;
 }
-

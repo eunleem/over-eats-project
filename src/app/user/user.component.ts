@@ -7,6 +7,7 @@ import { User } from '../auth/user';
   styleUrls: ['./user.component.scss'],
   template: `
     <div>hello users</div>
+    <h2>{{ user?.username }}</h2>
   `
 })
 export class UserComponent implements OnInit {

@@ -1,0 +1,84 @@
+ {
+   "products": [  
+     {
+    "id": "1",
+    "name": "Country-Fried Steak & Eggs",
+    "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
+    "price": "9000",
+    "category": "Breakfast Slams",
+    "img": "./images/menu/img1.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Fried Steak & Eggs",
+    "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
+    "price": "5000",
+    "category": "Breakfast Slams",
+    "img": "./images/menu/img2.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Country-Fried Steak & Eggs",
+    "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
+    "price": "9250",
+    "category": "Breakfast Slams",
+    "img": "./images/menu/img3.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Country-Fried Steak & Eggs",
+    "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
+    "price": "6000",
+    "category": "Breakfast Slams",
+    "img": "./images/menu/img4.jpg"
+  },
+  {
+    "id": "5",
+    "name": "Country-Fried Steak & Eggs",
+    "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
+    "price": "9.25",
+    "category": "Breakfast Slams",
+    "img": "./images/menu/img5.jpg"
+  },
+  {
+    "id": "6",
+    "name": "Country-Fried Steak & Eggs",
+    "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
+    "price": "9.25",
+    "category": "Breakfast Slams",
+    "img": "./images/menu/img1.jpg"
+  },
+  {
+    "id": "7",
+    "name": "Country-Fried Steak & Eggs",
+    "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
+    "price": "9.25",
+    "category": "Breakfast Slams",
+    "img": "./images/menu/img1.jpg"
+  },
+  {
+    "id": "8",
+    "name": "Country-Fried Steak & Eggs",
+    "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
+    "price": "9.25",
+    "category": "Breakfast Slams",
+    "img": "./images/menu/img1.jpg"
+  },
+  {
+    "id": "9",
+    "name": "Country-Fried Steak & Eggs",
+    "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
+    "price": "12000",
+    "category": "Breakfast Slams",
+    "img": "./images/menu/img1.jpg"
+  },
+  {
+    "id": "10",
+    "name": "Country-Fried Steak & Eggs",
+    "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
+    "price": "2500",
+    "category": "Breakfast Slams",
+    "img": "./images/menu/img1.jpg"
+  }
+]
+}

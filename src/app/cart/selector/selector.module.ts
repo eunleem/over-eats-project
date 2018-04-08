@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectorComponent } from './selector.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CartService } from '../../core/cart.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -11,7 +10,6 @@ import { CartService } from '../../core/cart.service';
     FormsModule
   ],
   declarations: [SelectorComponent],
-  exports: [SelectorComponent],
-  providers: [CartService]
+  exports: [SelectorComponent]
 })
 export class SelectorModule { }
