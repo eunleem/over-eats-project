@@ -36,8 +36,8 @@
             </g>
           </svg>
           <span 
-            *ngIf="cartService.cart"
-            class="number">{{cartService.cart?.length}}</span>
+            *ngIf="itemCount"
+            class="number">{{ itemCount }}</span>
         </a>
       </button>
     </div>

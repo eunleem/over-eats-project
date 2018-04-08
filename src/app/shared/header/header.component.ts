@@ -3,6 +3,8 @@ import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../auth/services/auth.service';
 import { CartService } from '../../core/cart.service';
+import { Subscription } from 'rxjs/Subscription';
+import { ShoppingCart } from '../../models/shopping-cart.model';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,10 @@ export class HeaderComponent implements OnInit {
   onMenu = false;
   isCart = true;
   isLoggedIn: boolean;
-  cartItem: number;
+
+  cart: Observable<ShoppingCart>;
+  itemCount: number;
+  cartSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -33,7 +38,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.route.snapshot.params.id);
+    this.cart = this.cartService.get();
+    this.cartSubscription = this.cart.subscribe(cart => {
+      this.itemCount = cart.items.map(i => i.quantity).reduce((prev, current) => prev + current, 0);
+    });
   }
 
   signout() {
