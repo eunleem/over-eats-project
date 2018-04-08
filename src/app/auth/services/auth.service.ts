@@ -14,9 +14,10 @@ import { Token } from '../token';
 
 @Injectable()
 export class AuthService {
+  // TODO: 주소 바꿔줄것.
   URL = `https://www.overeats.kr/api`;
   TOKEN_NAME = environment.tokenName;
-  USER = environment.user;
+  USER = 'user';
 
   constructor(
     private http: HttpClient,
@@ -63,7 +64,7 @@ export class AuthService {
   }
 
   setUser(user: any): void {
-    localStorage.setItem(this.USER, user);
+    localStorage.setItem(this.USER, JSON.stringify(user));
   }
 
   setToken(token: string): void {
