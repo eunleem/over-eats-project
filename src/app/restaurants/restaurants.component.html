@@ -1,24 +1,28 @@
 <div class="restaraunt-component-container constraint">
   <div class="container">
     <div class="search-container">
-      <div id="size-up" class="search">
-        <input class="text"
+      <div class="search">
+        <input class="input-search"
           type="text"
           (click)="click()"
           (input)="input()"
+          [(ngModel)]="value"
           placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
+          <ul class="search-list">
+            <li class="button" *ngIf="value">{{ value }}</li>
+          </ul>
         <div class="input-value" *ngIf="showContainer">
           검색할 값을 입력하세요.
         </div>
         <button *ngIf="showContainer" (click)="removeCategory()">X</button>
       </div>
-      <div class="category-container" *ngIf="showContainer">
+      <div class="category-container" *ngIf="value">
         <div class="categorys">
           <h1>상위 카테고리</h1>
         </div>
         <div class="category-list">
           <div class="category" *ngFor="let list of restaurant">
-            <a>
+            <a (click)="selectedRestaurant(list)">
               <img class="category-image" src="{{list.image}}">
             </a>
           </div>
@@ -29,8 +33,8 @@
           <h1>더 많은 카테고리</h1>
         </div>
         <div class="more-category-list">
-          <div class="more-category" *ngFor="let moreList of restaurant">
-            <a>
+          <div class="more-category" *ngFor="let moreList of moreLists">
+            <a (click)="selectedRestaurant(moreList)">
               <img class="more-category-image" src="{{moreList.image}}" alt="moreListImage">
             </a>
           </div>
@@ -44,7 +48,7 @@
         </div>
         <div class="content-list">
           <div class="content" *ngFor="let list of restaurant">
-            <a>
+            <a (click)="selectedRestaurant(list)">
               <div class="content-wrap">
                 <img class="img" src={{list.image}}>
                 <div class="ready" *ngIf="list.open">준비중</div>

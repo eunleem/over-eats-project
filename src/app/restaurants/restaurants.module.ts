@@ -5,6 +5,7 @@ import { RestaurantsComponent } from './restaurants.component';
 
 import { RestaurantRoutingModule } from './restaurants-routing.module';
 import { FormsModule } from '@angular/forms';
+import { RestaurantsService } from '../core/restaurants.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     RestaurantsComponent
-  ]
+  ],
+  providers: [RestaurantsService]
 })
 export class RestaurantsModule { }

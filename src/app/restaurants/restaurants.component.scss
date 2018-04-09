@@ -30,6 +30,21 @@
         }
     }
 
+    .input-search {
+        background: white;
+
+        ul {
+            position: absolute;
+            width: 100%;
+
+            & li {
+                height: 46px;
+                line-height: 46px;
+                padding: 0 10px;
+            }
+        }
+    }
+
     .input-value {
         position: absolute;
         right: 10px;
@@ -37,6 +52,7 @@
         color: $grey;
         font-size: 20px;
     }
+
 
     .categorys {
         margin-top: 20px;
@@ -137,22 +153,26 @@
         box-sizing: border-box;
         font-weight: 800;
         line-height: 0px;
+        margin-top: 10px;
+        font-size: 1.4em;
     }
 
     .detail {
         padding: 10px 0 5px 0;
+        font-size: 1em;
     }
 
     .food-types {
         font-size: 14px;
         color: $grey;
-        margin-bottom: 10px;
+        margin: 10px 0 15px 0;
     }
 
     .making-time {
+        height: 20px;
         display: inline-block;
-        text-align: center;
         flex-direction: column;
+        background-color: whitesmoke;
     }
 
     .img{
