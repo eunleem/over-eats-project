@@ -1,33 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-interface Restaurant {
-  id: number;
-  name: string;
-  image: string;
-  address: string;
-  open: boolean;
-  deliveryMin: number;
-  foodTypes: string[];
-}
+import { hostElement } from '@angular/core/src/render3/instructions';
+import { NgModel } from '@angular/forms';
+
+import { Restaurant } from '../models/restaurant';
+import { RestaurantsService } from '../core/restaurants.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
-  styleUrls: ['./restaurants.component.scss']
+  styleUrls: ['./restaurants.component.scss'],
 })
+
 export class RestaurantsComponent implements OnInit {
-  restaraunt: Restaurant[];
-  open: Restaurant['open'];
-  url = 'http://localhost:3000/restaurants';
-  constructor(public http: HttpClient) { }
+  isShow: boolean; // 스크롤 이동에 따른 버튼의 표시
+  showContainer: boolean; // 검색에 값을 넣을 때의 컨테이너 표시
+  isClick: boolean; // 검색창에 값을 넣을 때의 표시
+  restaurant: Restaurant[];
+  moreLists: Restaurant[];
+  open: Restaurant['open']; // 오픈하지 않은 매장의 명도처리
 
+  // url = 'http://localhost:3000/restaurants';
+  constructor(
+    public http: HttpClient,
+    public el: ElementRef,
+    private restaurantService: RestaurantsService,
+    // public router: Router
+  ) {}
   ngOnInit() {
-    this.http.get<Restaurant[]>(this.url)
-      .subscribe(restaraunt => this.restaraunt = restaraunt);
-    }
+    this.restaurantService.getRestaurants()
+    .subscribe(restaurant => this.restaurant = restaurant);
+    this.showContainer = false;
+    this.isClick = false;
+  }
 
-
+   // 스크롤을 최상단으로 부드럽게 이동
   goUp() {
-    console.log();
     window.scrollTo({
       'behavior': 'smooth',
       'left': 0,
@@ -35,19 +44,54 @@ export class RestaurantsComponent implements OnInit {
     });
   }
 
-  loadMore() {
-    console.log('a');
-  }
-  move(id: number) {
-    console.log(id);
-    console.log(this.restaraunt[id].open);
-    // const a = this.restaraunt[4] ? id : 'false';
-    // console.log(a);
+   // 스크롤의 위치를 감지해서 스크롤업버튼을 활성화
+  @HostListener('window:scroll', ['$event'])
+    checkScroll() {
+      const position = this.el.nativeElement.offsetTop;
+      const scrollPosition = window.pageYOffset;
+      if (scrollPosition >= position) {
+        this.isShow = true;
+      } else {
+        this.isShow = false;
+      }
+    }
+
+    // 클릭하면 placeholder가 변경 / 상위 카테고리, 더 많은 카테고리가 나옴
+  click() {
+    // 상위 카테고리
+    this.restaurantService.getCategory()
+    .subscribe(category => this.restaurant = category);
+    // 더 많은 카테고리
+    this.restaurantService.getMoreCategory()
+    .subscribe(MoreCategory => this.moreLists = MoreCategory);
+    // placeholder 변경
+    this.isClick = !this.isClick;
+    this.showContainer = !this.showContainer;
   }
 
-  storeOpen(id: number) {
-    const a = this.restaraunt[id].open ? 'true' : 'false';
-    console.log(a);
+  // 더보기를 누르면 추가적인 레스토랑 리스트가 나온다.
+  loadMore() {
+    this.restaurantService.loadMore()
+      .subscribe(loadMore => this.restaurant = [...this.restaurant, ...loadMore]);
+    console.log('a', this.restaurant);
   }
-  
+
+    // 텍스트를 지우면 카테고리 컨테이너가 사라짐
+  input() {
+    if (event.target.value == 0)
+    {
+      this.showContainer = true;
+    }
+  }
+
+  // 버튼을 누르면 컨테이너가 사라짐
+  removeCategory() {
+    this.showContainer = false;
+  }
+
+  selectedRestaurant(list) {
+    console.log(list);
+    // this.router.navigate('[]');
+  }
+
 }

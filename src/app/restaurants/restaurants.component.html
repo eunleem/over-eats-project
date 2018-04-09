@@ -1,25 +1,73 @@
-  <div class="restaraunt-container">
-    <div class="main-container">
-      <div class="restaurat-name">
-        <h1> restaraunt-name </h1>
+<div class="restaraunt-component-container constraint">
+  <div class="container">
+    <div class="search-container">
+      <div class="search">
+        <input class="input-search"
+          type="text"
+          (click)="click()"
+          (input)="input()"
+          [(ngModel)]="value"
+          placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
+          <ul class="search-list">
+            <li class="button" *ngIf="value">{{ value }}</li>
+          </ul>
+        <div class="input-value" *ngIf="showContainer">
+          검색할 값을 입력하세요.
+        </div>
+        <button *ngIf="showContainer" (click)="removeCategory()">X</button>
       </div>
-      <div class="content-list">
-        <div class="contents" *ngFor="let list of restaraunt">
-          <div class="content"
-            (click)="move(list.id)">
-            <img class="img"
-            [class.store-close]="list.open"
-            src={{list.image}}>
-            <p class="name">{{list.name}}</p>
-            <p class="foodTypes">{{list.foodTypes}}</p>
-            <p class="making-time"> 조리시간 : {{list.deliveryMin}}분 </p>
+      <div class="category-container" *ngIf="value">
+        <div class="categorys">
+          <h1>상위 카테고리</h1>
+        </div>
+        <div class="category-list">
+          <div class="category" *ngFor="let list of restaurant">
+            <a (click)="selectedRestaurant(list)">
+              <img class="category-image" src="{{list.image}}">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="more-category-container" *ngIf="showContainer">
+        <div class="categorys">
+          <h1>더 많은 카테고리</h1>
+        </div>
+        <div class="more-category-list">
+          <div class="more-category" *ngFor="let moreList of moreLists">
+            <a (click)="selectedRestaurant(moreList)">
+              <img class="more-category-image" src="{{moreList.image}}" alt="moreListImage">
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <button class="go-up" (click)="goUp()"> 위로 </button>
-    <div class="load-more">
-      <button (click)="loadMore()">더 로드하기</button>
+    <div class="restaraunt-container" *ngIf="!showContainer">
+      <div class="main-container">
+        <div class="restaurat-name">
+          <h1> local - 레스토랑 </h1>
+        </div>
+        <div class="content-list">
+          <div class="content" *ngFor="let list of restaurant">
+            <a (click)="selectedRestaurant(list)">
+              <div class="content-wrap">
+                <img class="img" src={{list.image}}>
+                <div class="ready" *ngIf="list.open">준비중</div>
+                <div class="name">{{list.name}}</div>
+                <div class="detail">
+                  <div class="food-types">{{list.foodTypes}}</div>
+                  <div class="making-time"> 조리시간 : {{list.deliveryMin}}분 </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <button class="go-up" *ngIf="isShow" (click)="goUp()">
+        &uarr;
+      </button>
+      <div class="load-more" (click)="loadMore()">
+        <button>더 로드하기</button>
+      </div>
     </div>
   </div>
-  <pre>{{ restaraunt | json }}</pre>
+</div>
