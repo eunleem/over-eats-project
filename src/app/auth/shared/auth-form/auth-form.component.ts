@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 
 @Component({
@@ -23,6 +23,9 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
           </span>
           <span class="error" *ngIf="usernamePattern">
             이메일 형식에 맞게 입력해 주세요.
+          </span>
+          <span class="error" *ngIf="error">
+            이미 가입된 이메일주소 입니다.
           </span>
         </div>
         <div class="form-group">
@@ -57,6 +60,10 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 export class AuthFormComponent implements OnInit {
   form: FormGroup;
   formValid: boolean;
+  usernameExist: boolean;
+
+  @Input()
+  error: boolean;
 
   @Output()
   submitted = new EventEmitter<FormGroup>();

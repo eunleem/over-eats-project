@@ -46,6 +46,7 @@ export class CartService {
     this.dispatch(cart);
   }
 
+  // editItem(product: Product, quantity: number, comment: string)
   editItem(product: Product, quantity: number, comment: string) {
     const cart = this.retrieve();
     const item = cart.items.find(cp => cp.product_id === product.id);

@@ -6,8 +6,12 @@ import { User } from '../auth/user';
   selector: 'app-user',
   styleUrls: ['./user.component.scss'],
   template: `
-    <div>hello users</div>
-    <h2>{{ user?.username }}</h2>
+    <div class="constraint">
+      <div>hello users</div>
+      <h2>{{ user?.username }}</h2>
+      <p>{{ user?.first_name}}</p>
+      <p>{{ user?.last_name}}</p>
+    </div>
   `
 })
 export class UserComponent implements OnInit {

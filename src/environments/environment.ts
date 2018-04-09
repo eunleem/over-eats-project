@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://www.overeats.kr/api/',
+  apiUrl: 'https://www.overeats.kr/api',
   tokenName: '',
   user: ''
 };

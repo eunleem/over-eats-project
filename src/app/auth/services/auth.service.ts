@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/shareReplay';
@@ -15,28 +16,32 @@ import { Token } from '../token';
 @Injectable()
 export class AuthService {
   // TODO: 주소 바꿔줄것.
-  URL = `https://www.overeats.kr/api`;
+  URL = environment.apiUrl;
   TOKEN_NAME = environment.tokenName;
   USER = 'user';
+
+  thisUser: any;
+  subscriber = new Array<Observer<User>>();
+  subscriptionObservable: Observable<User>;
 
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelper
-  ) { }
+  ) {
+  }
+
 
 
   // TODO ** set User 부분 ** 변경하기!!!!!!!
-  signin(credential: User): Observable<Token> {
+  signin(credential): Observable<Token> {
     return this.http.post<Token>(`${this.URL}/login/`, credential)
       .do(res => this.setToken(res.token))
       .do(res => this.setUser(res.user))
       .shareReplay();
   }
 
-  signup(credential: User): Observable<Token> {
-    return this.http.post<Token>(`${this.URL}/member/user/`, credential)
-      .do(res => this.setToken(res.token))
-      .shareReplay();
+  signup(credential): Observable<Token> {
+    return this.http.post<Token>(`${this.URL}/member/user/`, credential);
   }
 
 
@@ -59,8 +64,14 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_NAME);
   }
 
-  getUser(): string {
-    return localStorage.getItem(this.USER);
+  // getUser(): Observable<User> {
+  //   const thisUser = localStorage.getItem(this.USER);
+  //   return
+  // }
+
+  getUser(): User {
+    const user = JSON.parse(localStorage.getItem(this.USER));
+    return user;
   }
 
   setUser(user: any): void {

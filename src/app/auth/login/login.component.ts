@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         () => {
           console.log(this.auth.isAuthenticated());
-          this.router.navigate(['user']);
+          this.router.navigate(['home']);
         },
         ({ error }) => this.message = error.message
       );

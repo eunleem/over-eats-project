@@ -1,4 +1,5 @@
 export interface User {
+  pk: number;
   username: string;
   password: string;
   first_name: string;
