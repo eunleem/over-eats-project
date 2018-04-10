@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4500',
-  tokenName: 'access_token',
+  apiUrl: 'https://www.overeats.kr/api',
+  tokenName: '',
+  user: ''
 };

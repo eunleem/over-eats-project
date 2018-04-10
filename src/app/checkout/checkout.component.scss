@@ -3,10 +3,84 @@
   display: flex;
   justify-content: space-between;
 }
-
+// form group
 .checkout {
-  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  margin-right: 4em;
+
+  @media only screen and (min-width: $medium) {
+    width: 100%;
+  }
 }
+
+.page-title {
+  width: 100%;
+  font-size: 2em;
+  font-weight: 400;
+  margin-bottom: 46px;
+}
+
+.form-group1 {
+  width: 100%;
+  border: 1px solid $light-grey;
+  border-radius: 4px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+
+  label {
+    width: 100%;
+  }
+}
+
+.form-title {
+  font-size: 1.6em;
+  margin: 0;
+  padding: 20px;
+  border-bottom: 1px solid $light-grey;
+}
+
+.selector-group {
+  padding: 20px;
+
+  span {
+    color: $uber-green;
+  }
+}
+
+.date-picker {
+  padding-top: 20px;
+  display: flex;
+
+
+  .select-group {
+    position: relative;
+  }
+
+  select {
+    border-bottom: 1px solid $grey;
+    border-radius: 0px;
+    padding: 10px 20px;
+    font-weight: 400;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+}
+
+.fa-caret-down {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  width: 10px;
+  height: 34px;
+  color: $grey;
+  cursor: pointer;
+}
+
+// cart
+
 .cart-group {
   margin-top: 80px;
   min-width: 360px;

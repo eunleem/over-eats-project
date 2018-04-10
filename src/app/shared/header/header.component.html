@@ -13,17 +13,16 @@
         </g>
       </svg>
     </a>
-    <app-search *ngIf="onMenu" [onMenu]="onMenu"></app-search>
+    <app-search *ngIf="thisUrl !== '/home'" [onMenu]="true">
+    </app-search>
     <div class="menus">
-      <!-- <button class="icon-search" (click)="onSearchBar = !onSearchBar">
-        <i class="fas fa-search"></i>
-      </button> -->
       <button class="button">
-        <a routerLink="/login" *ngIf="!isLoggedIn">로그인</a>
-        <a *ngIf="isLoggedIn">로그아웃</a>
+        <a routerLink="/login" *ngIf="!this.auth.isAuthenticated()">로그인</a>
+        <a (click)="signout()" *ngIf="this.auth.isAuthenticated()">로그아웃</a>
       </button>
       <button class="button dark">
-        <a routerLink="/signup" *ngIf="!isLoggedIn">회원가입</a>
+        <a routerLink="/signup" *ngIf="!this.auth.isAuthenticated()">회원가입</a>
+        <a  routerLink="/user" *ngIf="this.auth.isAuthenticated()">마이페이지</a>
       </button>
       <button class="icon-group" *ngIf="isCart">
         <a routerLink="/checkout" class="icon">
@@ -37,7 +36,9 @@
               </g>
             </g>
           </svg>
-          <span class="number">2</span>
+          <span 
+            *ngIf="itemCount"
+            class="number">{{ itemCount }}</span>
         </a>
       </button>
     </div>

@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   template: `
     <div class="centered signup">
-        <app-auth-form (submitted)="signupUser($event)">
+        <app-auth-form
+          [error]="error"
+          (submitted)="signupUser($event)">
           <h1 class="form-title">회원가입</h1>
           <p class="form-sub">이메일 계정으로 간편하게 오버잇츠 회원이 되세요!</p>
           <span>이미 회원이신가요?</span>
@@ -24,13 +28,26 @@ import { FormGroup } from '@angular/forms';
   `
 })
 export class SignupComponent implements OnInit {
-
-  constructor() { }
+  error: boolean;
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
+
   signupUser(event: FormGroup) {
-    console.log(event.value);
+    const newUser = Object.assign({}, event.value, {first_name: '', last_name: '', phone_number: '010-0000-0000'});
+    this.auth.signup(newUser)
+      .subscribe(
+        () => {
+          console.log('sign up');
+          this.auth.signin(event.value)
+            .subscribe(() => this.router.navigate(['user']));
+        },
+        ({ error }) => this.error = true
+      );
   }
 }

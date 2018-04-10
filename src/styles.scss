@@ -2,6 +2,9 @@
 @import './sass/variables';
 @import './sass/reset';
 
+body {
+  background: $background;
+}
 .form-title {
   font-size: 2em;
   font-weight: 300;
@@ -118,9 +121,9 @@ input {
   color: $dark;
 
   &::placeholder {
-    color: $dark;
+    color: $grey;
     font-size: inherit;
-    font-weight: inherit;
+    font-weight: 100 !important;
   }
 
   &:focus {

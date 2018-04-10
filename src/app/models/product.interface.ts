@@ -1,6 +1,6 @@
-export interface Menu {
+export interface Product {
   id: number;
-  title: string;
+  name: string;
   disc: string;
   price: number;
   category: string;

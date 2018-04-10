@@ -1,5 +1,9 @@
 export interface User {
-  userid: string;
+  pk: number;
+  username: string;
   password: string;
-  admin?: boolean;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  img_profile: string;
 }

@@ -1,11 +1,18 @@
 @import '../../../sass/_variables.scss';
 
+.active {
+  background: $light-grey;
+  
+  em {
+    font-weight: 600;
+  }
+}
 
 label {
   position: relative;
-  width: 50vw;
+  width: 90vw;
   min-width: 200px;
-  max-width: 400px;
+  max-width: 600px;
 
   & input {
     height: 46px;
@@ -15,25 +22,36 @@ label {
 
 .fa-map-marker-alt {
     position: absolute;
-    height: 46px;
-    left: 10px;
-    color: rgb(160, 160, 160);
+    height: 54px;
+    width: 16px;
+    left: 20px;
+    color: $uber-green;
 }
-
 
 
 .onMain {
   .input-search {
     background: white;
   }
-
+  .input {
+    height: 56px;
+    line-height: 56px;
+    border-color: $uber-green;
+    font-size: 1.3em;
+    padding-left: 42px;
+  }
   ul {
     position: absolute;
     width: 100%;
+    border: 0;
 
     & li {
       height: 46px;
       line-height: 46px;
+      border: 0;
+      border-radius: 0;
+      border: 1px solid $uber-green;
+      margin: -1px 0;
       padding: 0 10px;
     }
   }
@@ -43,6 +61,8 @@ label {
     margin-left: -5px;
   }
 }
+
+
 .onHeader {
   position: absolute;
   width: 100%;
@@ -58,6 +78,8 @@ label {
   .fa-map-marker-alt {
     height: 40px;
     width: 12px;
+    left: 10px;
+    color: $grey;
   }
 
   @media only screen and (min-width: $medium) {
@@ -66,13 +88,10 @@ label {
     position: initial;
 
     label {
-    width: 40vw;
-    min-width: 200px;
-    max-width: 400px;
 
       & input {
         height: 34px;
-        width: 40vw;
+        width: 100%;
       }
     }
   

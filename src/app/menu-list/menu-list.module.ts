@@ -4,7 +4,8 @@ import { MenuListComponent } from './menu-list.component';
 
 import { MenuRoutingModule } from './menu-routing.module';
 import { CartModule } from '../cart/cart.module';
-import { SelectorModule } from './selector/selector.module';
+import { SelectorModule } from '../cart/selector/selector.module';
+
 
 
 @NgModule({
@@ -15,9 +16,9 @@ import { SelectorModule } from './selector/selector.module';
     SelectorModule
   ],
   declarations: [
-    MenuListComponent,
+    MenuListComponent
   ],
-  exports: [
-  ]
+  exports: [],
+  providers: []
 })
 export class MenuListModule { }

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -29,17 +30,24 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   message: string;
 
-  constructor() {
-  }
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
   }
 
 
   loginUser(event: FormGroup) {
-    const userName = event.value.email;
-    const password = event.value.password;
-    console.log(userName, password);
+    this.auth.signin(event.value)
+      .subscribe(
+        () => {
+          console.log(this.auth.isAuthenticated());
+          this.router.navigate(['home']);
+        },
+        ({ error }) => this.message = error.message
+      );
   }
 
 }
