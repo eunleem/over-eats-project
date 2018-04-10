@@ -1,56 +1,189 @@
-@import '../../sass/variables';
+    @import '../../sass/variables';
 
-    .restaurat-name > h1 {
-        font-size: 22px;
-        padding-left: 65px;
+    .restaraunt-component-container {
+        display: flex;
+        justify-content: center;
     }
 
-    /* content */
-
-    .content-list {
-        margin-right: -18px;
-        min-height: 1500px;
-        overflow: auto;
+    .search {
+        height: 50px;
+        display: flex;
+        position: relative;
+        justify-content: center;
+        flex-direction: column;
+        border-bottom: 1px solid $grey;
+        input {
+            min-height: 30px;
+            border: none;
+            font-size: 20px;
+        }
+        button {
+            background-color: black;
+            border: 1px solid whitesmoke;
+            color: white;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 5px;
+            top: 5px;
+            box-shadow: gray;
+        }
     }
 
-    .contents {
-        padding: 0 35px;
+    .input-search {
+        background: white;
+        ul {
+            position: absolute;
+            width: 100%;
+            & li {
+                height: 46px;
+                line-height: 46px;
+                padding: 0 10px;
+            }
+        }
     }
 
-    .content {
+    .input-value {
+        position: absolute;
+        right: 10px;
+        height: 20px;
+        color: $grey;
+        font-size: 20px;
+    }
+
+    .categorys {
+        margin-top: 20px;
+        padding-left: 10px;
+        font-size: 25px;
+        display: inline-block;
+    }
+
+    .category-list, .more-category-list {
+        margin-top: 30px;
+        min-height: 600px;
+        width: 100%;
+        display: inline-flex;
+        flex-wrap: wrap;
+        vertical-align: top;
+    }
+
+    .category, .more-category {
+        width: 100%;
+        max-width: 450px;
+        padding: 0 10px 10px 10px;
+        @media only screen and (min-width: $medium) {
+            width: 50%;
+            max-width: 350px;
+        }
+        @media only screen and (min-width: $m-large) {
+            width: 33.33%;
+            min-width: 300px;
+        }
+        @media only screen and (min-width: $large) {
+            width: 25%;
+            min-width: 280px;
+        }
+    }
+
+    .category-image, .more-category-image {
+        width: 100%;
+        height: 150px;
+        background: 100% 100%;
         cursor: pointer;
-        margin: 20px 30px;
-        float: left;
-        width: 27%;
-        height: 330px;
         border-radius: 2px;
     }
 
-    .content:hover {
-        background-color: rgba(201, 175, 175, 0.1);
-        transition: all 1s ease;
-        cursor: pointer;
+
+// restaurant-container
+
+    .restaurat-name {
+        display: block;
+        font-size: 22px;
+        padding-left: 25px;
     }
 
+    .main-container {
+        padding-left: 10px;
+    }
+    /* content */
 
-    .name, .foodTypes {
-        font-size: 1.2em;
-        margin-top: -2px;
+    .content-list {
+        min-height: 1500px;
+        overflow: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .content {
+        position: relative;
+        cursor: pointer;
+        width: 100%;
+        height: 330px;
+        margin-top: 15px;
+        &:hover {
+            background-color: rgba(201, 175, 175, 0.1);
+            transition: all 1s ease;
+            cursor: pointer;
+            transform: translateY(-2px);
+        }
+        @media only screen and (min-width: $medium) {
+            width: 50%;
+            max-width: 380px;
+        }
+        @media only screen and (min-width: $large) {
+            width: 33.33%;
+            min-width: 300px;
+        }
+
+    }
+
+    .content-wrap {
+        margin: 0 0.8em;
+        position: relative;
+    }
+
+    .name, .food-types, .making-time {
+        margin-top: -10px;
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        font-weight: 800;
+        margin-top: 10px;
+    }
+
+    .food-types {
+        font-size: 14px;
+        color: $grey;
     }
 
     .making-time {
-        background-color: rgba(201, 175, 175, 0.1);
+        height: 20px;
+        display: inline-block;
+        flex-direction: column;
+        background-color: whitesmoke;
     }
 
     .img{
+        border-radius: 4px;
         width: 100%;
         height: 240px;
         background-size: 100% 100%;
     }
 
     // 가게가 안열었을 때
-    .img.store-close {
-        background: rgba(0,0,0,0.6);
+    .ready {
+        background-color: rgba(0, 0, 0, 0.6);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        color: white;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        height: 240px;
+        border-radius: 4px;
     }
 
     /* load more */
@@ -59,14 +192,14 @@
         margin: 30px 0;
         display: flex;
         justify-content: center;
-    }
 
-    .load-more > button {
-        border: 1px solid $grey;
-        font-size: 14px;
-        padding: 8px 16px;
-        height: 50px;
-        cursor: pointer;
+        button {
+            border: 1px solid $grey;
+            font-size: 14px;
+            padding: 8px 16px;
+            height: 50px;
+            cursor: pointer;
+        }
     }
 
     /* scroll up */
@@ -74,14 +207,19 @@
     .go-up {
         float: right;
         position: fixed;
-        bottom: 100px;
+        bottom: 40px;
         right: 40px;
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
         background-color: $uber-green;
-        transition: all 3s ease;
         cursor: pointer;
+        color:white;
+        font-size: 20px;
     }
 
+    .go-up:hover {
+        background-color: rgb(48, 133, 19);
+        transition: all 0.7s ease;
+    }
 
 
