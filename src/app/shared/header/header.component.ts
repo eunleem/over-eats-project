@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../auth/services/auth.service';
 import { CartService } from '../../core/cart.service';
@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   onMenu = false;
   isCart = true;
   isLoggedIn: boolean;
+  thisUrl: string;
 
   cart: Observable<ShoppingCart>;
   itemCount: number;
@@ -27,12 +28,8 @@ export class HeaderComponent implements OnInit {
     private cartService: CartService
   ) {
     this.router.events.subscribe(data => {
-      if (data instanceof NavigationStart) {
-        if (data.url === '/home' || data.url === '') {
-          this.onMenu = false;
-        } else {
-          this.onMenu = true;
-        }
+      if (data instanceof NavigationEnd) {
+        this.thisUrl = data.urlAfterRedirects;
       }
     });
   }

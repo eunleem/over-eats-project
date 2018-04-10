@@ -13,7 +13,8 @@
         </g>
       </svg>
     </a>
-    <app-search *ngIf="onMenu" [onMenu]="onMenu"></app-search>
+    <app-search *ngIf="thisUrl !== '/home'" [onMenu]="true">
+    </app-search>
     <div class="menus">
       <button class="button">
         <a routerLink="/login" *ngIf="!this.auth.isAuthenticated()">로그인</a>

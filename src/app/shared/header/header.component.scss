@@ -10,12 +10,16 @@
     opacity: 1;
   }
 }
+
+.hide {
+  display: none;
+}
 .isClicked {
   color: $uber-green;
 }
 
 .header-group {
-  background: white;
+  background: $background;
   // box-shadow: 0px 5px 20px 0px #c7c7c7;
   position: sticky;
   top: 0;
