@@ -59,7 +59,7 @@
   border-bottom: 1px solid rgb(224, 224, 224);
   position: sticky;
   top: 70px;
-  background: white;
+  background: $background;
   z-index: 50;
 
   & ul {
@@ -119,7 +119,7 @@
   border-radius: 2px;
   border: 1px solid $grey;
   cursor: pointer;
-  background-color: white;
+  background-color: $background;
   display: flex;
   flex-direction: row;
   margin-right: 24px;

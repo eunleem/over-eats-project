@@ -26,9 +26,14 @@ interface ICartItemWithProduct extends CartItem {
     (close)="onClick = false">
   </app-editor>
   <div class="cart">
-    <button class="button uber button-fluid">장바구니 확인</button>
-      <div>
-        <div class="cart-group"
+    <div class="button-group">
+      <button
+      (click)="goCheckout()"
+      [ngClass]="{'disabled': cartItems?.length === 0}"
+      class="button uber button-fluid">장바구니 확인</button>
+    </div>
+    <ul class="item-group">
+        <li class="item-list"
           *ngFor="let item of cartItems">
             <div (click)="onEdit(item)">
               {{ item.product.name }}
@@ -38,13 +43,18 @@ interface ICartItemWithProduct extends CartItem {
             <span
               type="button"
               (click)="onRemove(item.product_id)">
-            제거
+            <i class="far fa-trash-alt"></i>
             </span>
-        </div>
-        <div class="price-group">
-          <span>{{ itemCount }}</span>
-        </div>
-      </div>
+        </li>
+    </ul>
+    <div class="price-group">
+      <p *ngIf="itemCount">
+        <span>총 {{ itemCount }} 개 아이템</span>
+        <span>25,000원</span>
+      </p>
+      <span *ngIf="!itemCount || itemCount == 0">
+        카트에 아이템을 추가하면 여기에 나타납니다.</span>
+    </div>
   </div>
   `
 })
@@ -91,6 +101,10 @@ export class CartComponent implements OnInit, OnDestroy {
   onEdit(item) {
     this.cartItem = item;
     this.onClick = true;
+  }
+
+  goCheckout() {
+    this.router.navigate(['checkout']);
   }
 
   ngOnDestroy() {
