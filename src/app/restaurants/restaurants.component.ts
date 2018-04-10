@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
   templateUrl: './restaurants.component.html',
   styleUrls: ['./restaurants.component.scss'],
 })
-
 export class RestaurantsComponent implements OnInit {
   isShow: boolean; // 스크롤 이동에 따른 버튼의 표시
   showContainer: boolean; // 검색에 값을 넣을 때의 컨테이너 표시
@@ -20,13 +19,14 @@ export class RestaurantsComponent implements OnInit {
   restaurant: Restaurant[];
   moreLists: Restaurant[];
   open: Restaurant['open']; // 오픈하지 않은 매장의 명도처리
-
+  value: string;
+  id: number;
   // url = 'http://localhost:3000/restaurants';
   constructor(
     public http: HttpClient,
     public el: ElementRef,
     private restaurantService: RestaurantsService,
-    // public router: Router
+    public router: Router
   ) {}
   ngOnInit() {
     this.restaurantService.getRestaurants()
@@ -77,10 +77,10 @@ export class RestaurantsComponent implements OnInit {
   }
 
     // 텍스트를 지우면 카테고리 컨테이너가 사라짐
-  input() {
-    if (event.target.value == 0)
-    {
-      this.showContainer = true;
+  input(value: string) {
+    const lengthValue = value.length;
+    if (lengthValue === 0) {
+      this.showContainer = false;
     }
   }
 
@@ -89,9 +89,9 @@ export class RestaurantsComponent implements OnInit {
     this.showContainer = false;
   }
 
-  selectedRestaurant(list) {
-    console.log(list);
-    // this.router.navigate('[]');
+  selectedRestaurant(id: number) {
+    console.log(id);
+    this.router.navigate([id]);
   }
 
 }
