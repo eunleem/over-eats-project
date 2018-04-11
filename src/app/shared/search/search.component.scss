@@ -29,6 +29,7 @@ label {
 }
 
 
+
 .onMain {
   .input-search {
     background: white;
@@ -64,6 +65,7 @@ label {
 
 
 .onHeader {
+  display: none;
   position: absolute;
   width: 100%;
   top: 71px;
@@ -75,6 +77,12 @@ label {
     width: 100vw;
   }
 
+  label {
+    width: 50vw;
+    max-width: 240px;
+    position: relative;
+  }
+
   .fa-map-marker-alt {
     height: 40px;
     width: 12px;
@@ -82,12 +90,29 @@ label {
     color: $grey;
   }
 
-  @media only screen and (min-width: $medium) {
-    display: initial;
+  ul {
+    position: absolute;
+    width: 100%;
+    border: 0;
 
+    & li {
+      height: 40px;
+      line-height: 40px;
+      border: 0;
+      border-radius: 0;
+      border: 1px solid $uber-green;
+      margin: -1px 0;
+      padding: 0 10px;
+    }
+  }
+
+  @media only screen and (min-width: 700px) {
+    display: initial;
     position: initial;
 
     label {
+      width: 40vw;
+      max-width: 600px;
 
       & input {
         height: 34px;
@@ -99,4 +124,11 @@ label {
     height: 34px;
     }
   }
+
+    @media only screen and (min-width: $large) {
+      label {
+        width: 70vw;
+        max-width: 600px;
+      }
+    }
 }

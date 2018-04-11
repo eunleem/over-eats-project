@@ -20,13 +20,8 @@ export class SearchService {
 
   constructor(private http: HttpClient) { }
 
-  search(terms: Observable<string>) {
-    return terms.debounceTime(1000)
-      .distinctUntilChanged()
-      .switchMap(term => this.searchAddress(term));
-  }
-
   searchAddress(term) {
+    console.log('searching addresses');
     return this.http.post<SearchResult>(`${this.URL}/address/`, { search_text: term }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -34,6 +29,18 @@ export class SearchService {
     });
   }
 
+
+  // restaurant services
+
+  getRestaurant(geometry) {
+    console.log('getting restaurants from db');
+    const {lat, lng} = geometry;
+    return this.http.get(`${this.URL}/restaurant/?lat=${lat}&lng=${lng}`);
+  }
+
+  loadMore(url) {
+    return this.http.get(url);
+  }
 
 }
 
