@@ -1,40 +1,67 @@
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { hostElement } from '@angular/core/src/render3/instructions';
 import { NgModel } from '@angular/forms';
+import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Observable';
 
 import { Restaurant } from '../models/restaurant';
+
 import { RestaurantsService } from '../core/restaurants.service';
-import { Router } from '@angular/router';
+import { SearchService } from '../core/search.service';
 
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
   styleUrls: ['./restaurants.component.scss'],
 })
-export class RestaurantsComponent implements OnInit {
+export class RestaurantsComponent implements OnInit, AfterViewInit {
+
   isShow: boolean; // 스크롤 이동에 따른 버튼의 표시
-  showContainer: boolean; // 검색에 값을 넣을 때의 컨테이너 표시
-  isClick: boolean; // 검색창에 값을 넣을 때의 표시
-  restaurant: Restaurant[];
+  showContainer = false; // 검색에 값을 넣을 때의 컨테이너 표시
+  isClick = false; // 검색창에 값을 넣을 때의 표시
+  restaurants: any;
   moreLists: Restaurant[];
   open: Restaurant['open']; // 오픈하지 않은 매장의 명도처리
   value: string;
   id: number;
-  // url = 'http://localhost:3000/restaurants';
+
+  today = new Date().getDay();
+  isLoading = false;
+  nextPage: string;
+  hideMoreButton = false;
+
   constructor(
     public http: HttpClient,
     public el: ElementRef,
-    private restaurantService: RestaurantsService,
+    private activateRoute: ActivatedRoute,
+    private searchService: SearchService,
     public router: Router
   ) {}
+
   ngOnInit() {
-    this.restaurantService.getRestaurants()
-    .subscribe(restaurant => this.restaurant = restaurant);
-    this.showContainer = false;
-    this.isClick = false;
+    this.isLoading = true;
+    let geometry: any;
+    this.activateRoute.params.subscribe(params => {
+      geometry = params;
+    });
+    this.searchService.getRestaurant(geometry)
+      .subscribe((data: any) => {
+        console.log(data);
+        this.isLoading = false;
+        this.restaurants = data.restaurants;
+        this.nextPage = data.next;
+      });
   }
 
+  getOpenTime(restaurant) {
+    if (this.today > 5) { this.today = 0; }
+    const time = restaurant.open_time.map(item => item.start_time)[this.today];
+    const hour = Math.floor(time / 60);
+    const min = Math.floor(time % 60);
+    return `${hour} : ${min === 0 ? '00' : min}`;
+  }
    // 스크롤을 최상단으로 부드럽게 이동
   goUp() {
     window.scrollTo({
@@ -59,21 +86,25 @@ export class RestaurantsComponent implements OnInit {
     // 클릭하면 placeholder가 변경 / 상위 카테고리, 더 많은 카테고리가 나옴
   click() {
     // 상위 카테고리
-    this.restaurantService.getCategory()
-    .subscribe(category => this.restaurant = category);
+    // this.restaurantService.getCategory()
+    // .subscribe(category => this.restaurants = category);
     // 더 많은 카테고리
-    this.restaurantService.getMoreCategory()
-    .subscribe(MoreCategory => this.moreLists = MoreCategory);
+    // this.restaurantService.getMoreCategory()
+    // .subscribe(MoreCategory => this.moreLists = MoreCategory);
     // placeholder 변경
-    this.isClick = !this.isClick;
-    this.showContainer = !this.showContainer;
+  //   this.isClick = !this.isClick;
+  //   this.showContainer = !this.showContainer;
   }
 
   // 더보기를 누르면 추가적인 레스토랑 리스트가 나온다.
   loadMore() {
-    this.restaurantService.loadMore()
-      .subscribe(loadMore => this.restaurant = [...this.restaurant, ...loadMore]);
-    console.log('a', this.restaurant);
+    this.searchService.loadMore(this.nextPage)
+      .subscribe((data: any) => {
+        this.restaurants = [...this.restaurants, ...data.restaurants];
+        this.nextPage = data.next;
+        console.log(data);
+        if (!this.nextPage) { this.hideMoreButton = true; }
+      });
   }
 
     // 텍스트를 지우면 카테고리 컨테이너가 사라짐
@@ -89,9 +120,9 @@ export class RestaurantsComponent implements OnInit {
     this.showContainer = false;
   }
 
-  selectedRestaurant(id: number) {
+  selectedRestaurant(id: string) {
+    // this.router.navigate([id]);
     console.log(id);
-    this.router.navigate([id]);
   }
 
 }

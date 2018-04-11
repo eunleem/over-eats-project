@@ -1,67 +1,60 @@
 <div class="restaraunt-component-container constraint">
-  <div class="container">
-    <div class="search-container">
-      <div class="search">
-        <input class="input-search"
-          type="text"
-          (click)="click()"
-          (input)="input(value)"
-          [(ngModel)]="value"
-          placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
-          <li *ngIf="value">{{ value }}</li>
-        <div class="input-value"
-          *ngIf="showContainer">검색할 값을 입력하세요.</div>
-        <button *ngIf="showContainer"
-          (click)="removeCategory()">X</button>
+  <div class="search-container">
+    <div class="search">
+      <input class="input-search"
+        type="text"
+        (click)="click()"
+        (input)="input()"
+        [(ngModel)]="value"
+        placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
+      <ul>
+        <li *ngIf="value">{{ value }}</li>
+      </ul>
+      <div class="input-value"
+        *ngIf="showContainer">
+        검색할 값을 입력하세요.
       </div>
-      <section *ngIf="showContainer">
-        <div class="category-container" >
-          <h1 class="categorys">상위 카테고리</h1>
-          <div class="category-list">
-            <div class="category"
-              *ngFor="let list of restaurant">
-              <a (click)="selectedRestaurant(list)">
-                <img class="category-image"
-                src="{{list.image}}">
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="more-category-container">
-          <h1 class="categorys">더 많은 카테고리</h1>
-          <div class="more-category-list">
-            <div class="more-category"
-              *ngFor="let moreList of moreLists">
-              <a (click)="selectedRestaurant(moreList)">
-                <img class="more-category-image"
-                  src="{{moreList.image}}"
-                  alt="moreListImage">
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <button *ngIf="showContainer"
+        (click)="removeCategory()">X</button>
+    </div>
+    <app-category></app-category>
+  </div>
+    <app-preloader 
+      *ngIf="isLoading" 
+      [ngStyle]="{ 'top': '25%', 'left': '50%', 'position': 'absolute' }">
+    </app-preloader>
     <div class="restaraunt-container" *ngIf="!showContainer">
-      <div class="main-container">
-        <h1 class="restaurat-name"> local - 레스토랑 </h1>
-        <div class="content-list">
-          <div class="content" *ngFor="let list of restaurant">
-            <a [routerLink]="[list.id]" (click)="selectedRestaurant(list.id)">
+      <div class="main-container" *ngIf="restaurants">
+        <h1>레스토랑</h1>
+        <ul class="content-list">
+          <li class="content" *ngFor="let restaurant of restaurants">
+            <a [routerLink]="['/menu', restaurant.uuid]">
               <div class="content-wrap">
-                <img class="img" src={{list.image}}>
-                <div class="ready" *ngIf="list.open">준비중</div>
-                <div class="name">{{list.name}}</div>
-                <div class="food-types">{{list.foodTypes}}</div>
-                <div class="making-time"> 조리시간 : {{list.deliveryMin}}분 </div>
+                <div class="img">
+                  <img width="100%" height="auto" src={{restaurant.logo}}>
+                </div>
+                <div class="ready" *ngIf="!restaurant.r_status">준비중</div>
+                <div class="text-group">
+                  <h3 class="name">{{restaurant.title}}</h3>
+                  <div class="food-types">
+                    <span *ngFor="let type of restaurant.tags">
+                        {{type.name}}
+                    </span>
+                  </div>
+                  <span class="duration">{{restaurant.eta_range.max}}분 </span>
+                  <span class="duration">오픈시간 {{ getOpenTime(restaurant) }}</span>
+                </div>
               </div>
             </a>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
       <button class="go-up" *ngIf="isShow" (click)="goUp()">&uarr;</button>
-      <div class="load-more" (click)="loadMore()">
+      <div class="load-more" 
+        *ngIf="restaurants && !hideMoreButton"
+        (click)="loadMore()">
         <button>더 로드하기</button>
       </div>
     </div>
-  </div>
+
 </div>
