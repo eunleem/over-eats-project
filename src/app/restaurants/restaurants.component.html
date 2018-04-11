@@ -1,4 +1,4 @@
-<div class="restaraunt-component-container constraint">
+<div class="constraint">
   <div class="container">
     <div class="search-container">
       <div class="search">
@@ -9,50 +9,45 @@
           [(ngModel)]="value"
           placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
           <li *ngIf="value">{{ value }}</li>
-        <div class="input-value"
-          *ngIf="showContainer">검색할 값을 입력하세요.</div>
-        <button *ngIf="showContainer"
-          (click)="removeCategory()">X</button>
+        <div class="input-value" *ngIf="showContainer">검색할 값을 입력하세요.</div>
+        <button *ngIf="showContainer" (click)="removeCategory()">X</button>
       </div>
-      <section *ngIf="showContainer">
-        <div class="category-container" >
-          <h1 class="categorys">상위 카테고리</h1>
-          <div class="category-list">
-            <div class="category"
-              *ngFor="let list of restaurant">
-              <a (click)="selectedRestaurant(list)">
-                <img class="category-image"
-                src="{{list.image}}">
-              </a>
-            </div>
+    </div>
+    <section *ngIf="showContainer">
+      <div class="category-container">
+        <h1 class="categorys">상위 카테고리</h1>
+        <div class="category-list">
+          <div class="category" *ngFor="let restaurant of restaurants">
+            <a (click)="selectedRestaurant(restaurant.count)">
+              <img class="category-image" src="{{restaurant.restaurants.logo}}">
+            </a>
           </div>
         </div>
-        <div class="more-category-container">
-          <h1 class="categorys">더 많은 카테고리</h1>
-          <div class="more-category-list">
-            <div class="more-category"
-              *ngFor="let moreList of moreLists">
-              <a (click)="selectedRestaurant(moreList)">
-                <img class="more-category-image"
-                  src="{{moreList.image}}"
-                  alt="moreListImage">
-              </a>
-            </div>
+      </div>
+      <div class="more-category-container">
+        <h1 class="categorys">더 많은 카테고리</h1>
+        <div class="more-category-list">
+          <div class="more-category" *ngFor="let moreList of moreLists">
+            <a (click)="selectedRestaurant(moreList.count)">
+              <img class="more-category-image" src="{{moreList.restaurants.logo}}" alt="moreListImage">
+            </a>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
     <div class="restaraunt-container" *ngIf="!showContainer">
       <div class="main-container">
-        <h1 class="restaurat-name"> local - 레스토랑 </h1>
+        <h1 class="restaurant-name"> local - 레스토랑 </h1>
         <div class="content-list">
-          <div class="content" *ngFor="let list of restaurant">
-            <a [routerLink]="[list.id]" (click)="selectedRestaurant(list.id)">
+          <div class="content" *ngFor="let restaurant of restaurants">
+            <a (click)="selectedRestaurant(restaurant.count)">
               <div class="content-wrap">
-                <img class="img" src={{list.image}}>
-                <div class="ready" *ngIf="list.open">준비중</div>
-                <div class="name">{{list.name}}</div>
-                <div class="food-types">{{list.foodTypes}}</div>
-                <div class="making-time"> 조리시간 : {{list.deliveryMin}}분 </div>
+                <img class="img" src={{restaurant.restaurants.logo}}>
+                <div class="ready" *ngIf="!checkOpen()">준비중</div>
+                <div class="name">{{restaurant.restaurants.title}}</div>
+                <div class="food-types">{{restaurant.restaurants.tags.name}}</div>
+                <div class="making-time" *ngIf="checkOpen()"> 조리시간 : {{restaurant.restaurants.eta_range.min}}분 ~ {{restaurant.restaurants.eta_range.max}} 분 </div>
+                <div calss="making-time" *ngIf="!checkOpen()">{{checkTime()}}</div>
               </div>
             </a>
           </div>

@@ -1,263 +1,93 @@
-
-   [
-    {
-      "id": 0,
-      "name": "Weimann Inc",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "2123 Gutmann Creek",
-      "open": true,
-      "deliveryMin": 25,
-      "foodTypes": [
-        "Generic",
-        "Incredible",
-        "Sleek"
-      ]
+[
+  {
+    "count" : 212,
+    "next" : "http://www.naver.com",
+    "previous": null,
+    "search_params": {
+      "lat": "37. 494780",
+      "lng": 127.051284,
+      "radious": "5000"
     },
-    {
-      "id": 1,
-      "name": "Koelpin LLC",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "83959 O'Keefe Glen",
-      "open": true,
-      "deliveryMin": 31,
-      "foodTypes": [
-        "Handcrafted",
-        "Intelligent",
-        "Handcrafted"
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Hilpert and Sons",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "075 Von Walk",
-      "open": false,
-      "deliveryMin": 10,
-      "foodTypes": [
-        "Small",
-        "Refined",
-        "Handcrafted"
-      ]
-    },
-    {
-      "id": 3,
-      "name": "Johnson - Quigley",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "617 McDermott Canyon",
-      "open": true,
-      "deliveryMin": 0,
-      "foodTypes": [
-        "Handmade",
-        "Ergonomic",
-        "Tasty"
-      ]
-    },
-    {
-      "id": 4,
-      "name": "Feeney - Stroman",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "3315 Quentin Bypass",
-      "open": false,
-      "deliveryMin": 7,
-      "foodTypes": [
-        "Practical",
-        "Awesome",
-        "Awesome"
-      ]
-    },
-    {
-      "id": 5,
-      "name": "Farrell, Kuhlman and Kuvalis",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "81486 Koepp Row",
-      "open": false,
-      "deliveryMin": 30,
-      "foodTypes": [
-        "Rustic",
-        "Handcrafted",
-        "Rustic"
-      ]
-    },
-    {
-      "id": 6,
-      "name": "Rosenbaum and Sons",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "1858 Torp Walks",
-      "open": true,
-      "deliveryMin": 37,
-      "foodTypes": [
-        "Incredible",
-        "Intelligent",
-        "Unbranded"
-      ]
-    },
-    {
-      "id": 7,
-      "name": "Fisher - Corkery",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "2913 Beier Street",
-      "open": true,
-      "deliveryMin": 25,
-      "foodTypes": [
-        "Practical",
-        "Refined",
-        "Generic"
-      ]
-    },
-    {
-      "id": 8,
-      "name": "Brekke, Schowalter and Rowe",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "25013 Kailey Forks",
-      "open": true,
-      "deliveryMin": 19,
-      "foodTypes": [
-        "Incredible",
-        "Licensed",
-        "Generic"
-      ]
-    },
-    {
-      "id": 9,
-      "name": "Bruen Inc",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "54449 Jast Prairie",
-      "open": false,
-      "deliveryMin": 5,
-      "foodTypes": [
-        "Refined",
-        "Gorgeous",
-        "Awesome"
-      ]
-    },
-    {
-      "id": 10,
-      "name": "Hansen Inc",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "890 Godfrey Field",
-      "open": false,
-      "deliveryMin": 5,
-      "foodTypes": [
-        "Licensed",
-        "Ergonomic",
-        "Rustic"
-      ]
-    },
-    {
-      "id": 11,
-      "name": "Terry - Cartwright",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "93077 Ebert Street",
-      "open": true,
-      "deliveryMin": 9,
-      "foodTypes": [
-        "Fantastic",
-        "Handmade",
-        "Incredible"
-      ]
-    },
-    {
-      "id": 12,
-      "name": "Abshire and Sons",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "92028 Osvaldo Harbor",
-      "open": true,
-      "deliveryMin": 15,
-      "foodTypes": [
-        "Fantastic",
-        "Ergonomic",
-        "Intelligent"
-      ]
-    },
-    {
-      "id": 13,
-      "name": "Bradtke LLC",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "15609 Jordi Glen",
-      "open": true,
-      "deliveryMin": 3,
-      "foodTypes": [
-        "Refined",
-        "Small",
-        "Ergonomic"
-      ]
-    },
-    {
-      "id": 14,
-      "name": "Jakubowski Group",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "837 Rath Springs",
-      "open": true,
-      "deliveryMin": 27,
-      "foodTypes": [
-        "Tasty",
-        "Refined",
-        "Generic"
-      ]
-    },
-    {
-      "id": 15,
-      "name": "Kertzmann - Swaniawski",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "09708 Delpha Haven",
-      "open": false,
-      "deliveryMin": 29,
-      "foodTypes": [
-        "Licensed",
-        "Incredible",
-        "Practical"
-      ]
-    },
-    {
-      "id": 16,
-      "name": "Mueller LLC",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "396 Osborne Junction",
-      "open": false,
-      "deliveryMin": 26,
-      "foodTypes": [
-        "Refined",
-        "Sleek",
-        "Handmade"
-      ]
-    },
-    {
-      "id": 17,
-      "name": "Gerhold LLC",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "74008 Kuhic Inlet",
-      "open": false,
-      "deliveryMin": 32,
-      "foodTypes": [
-        "Licensed",
-        "Generic",
-        "Refined"
-      ]
-    },
-    {
-      "id": 18,
-      "name": "Wunsch - Kunze",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "5774 Brain Drive",
-      "open": true,
-      "deliveryMin": 5,
-      "foodTypes": [
-        "Awesome",
-        "Licensed",
-        "Handmade"
-      ]
-    },
-    {
-      "id": 19,
-      "name": "Sawayn, Carter and Schneider",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "1644 Kilback Harbor",
-      "open": true,
-      "deliveryMin": 19,
-      "foodTypes": [
-        "Rustic",
-        "Ergonomic",
-        "Fantastic"
+    "restaurants": {
+      "uuid": "4casdad",
+      "title": "임실치즈떡볶이",
+      "r_status": "ACTIVE",
+      "r_visible": "True",
+      "schedule_order": false,
+      "rating": "0,0",
+      "address": {
+        "address1": "서울 마포구 망원동 410번지",
+        "apt_suite": "",
+        "city": "seoul",
+        "country": "korea",
+        "postal_conde": "135-080",
+        "region": "",
+        "formatted_address": "서울 마포구 망원동 410번지"
+      },
+      "position": {
+        "latitude": 37.497,
+        "longtitude": 1127.123,
+        "distance": 780
+      },
+      "eta_range": {
+        "min": 20,
+        "max": 30
+      },
+      "tags": {
+        "uuid": "asfasd",
+        "name": "한식",
+        "logo_url": "https://source.unsplash.com/1600x900/?food"
+      },
+      "logo": "https://source.unsplash.com/1600x900/?food",
+      "logos": {
+        "id": 212,
+        "url": "https://source.unsplash.com/1600x900/?food",
+        "width": 550,
+        "height": 550,
+        "is_default": true,
+        "restaurant": "임실치즈떡볶이"
+      },
+      "open_time": [
+        {
+          "day_of_week": "1",
+          "day_of_week_display": "Monday",
+          "start_time": 480,
+          "end_time": 1230
+        },
+        {
+          "day_of_week": "2",
+          "day_of_week_display": "Tuesday",
+          "start_time": 360,
+          "end_time": 1230
+        },
+        {
+          "day_of_week": "3",
+          "day_of_week_display": "Wednesday",
+          "start_time": 600,
+          "end_time": 1230
+        },
+        {
+          "day_of_week": "4",
+          "day_of_week_display": "Thursday",
+          "start_time": 750,
+          "end_time": 1230
+        },
+        {
+          "day_of_week": "5",
+          "day_of_week_display": "Friday",
+          "start_time": 300,
+          "end_time": 1230
+        },
+        {
+          "day_of_week": "6",
+          "day_of_week_display": "Saturday",
+          "start_time": 240,
+          "end_time": 1230
+        }
+      ],
+      "contact": [
+        "+82027128803"
       ]
     }
-  ]
+  }
+]

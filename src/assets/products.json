@@ -5,7 +5,8 @@
       "disc": "A golden-fried chopped beef steak smothered in rich country gravy. Served with two eggs, hash browns and bread.",
       "price": "9000",
       "category": "Breakfast Slams",
-      "img": "./images/menu/img1.jpg"
+      "img":
+          [{"img1": "./images/menu/img1.jpg"}]
     },
     {
       "id": "2",
