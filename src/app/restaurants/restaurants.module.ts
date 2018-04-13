@@ -6,12 +6,14 @@ import { RestaurantsComponent } from './restaurants.component';
 import { RestaurantRoutingModule } from './restaurants-routing.module';
 import { FormsModule } from '@angular/forms';
 import { RestaurantsService } from '../core/restaurants.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     RestaurantRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   declarations: [
     RestaurantsComponent,
