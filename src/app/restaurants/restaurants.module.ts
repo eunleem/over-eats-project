@@ -14,7 +14,7 @@ import { RestaurantsService } from '../core/restaurants.service';
     FormsModule
   ],
   declarations: [
-    RestaurantsComponent
+    RestaurantsComponent,
   ],
   exports: [
     RestaurantsComponent

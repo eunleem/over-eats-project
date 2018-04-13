@@ -8,12 +8,12 @@ import { MenuListComponent } from '../menu-list/menu-list.component';
 
 const routes: Routes = [
   { path: 'restaurants', component: RestaurantsComponent },
-  // { path: 'menu-list/:id', component: MenuListComponent}
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes)],
+    RouterModule.forChild(routes)
+  ],
   exports: [RouterModule]
 })
 export class RestaurantRoutingModule { }

@@ -1,10 +1,5 @@
     @import '../../sass/variables';
 
-    .restaraunt-component-container {
-        display: flex;
-        justify-content: center;
-    }
-
     .search {
         height: 50px;
         display: flex;
@@ -96,7 +91,7 @@
 
 // restaurant-container
 
-    .restaurat-name {
+    .restaurant-name {
         display: block;
         font-size: 22px;
         padding-left: 25px;

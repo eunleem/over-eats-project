@@ -1,263 +1,57 @@
-
-   [
+{
+  "count": 59,
+  "next": "https://www.overeats.kr/api/restaurant/category/?page=2&page_size=10",
+  "previous": null,
+  "categories": [
     {
-      "id": 0,
-      "name": "Weimann Inc",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "2123 Gutmann Creek",
-      "open": true,
-      "deliveryMin": 25,
-      "foodTypes": [
-        "Generic",
-        "Incredible",
-        "Sleek"
-      ]
+      "uuid": "702f813b-a64a-4456-b253-e547592b78ea",
+      "name": "펍",
+      "logo_url": "https://duyt4h9nfnj50.cloudfront.net/sku/07c8a18c386b4f4263e8c6a8921c4676"
     },
     {
-      "id": 1,
-      "name": "Koelpin LLC",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "83959 O'Keefe Glen",
-      "open": true,
-      "deliveryMin": 31,
-      "foodTypes": [
-        "Handcrafted",
-        "Intelligent",
-        "Handcrafted"
-      ]
+      "uuid": "7f1d8e4a-ce36-439a-b19c-7d50ecd39d51",
+      "name": "뉴 멕시칸",
+      "logo_url": "https://duyt4h9nfnj50.cloudfront.net/sku/d409b9e4da70c004798275dc9b6a8291"
     },
     {
-      "id": 2,
-      "name": "Hilpert and Sons",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "075 Von Walk",
-      "open": false,
-      "deliveryMin": 10,
-      "foodTypes": [
-        "Small",
-        "Refined",
-        "Handcrafted"
-      ]
+      "uuid": "17e5b656-bcb5-4042-8765-f1f6ed97aad5",
+      "name": "버거",
+      "logo_url": "https://duyt4h9nfnj50.cloudfront.net/sku/128411a1b54acd3c3c4e5263e7c58e2d"
     },
     {
-      "id": 3,
-      "name": "Johnson - Quigley",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "617 McDermott Canyon",
-      "open": true,
-      "deliveryMin": 0,
-      "foodTypes": [
-        "Handmade",
-        "Ergonomic",
-        "Tasty"
-      ]
+      "uuid": "a8a5445a-46f8-46b2-a210-fe60c09318eb",
+      "name": "비건",
+      "logo_url": "https://duyt4h9nfnj50.cloudfront.net/sku/55c691b1f4df92218a47588c5ec761d1"
     },
     {
-      "id": 4,
-      "name": "Feeney - Stroman",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "3315 Quentin Bypass",
-      "open": false,
-      "deliveryMin": 7,
-      "foodTypes": [
-        "Practical",
-        "Awesome",
-        "Awesome"
-      ]
+      "uuid": "bb871f1e-45c6-431b-b410-593314efc657",
+      "name": "스시",
+      "logo_url": "https://duyt4h9nfnj50.cloudfront.net/sku/21b6882726bf71ba17b29ab47ef16d22"
     },
     {
-      "id": 5,
-      "name": "Farrell, Kuhlman and Kuvalis",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "81486 Koepp Row",
-      "open": false,
-      "deliveryMin": 30,
-      "foodTypes": [
-        "Rustic",
-        "Handcrafted",
-        "Rustic"
-      ]
+      "uuid": "0f8b45e3-8e97-4b89-a6a2-e7efaac20209",
+      "name": "안주",
+      "logo_url": "https://duyt4h9nfnj50.cloudfront.net/sku/92daea70cc9f6b0725ab7bedcf93284c"
     },
     {
-      "id": 6,
-      "name": "Rosenbaum and Sons",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "1858 Torp Walks",
-      "open": true,
-      "deliveryMin": 37,
-      "foodTypes": [
-        "Incredible",
-        "Intelligent",
-        "Unbranded"
-      ]
+      "uuid": "22dfce53-f628-494a-a965-dd91d8801022",
+      "name": "양식",
+      "logo_url": "https://duyt4h9nfnj50.cloudfront.net/sku/cfb732b6a1111371079b2fdb73287fcc"
     },
     {
-      "id": 7,
-      "name": "Fisher - Corkery",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "2913 Beier Street",
-      "open": true,
-      "deliveryMin": 25,
-      "foodTypes": [
-        "Practical",
-        "Refined",
-        "Generic"
-      ]
+      "uuid": "71aab814-88d8-45ba-9173-6fb9b97b81fe",
+      "name": "웰빙",
+      "logo_url": "https://duyt4h9nfnj50.cloudfront.net/sku/5bcce6114b9d2d5a39b81e756a250407"
     },
     {
-      "id": 8,
-      "name": "Brekke, Schowalter and Rowe",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "25013 Kailey Forks",
-      "open": true,
-      "deliveryMin": 19,
-      "foodTypes": [
-        "Incredible",
-        "Licensed",
-        "Generic"
-      ]
+      "uuid": "58dec3e8-6381-400b-8d83-0ee7b6260a20",
+      "name": "일식",
+      "logo_url": "https://duyt4h9nfnj50.cloudfront.net/sku/78e3d7f0866e5f17c8350216653b063b"
     },
     {
-      "id": 9,
-      "name": "Bruen Inc",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "54449 Jast Prairie",
-      "open": false,
-      "deliveryMin": 5,
-      "foodTypes": [
-        "Refined",
-        "Gorgeous",
-        "Awesome"
-      ]
-    },
-    {
-      "id": 10,
-      "name": "Hansen Inc",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "890 Godfrey Field",
-      "open": false,
-      "deliveryMin": 5,
-      "foodTypes": [
-        "Licensed",
-        "Ergonomic",
-        "Rustic"
-      ]
-    },
-    {
-      "id": 11,
-      "name": "Terry - Cartwright",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "93077 Ebert Street",
-      "open": true,
-      "deliveryMin": 9,
-      "foodTypes": [
-        "Fantastic",
-        "Handmade",
-        "Incredible"
-      ]
-    },
-    {
-      "id": 12,
-      "name": "Abshire and Sons",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "92028 Osvaldo Harbor",
-      "open": true,
-      "deliveryMin": 15,
-      "foodTypes": [
-        "Fantastic",
-        "Ergonomic",
-        "Intelligent"
-      ]
-    },
-    {
-      "id": 13,
-      "name": "Bradtke LLC",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "15609 Jordi Glen",
-      "open": true,
-      "deliveryMin": 3,
-      "foodTypes": [
-        "Refined",
-        "Small",
-        "Ergonomic"
-      ]
-    },
-    {
-      "id": 14,
-      "name": "Jakubowski Group",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "837 Rath Springs",
-      "open": true,
-      "deliveryMin": 27,
-      "foodTypes": [
-        "Tasty",
-        "Refined",
-        "Generic"
-      ]
-    },
-    {
-      "id": 15,
-      "name": "Kertzmann - Swaniawski",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "09708 Delpha Haven",
-      "open": false,
-      "deliveryMin": 29,
-      "foodTypes": [
-        "Licensed",
-        "Incredible",
-        "Practical"
-      ]
-    },
-    {
-      "id": 16,
-      "name": "Mueller LLC",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "396 Osborne Junction",
-      "open": false,
-      "deliveryMin": 26,
-      "foodTypes": [
-        "Refined",
-        "Sleek",
-        "Handmade"
-      ]
-    },
-    {
-      "id": 17,
-      "name": "Gerhold LLC",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "74008 Kuhic Inlet",
-      "open": false,
-      "deliveryMin": 32,
-      "foodTypes": [
-        "Licensed",
-        "Generic",
-        "Refined"
-      ]
-    },
-    {
-      "id": 18,
-      "name": "Wunsch - Kunze",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "5774 Brain Drive",
-      "open": true,
-      "deliveryMin": 5,
-      "foodTypes": [
-        "Awesome",
-        "Licensed",
-        "Handmade"
-      ]
-    },
-    {
-      "id": 19,
-      "name": "Sawayn, Carter and Schneider",
-      "image": "https://source.unsplash.com/1600x900/?food",
-      "address": "1644 Kilback Harbor",
-      "open": true,
-      "deliveryMin": 19,
-      "foodTypes": [
-        "Rustic",
-        "Ergonomic",
-        "Fantastic"
-      ]
+      "uuid": "3846b57e-19a8-4bac-91a5-828a3d60a9da",
+      "name": "주류",
+      "logo_url": "https://duyt4h9nfnj50.cloudfront.net/sku/ef607d9b260dcc5b3d1c0bdca1bfbe7d"
     }
   ]
+}
