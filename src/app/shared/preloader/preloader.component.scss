@@ -1,9 +1,5 @@
 @import '../../../sass/_variables';
 
-
-// scaling... any units
-$width: 22px;
-
 body {
   background-color: white;
 }
@@ -12,7 +8,7 @@ body {
 .showbox {
   padding: 0;
   width: 50px;
-  height: 50px;
+  height: 55px;
   display: flex;
   position: absolute;
   top: 0;
@@ -20,6 +16,11 @@ body {
   &.onHeader {
     width: 30px;
     height: 35px;
+  }
+
+  &.onMain {
+    width: 50px;
+    height: 55px;
   }
 }
 
@@ -38,6 +39,11 @@ body {
 .onHeader {
   .loader{
     width: 18px;
+  }
+}
+.onMain {
+  .loader{
+    width: 22px;
   }
 }
 
