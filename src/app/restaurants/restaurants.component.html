@@ -5,11 +5,11 @@
         <input class="input-search"
           type="text"
           (click)="click()"
-          (input)="input(value)"
+          (input)="input()"
           [(ngModel)]="value"
           placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
           <li *ngIf="value">{{ value }}</li>
-        <div class="input-value" *ngIf="showContainer">검색할 값을 입력하세요.</div>
+        <div class="input-value" *ngIf= "value ? true : false">검색할 값을 입력하세요.</div>
         <button *ngIf="showContainer" (click)="removeCategory()">X</button>
       </div>
     </div>
@@ -17,9 +17,9 @@
       <div class="category-container">
         <h1 class="categorys">상위 카테고리</h1>
         <div class="category-list">
-          <div class="category" *ngFor="let restaurant of restaurants">
-            <a (click)="selectedRestaurant(restaurant.count)">
-              <img class="category-image" src="{{restaurant.restaurants.logo}}">
+          <div class="category" *ngFor="let item of categoryLists">
+            <a (click)="selectedRestaurant(item.count)">
+              <img class="category-image" src="{{item.logo_url}}">
             </a>
           </div>
         </div>
@@ -27,9 +27,9 @@
       <div class="more-category-container">
         <h1 class="categorys">더 많은 카테고리</h1>
         <div class="more-category-list">
-          <div class="more-category" *ngFor="let moreList of moreLists">
-            <a (click)="selectedRestaurant(moreList.count)">
-              <img class="more-category-image" src="{{moreList.restaurants.logo}}" alt="moreListImage">
+          <div class="more-category" *ngFor="let item of moreLists">
+            <a (click)="selectedRestaurant(item.count)">
+              <img class="more-category-image" src="{{item.logo_url}}" alt="moreListImage">
             </a>
           </div>
         </div>
@@ -39,15 +39,15 @@
       <div class="main-container">
         <h1 class="restaurant-name"> local - 레스토랑 </h1>
         <div class="content-list">
-          <div class="content" *ngFor="let restaurant of restaurants">
-            <a (click)="selectedRestaurant(restaurant.count)">
+          <div class="content" *ngFor="let item of restaurantsList">
+            <a (click)="selectedRestaurant(item.count)">
               <div class="content-wrap">
-                <img class="img" src={{restaurant.restaurants.logo}}>
-                <div class="ready" *ngIf="!checkOpen()">준비중</div>
-                <div class="name">{{restaurant.restaurants.title}}</div>
-                <div class="food-types">{{restaurant.restaurants.tags.name}}</div>
-                <div class="making-time" *ngIf="checkOpen()"> 조리시간 : {{restaurant.restaurants.eta_range.min}}분 ~ {{restaurant.restaurants.eta_range.max}} 분 </div>
-                <div calss="making-time" *ngIf="!checkOpen()">{{checkTime()}}</div>
+                <img class="img" src={{item.logo}}>
+                <div class="ready" *ngIf="!checkOpenTimes(item)">준비중</div>
+                <div class="name">{{item.title}}</div>
+                <div class="food-types">{{item.tags[0].name}}</div>
+                <div class="making-time" *ngIf="checkOpenTimes(item)"> {{item.eta_range.min}} ~ {{item.eta_range.max}} 분 </div>
+                <div calss="making-time" *ngIf="!checkOpenTimes(item)">{{nextOpenTime(item.open_time)}}</div>
               </div>
             </a>
           </div>
