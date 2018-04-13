@@ -16,10 +16,10 @@ export class RestaurantsComponent implements OnInit {
   isShow: boolean; // 스크롤 이동에 따른 버튼의 표시
   showContainer: boolean; // 검색에 값을 넣을 때의 컨테이너 표시
   isClick: boolean; // 검색창에 값을 넣을 때의 표시
-  restaurants: any[];
-  categoryLists: any[];
-  moreLists: any[];
-  restaurantsList: any[];
+  restaurants: any;
+  categoryLists: any;
+  moreLists: any;
+  restaurantsList: any;
   value: string;
 
   constructor(
