@@ -14,9 +14,9 @@ interface List {
         <div class="participants-container">
           <div>
             <li class="learn">IOS</li>
-            <a href="https://github.com/wargi"><li>SangWook Park</li></a>
+            <a href="https://github.com/wargi"><li>Sangwook Park</li></a>
             <a href="https://github.com/solchan87"><li>Solchan Ahn</li></a>
-            <a href="https://github.com/baeraemo"><li>TaeWoong Bae</li></a>
+            <a href="https://github.com/baeraemo"><li>Taewoong Bae</li></a>
           </div>
           <div>
             <li class="learn">WDS</li>
@@ -29,8 +29,10 @@ interface List {
             <a href="https://github.com/bluelion2"><li>Seunghun Kang</li></a>
           </div>
         </div>
-        <div class="foot">
-          <a href="https://github.com/FastCampusTeamTwo"><span>OverEats Project</span></a>
+        <div class="news constraint">
+          <h3>패스트캠퍼스의 뉴스레터를 구독하시면, 간편하게 신규 교육과정 및 이벤트/세미나 소식을 메일로 받아보실 수 있습니다!</h3>
+          <div><input type="email" placeholder="E-mail Address"></div>
+          <div><button>Subscribe</button></div>
         </div>
       </div>
     </footer>
