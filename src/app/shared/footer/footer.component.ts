@@ -37,27 +37,8 @@ interface List {
   `
 })
 export class FooterComponent implements OnInit {
-  list: List[];
-  url: string;
   constructor() { }
 
-  ngOnInit() {
-    this.list = [
-      // { id: 0, name: 'IOS', github: 'https://github.com/wargi' },
-      // { id: 1, name: 'SangWook Park', github: 'https://github.com/wargi' },
-      // { id: 2, name: 'Solchan Ahn', github: 'https://github.com/solchan87' },
-      // { id: 3, name: 'TaeWoong Bae', github: 'https://github.com/baeraemo' },
-      // { id: 4, name: 'WDS', github: 'https://github.com/baeraemo' },
-      // { id: 5, name: 'archomai ', github: 'https://github.com/archomai' },
-      // { id: 6, name: 'callorange', github: 'https://github.com/callorange' },
-      // { id: 7, name: '', github: 'https://github.com/callorange' },
-      // { id: 8, name: 'FDS', github: 'https://github.com/callorange' },
-      // { id: 9, name: 'Dahe Oh', github: 'https://github.com/yogicat' },
-      // { id: 10, name: 'Seunghun Kang', github: 'https://github.com/bluelion2' },
-      // { id: 11, name: '', github: 'https://github.com/baeraemo' },
-    ];
-    // this.url = 'https://github.com/FastCampusTeamTwo';
-  }
-
+  ngOnInit() {}
 
 }
