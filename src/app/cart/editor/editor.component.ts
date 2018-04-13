@@ -19,8 +19,8 @@ import { CartService } from '../../core/cart.service';
             </path>
           </svg>
         </button>
-        <h3>{{ editItem?.product.name }}</h3>
-        <p class="menu-disc">{{ editItem?.product.disc }}</p>
+        <h3>{{ editItem?.product.title }}</h3>
+        <p class="menu-disc">{{ editItem?.product.description }}</p>
         <div class="formgroup">
           <label>조리시 요청사항
             <input
@@ -30,16 +30,30 @@ import { CartService } from '../../core/cart.service';
               placeholder="음식 조리 시 요청할 사항을 적어주세요">
           </label>
           <div class="group">
-            <input
-              type="number"
-              step="1" min="0" max="20"
-              [(ngModel)]="editItem.quantity"
-              required>
+            <div class="counter">
+                <div class="button-group">
+                  <button
+                    class="input-button"
+                    type="button"
+                    (click)="decrement()"
+                    [disabled]="quantity === min">
+                  -
+                  </button>
+                  <p class="value">{{ quantity }}</p>
+                  <button
+                    class="input-button"
+                    type="button"
+                    (click)="increment()"
+                    [disabled]="quantity === max">
+                  +
+                  </button>
+                </div>
+              </div>
             <button type="button"
               (click)="onEdit()"
               class="button uber button-fluid">
-              <span>장바구니 {{ editItem?.quantity }} 수정</span>
-              <em>{{ editItem?.product.price * editItem.quantity}} 원</em>
+              <span>장바구니 {{ quantity }} 수정</span>
+              <em>{{ editItem?.product.price * quantity}} 원</em>
             </button>
           </div>
         </div>
@@ -53,18 +67,30 @@ export class EditorComponent implements OnInit {
   @Output() close = new EventEmitter();
 
   comment = '';
-  quantity = 1;
+  min = 0;
+  max = 20;
+  quantity: number;
 
   constructor(private cartService: CartService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.quantity = this.editItem.quantity;
+  }
+
+  increment() {
+    this.quantity++;
+  }
+
+  decrement() {
+    this.quantity--;
+  }
 
   toggle() {
     this.close.emit(null);
   }
 
   onEdit() {
-    this.cartService.editItem(this.editItem.product, this.editItem.quantity, this.editItem.comments);
+    this.cartService.editItem(this.editItem.product, this.quantity, this.editItem.comments);
     this.close.emit(null);
   }
 

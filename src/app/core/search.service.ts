@@ -4,10 +4,6 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
 
 interface SearchResult {
    search_text: string;
@@ -16,7 +12,9 @@ interface SearchResult {
 
 @Injectable()
 export class SearchService {
-  URL = 'https://www.overeats.kr/api';
+  URL = environment.apiUrl;
+  selectedRes = {};
+  products = {};
 
   constructor(private http: HttpClient) { }
 
@@ -31,8 +29,7 @@ export class SearchService {
 
 
   // restaurant services
-
-  getRestaurant(geometry) {
+  getRestaurant(geometry): Observable<any> {
     console.log('getting restaurants from db');
     const {lat, lng} = geometry;
     return this.http.get(`${this.URL}/restaurant/?lat=${lat}&lng=${lng}`);
@@ -40,6 +37,16 @@ export class SearchService {
 
   loadMore(url) {
     return this.http.get(url);
+  }
+
+  // get menu
+  getProducts(uuid): Observable<any> {
+    return this.http.get(`${this.URL}/restaurant/${uuid}/menu`);
+  }
+
+  // set restaurant
+  setRestaurant(restaurant) {
+    this.selectedRes = restaurant;
   }
 
 }

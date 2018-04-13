@@ -19,8 +19,8 @@ import { CartService } from '../../core/cart.service';
             </path>
           </svg>
         </button>
-        <h3>{{ thisItem.name }}</h3>
-        <p class="menu-disc">{{ thisItem.disc }}</p>
+        <h3>{{ thisItem.title }}</h3>
+        <p class="menu-disc">{{ thisItem.description }}</p>
         <div class="formgroup">
           <label>조리시 요청사항
             <input
@@ -30,14 +30,29 @@ import { CartService } from '../../core/cart.service';
               placeholder="음식 조리 시 요청할 사항을 적어주세요">
           </label>
           <div class="group">
-            <input
-              type="number"
-              step="1" min="0" max="20"
-              [(ngModel)]="quantity"
-              required>
-            <button type="button"
+            <div class="counter">
+                <div class="button-group">
+                  <button
+                    class="input-button"
+                    type="button"
+                    (click)="decrement()"
+                    [disabled]="value === min">
+                  -
+                  </button>
+                  <p class="value">{{ quantity }}</p>
+                  <button
+                    class="input-button"
+                    type="button"
+                    (click)="increment()"
+                    [disabled]="value === max">
+                  +
+                  </button>
+                </div>
+              </div>
+            <button
+              type="button"
               (click)="onAdd()"
-              class="button uber button-fluid">
+              class="add-button button uber button-fluid">
               <span>장바구니 {{ quantity }} 추가</span>
               <em>{{ thisItem.price * quantity }} 원</em>
             </button>
@@ -54,10 +69,21 @@ export class SelectorComponent implements OnInit {
 
   comment = '';
   quantity = 1;
+  min = 0;
+  max = 20;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {}
+
+
+  increment() {
+    this.quantity++;
+  }
+
+  decrement() {
+    this.quantity--;
+  }
 
   toggle() {
     this.close.emit(null);
@@ -67,6 +93,7 @@ export class SelectorComponent implements OnInit {
     this.cartService.addItem(this.thisItem, this.quantity, this.comment);
     this.close.emit(null);
   }
+
 
 }
 

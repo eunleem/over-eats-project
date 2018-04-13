@@ -1,23 +1,25 @@
 <div class="restaraunt-component-container constraint">
   <div class="search-container">
     <div class="search">
-      <input class="input-search"
+      <input 
+        class="input-search"
         type="text"
         (click)="click()"
-        (input)="input()"
         [(ngModel)]="value"
         placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
       <ul>
         <li *ngIf="value">{{ value }}</li>
       </ul>
-      <div class="input-value"
-        *ngIf="showContainer">
+      <div 
+        class="input-value"
+        *ngIf="value == ''">
         검색할 값을 입력하세요.
       </div>
-      <button *ngIf="showContainer"
+      <button 
+        *ngIf="showContainer"
         (click)="removeCategory()">X</button>
     </div>
-    <app-category></app-category>
+
   </div>
     <app-preloader 
       *ngIf="isLoading" 
@@ -28,7 +30,7 @@
         <h1>레스토랑</h1>
         <ul class="content-list">
           <li class="content" *ngFor="let restaurant of restaurants">
-            <a [routerLink]="['/menu', restaurant.uuid]">
+            <a (click)="selectedRestaurant(restaurant)">
               <div class="content-wrap">
                 <div class="img">
                   <img width="100%" height="auto" src={{restaurant.logo}}>

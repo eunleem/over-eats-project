@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { ProductsService } from '../core/products.service';
 
 interface ICartItemWithProduct extends CartItem {
-  product: Product;
   totalCost: number;
 }
 
@@ -36,13 +35,13 @@ interface ICartItemWithProduct extends CartItem {
         <li class="item-list"
           *ngFor="let item of cartItems">
             <div (click)="onEdit(item)">
-              {{ item.product.name }}
+              {{ item.product.title }}
             </div>
             <span>{{ item.quantity }}</span>
             <span>{{ item.totalCost }}</span>
             <span
               type="button"
-              (click)="onRemove(item.product_id)">
+              (click)="onRemove(item.product.id)">
             <i class="far fa-trash-alt"></i>
             </span>
         </li>
@@ -62,14 +61,12 @@ export class CartComponent implements OnInit, OnDestroy {
   cart: Observable<ShoppingCart>;
   cartItems: ICartItemWithProduct[];
   itemCount: number;
-  products: Product[];
   cartSubscription: Subscription;
   cartItem: ICartItemWithProduct;
   onClick: boolean;
 
   constructor(
     private router: Router,
-    private productsService: ProductsService,
     private cartService: CartService
   ) {}
 
@@ -77,16 +74,12 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cart = this.cartService.get();
     this.cartSubscription = this.cart.subscribe(cart => {
       this.itemCount = cart.items.map(i => i.quantity).reduce((prev, current) => prev + current, 0);
-      this.productsService.getProducts().subscribe((products) => {
-        this.products = products;
-        this.cartItems = cart.items.map((item) => {
-          const product = this.products.find(p => p.id === item.product_id);
-          return {
-            ...item,
-            product,
-            totalCost: product.price * item.quantity
-          };
-        });
+      console.log('cart', cart);
+      this.cartItems = cart.items.map((item) => {
+        return {
+          ...item,
+          totalCost: item.product.price * item.quantity
+        };
       });
     });
   }

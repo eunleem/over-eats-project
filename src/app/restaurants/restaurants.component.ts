@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { hostElement } from '@angular/core/src/render3/instructions';
@@ -10,13 +10,14 @@ import { Restaurant } from '../models/restaurant';
 
 import { RestaurantsService } from '../core/restaurants.service';
 import { SearchService } from '../core/search.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
   styleUrls: ['./restaurants.component.scss'],
 })
-export class RestaurantsComponent implements OnInit, AfterViewInit {
+export class RestaurantsComponent implements OnInit, OnDestroy {
 
   isShow: boolean; // 스크롤 이동에 따른 버튼의 표시
   showContainer = false; // 검색에 값을 넣을 때의 컨테이너 표시
@@ -32,6 +33,8 @@ export class RestaurantsComponent implements OnInit, AfterViewInit {
   nextPage: string;
   hideMoreButton = false;
 
+  sub;
+
   constructor(
     public http: HttpClient,
     public el: ElementRef,
@@ -40,19 +43,25 @@ export class RestaurantsComponent implements OnInit, AfterViewInit {
     public router: Router
   ) {}
 
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
   ngOnInit() {
     this.isLoading = true;
     let geometry: any;
-    this.activateRoute.params.subscribe(params => {
+    this.sub = this.activateRoute
+      .params.subscribe(params => {
       geometry = params;
+      this.searchService.getRestaurant(geometry)
+        .subscribe((data: any) => {
+          console.log(data);
+          this.isLoading = false;
+          this.restaurants = data.restaurants;
+          this.nextPage = data.next;
+        });
     });
-    this.searchService.getRestaurant(geometry)
-      .subscribe((data: any) => {
-        console.log(data);
-        this.isLoading = false;
-        this.restaurants = data.restaurants;
-        this.nextPage = data.next;
-      });
   }
 
   getOpenTime(restaurant) {
@@ -72,14 +81,24 @@ export class RestaurantsComponent implements OnInit, AfterViewInit {
   }
 
    // 스크롤의 위치를 감지해서 스크롤업버튼을 활성화
-  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:scroll', [])
     checkScroll() {
       const position = this.el.nativeElement.offsetTop;
       const scrollPosition = window.pageYOffset;
+
+      const d = document.documentElement;
+      const offset = d.scrollTop + window.innerHeight;
+      const height = d.offsetHeight;
+
       if (scrollPosition >= position) {
         this.isShow = true;
       } else {
         this.isShow = false;
+      }
+
+      if ( offset === height ) {
+        // infinite scrolling
+        this.loadMore();
       }
     }
 
@@ -96,21 +115,22 @@ export class RestaurantsComponent implements OnInit, AfterViewInit {
   //   this.showContainer = !this.showContainer;
   }
 
+
   // 더보기를 누르면 추가적인 레스토랑 리스트가 나온다.
   loadMore() {
-    this.searchService.loadMore(this.nextPage)
-      .subscribe((data: any) => {
-        this.restaurants = [...this.restaurants, ...data.restaurants];
-        this.nextPage = data.next;
-        console.log(data);
-        if (!this.nextPage) { this.hideMoreButton = true; }
-      });
+    if (this.nextPage) {
+      this.searchService.loadMore(this.nextPage)
+        .subscribe((data: any) => {
+          this.restaurants = [...this.restaurants, ...data.restaurants];
+          this.nextPage = data.next;
+          if (!this.nextPage) { this.hideMoreButton = true; }
+        });
+    }
   }
 
     // 텍스트를 지우면 카테고리 컨테이너가 사라짐
-  input(value: string) {
-    const lengthValue = value.length;
-    if (lengthValue === 0) {
+  input() {
+    if (this.value = '') {
       this.showContainer = false;
     }
   }
@@ -120,9 +140,9 @@ export class RestaurantsComponent implements OnInit, AfterViewInit {
     this.showContainer = false;
   }
 
-  selectedRestaurant(id: string) {
-    // this.router.navigate([id]);
-    console.log(id);
+  selectedRestaurant(restaurant) {
+    this.router.navigate(['/restaurant', `${restaurant.uuid}`]);
+    this.searchService.setRestaurant(restaurant);
   }
 
 }

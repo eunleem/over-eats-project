@@ -8,6 +8,7 @@ import { Product } from '../models/product.interface';
 import { ShoppingCart } from '../models/shopping-cart.model';
 
 import { ProductsService } from './products.service';
+import { SearchService } from './search.service';
 
 const CART_KEY = 'cart';
 @Injectable()
@@ -16,12 +17,11 @@ export class CartService {
   subscribers: Array<Observer<ShoppingCart>> = new Array<Observer<ShoppingCart>>();
   subscriptionObservable: Observable<ShoppingCart>;
 
-  constructor(private productsService: ProductsService) {
+  constructor(private searchService: SearchService) {
     this.subscriptionObservable = new Observable<ShoppingCart>((observer: Observer<ShoppingCart>) => {
       this.subscribers.push(observer);
       observer.next(this.retrieve());
     });
-    this.productsService.getProducts().subscribe((data: Product[]) => this.products = data);
   }
 
   get(): Observable<ShoppingCart> {
@@ -30,10 +30,10 @@ export class CartService {
 
   addItem(product: Product, quantity: number, comment: string) {
     const cart = this.retrieve();
-    let item = cart.items.find(cp => cp.product_id === product.id);
+    let item = cart.items.find(ci => ci.product.uuid === product.uuid);
     if (item === undefined) {
       item = new CartItem();
-      item.product_id = product.id;
+      item.product = product;
       cart.items.push(item);
     }
 
@@ -44,12 +44,13 @@ export class CartService {
     this.calculateCart(cart);
     this.save(cart);
     this.dispatch(cart);
+    console.log(cart);
   }
 
   // editItem(product: Product, quantity: number, comment: string)
   editItem(product: Product, quantity: number, comment: string) {
     const cart = this.retrieve();
-    const item = cart.items.find(cp => cp.product_id === product.id);
+    const item = cart.items.find(ci => ci.product.uuid === product.uuid);
 
     item.quantity = quantity;
     item.comments = comment;
@@ -62,7 +63,7 @@ export class CartService {
 
   removeItem(id: number) {
     const cart = this.retrieve();
-    cart.items = cart.items.filter(item => item.product_id !== id);
+    cart.items = cart.items.filter(item => item.product.uuid !== id);
 
     this.calculateCart(cart);
     this.save(cart);
@@ -80,7 +81,7 @@ export class CartService {
 
   calculateCart(cart: ShoppingCart) {
     cart.itemsTotal = cart.items
-      .map(item => item.quantity * this.products.find(p => p.id === item.product_id).price)
+      .map(item => item.quantity * item.product.price)
       .reduce((prev, current) => prev + current, 0);
     cart.grossTotal = cart.itemsTotal + cart.deliveryTotal;
   }
