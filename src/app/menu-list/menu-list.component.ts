@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { Product } from '../models/product.interface';
 
 import { CartService } from '../core/cart.service';
-import { ProductsService } from '../core/products.service';
 import { EventEmitter } from 'protractor';
 import { ActivatedRoute } from '@angular/router';
 import { SearchService } from '../core/search.service';
@@ -23,7 +22,6 @@ export class MenuListComponent implements OnInit {
   restaurantInfo;
 
   constructor(
-    private productsService: ProductsService,
     private searchService: SearchService,
     private cartService: CartService,
     private activateRoute: ActivatedRoute

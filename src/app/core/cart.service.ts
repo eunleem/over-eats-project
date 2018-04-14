@@ -7,7 +7,6 @@ import { CartItem } from '../models/cart-item.model';
 import { Product } from '../models/product.interface';
 import { ShoppingCart } from '../models/shopping-cart.model';
 
-import { ProductsService } from './products.service';
 import { SearchService } from './search.service';
 
 const CART_KEY = 'cart';
@@ -61,7 +60,7 @@ export class CartService {
     this.dispatch(cart);
   }
 
-  removeItem(id: number) {
+  removeItem(id: string) {
     const cart = this.retrieve();
     cart.items = cart.items.filter(item => item.product.uuid !== id);
 
