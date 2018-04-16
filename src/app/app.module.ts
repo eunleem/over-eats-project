@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ReactiveFormsModule } from '@angular/forms';
 // custom module
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
@@ -25,7 +25,6 @@ import { AuthService } from './auth/services/auth.service';
 import { SearchService } from './core/search.service';
 import { AuthGuard } from './auth/services/auth.guard';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +34,7 @@ import { AuthGuard } from './auth/services/auth.guard';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     // custom module
     HomeModule,
     SharedModule,
