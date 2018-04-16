@@ -1,31 +1,9 @@
 <div class="restaraunt-component-container constraint">
-  <div class="search-container">
-    <div class="search">
-      <input 
-        class="input-search"
-        type="text"
-        (click)="click()"
-        [(ngModel)]="value"
-        placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
-      <ul>
-        <li *ngIf="value">{{ value }}</li>
-      </ul>
-      <div 
-        class="input-value"
-        *ngIf="value == ''">
-        검색할 값을 입력하세요.
-      </div>
-      <button 
-        *ngIf="showContainer"
-        (click)="removeCategory()">X</button>
-    </div>
-
-  </div>
     <app-preloader 
       *ngIf="isLoading" 
       [ngStyle]="{ 'top': '25%', 'left': '50%', 'position': 'absolute' }">
     </app-preloader>
-    <div class="restaraunt-container" *ngIf="!showContainer">
+    <div class="restaraunt-container">
       <div class="main-container" *ngIf="restaurants">
         <h1>레스토랑</h1>
         <ul class="content-list">
@@ -33,7 +11,7 @@
             <a (click)="selectedRestaurant(restaurant)">
               <div class="content-wrap">
                 <div class="img">
-                  <img width="100%" height="auto" src={{restaurant.logo}}>
+                  <img width="100%" height="auto" [src]="restaurant.logo">
                 </div>
                 <div class="ready" *ngIf="!restaurant.r_status">준비중</div>
                 <div class="text-group">
@@ -52,11 +30,11 @@
         </ul>
       </div>
       <button class="go-up" *ngIf="isShow" (click)="goUp()">&uarr;</button>
-      <div class="load-more" 
-        *ngIf="restaurants && !hideMoreButton"
+      <div 
+        class="load-more" 
+        *ngIf="restaurants && nextPage"
         (click)="loadMore()">
         <button>더 로드하기</button>
       </div>
     </div>
-
 </div>

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
+import { Product } from '../models/product.interface';
 
 
 interface SearchResult {
@@ -13,8 +14,6 @@ interface SearchResult {
 @Injectable()
 export class SearchService {
   URL = environment.apiUrl;
-  selectedRes = {};
-  products = {};
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +28,7 @@ export class SearchService {
 
 
   // restaurant services
-  getRestaurant(geometry): Observable<any> {
+  getRestaurants(geometry): Observable<any> {
     console.log('getting restaurants from db');
     const {lat, lng} = geometry;
     return this.http.get(`${this.URL}/restaurant/?lat=${lat}&lng=${lng}`);
@@ -40,13 +39,8 @@ export class SearchService {
   }
 
   // get menu
-  getProducts(uuid): Observable<any> {
-    return this.http.get(`${this.URL}/restaurant/${uuid}/menu`);
-  }
-
-  // set restaurant
-  setRestaurant(restaurant) {
-    this.selectedRes = restaurant;
+  getProducts(uuid): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.URL}/restaurant/${uuid}/menu`);
   }
 
 }

@@ -14,8 +14,10 @@ import { CartService } from '../../core/cart.service';
       class="modal-background">
       <div class="modal">
         <button class="closeButton" (click)="toggle()">
-          <svg viewBox="0 0 64 64" width="16px" height="16px" class="closeButtonBase_ b4 bw a7z u8 kz l0 a80 a81 a82 a83 a84 closeButtonLight_ a3 ds">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M34.828 32l18.385 18.385-2.828 2.828L32 34.83 13.615 53.213l-2.828-2.828L29.172 32 10.787 13.616l2.828-2.829L32 29.172l18.385-18.385 2.828 2.829L34.828 32z">
+          <svg viewBox="0 0 64 64" width="16px" height="16px"
+          class="closeButtonBase_ b4 bw a7z u8 kz l0 a80 a81 a82 a83 a84 closeButtonLight_ a3 ds">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M34.828 32l18.385 18.385-2.828 2.828L32 34.83 13.615 53.213l-2.828-2.828L29.172 32 10.787 13.616l2.828-2.829L32 29.172l18.385-18.385 2.828 2.829L34.828 32z">
             </path>
           </svg>
         </button>
@@ -36,7 +38,7 @@ import { CartService } from '../../core/cart.service';
                     class="input-button"
                     type="button"
                     (click)="decrement()"
-                    [disabled]="value === min">
+                    [disabled]="quantity === min">
                   -
                   </button>
                   <p class="value">{{ quantity }}</p>
@@ -44,7 +46,7 @@ import { CartService } from '../../core/cart.service';
                     class="input-button"
                     type="button"
                     (click)="increment()"
-                    [disabled]="value === max">
+                    [disabled]="quantity === max">
                   +
                   </button>
                 </div>
@@ -64,9 +66,9 @@ import { CartService } from '../../core/cart.service';
   `
 })
 export class SelectorComponent implements OnInit {
-  @Input() thisItem: any;
   @Output() close = new EventEmitter();
 
+  selectedProduct;
   comment = '';
   quantity = 1;
   min = 0;
@@ -74,8 +76,9 @@ export class SelectorComponent implements OnInit {
 
   constructor(private cartService: CartService) {}
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.selectedProduct = this.cartService.selectedProduct;
+  }
 
   increment() {
     this.quantity++;
@@ -90,7 +93,7 @@ export class SelectorComponent implements OnInit {
   }
 
   onAdd() {
-    this.cartService.addItem(this.thisItem, this.quantity, this.comment);
+    this.cartService.addItem(this.selectedProduct, this.quantity, this.comment);
     this.close.emit(null);
   }
 

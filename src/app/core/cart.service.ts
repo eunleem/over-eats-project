@@ -13,11 +13,15 @@ const CART_KEY = 'cart';
 @Injectable()
 export class CartService {
   products: Product[];
-  subscribers: Array<Observer<ShoppingCart>> = new Array<Observer<ShoppingCart>>();
+  selectedProduct: Product;
+  selectedRestaurant: any;
+  cart: ShoppingCart;
+
+  subscribers = new Array<Observer<ShoppingCart>>();
   subscriptionObservable: Observable<ShoppingCart>;
 
   constructor(private searchService: SearchService) {
-    this.subscriptionObservable = new Observable<ShoppingCart>((observer: Observer<ShoppingCart>) => {
+    this.subscriptionObservable = new Observable<ShoppingCart>((observer) => {
       this.subscribers.push(observer);
       observer.next(this.retrieve());
     });
@@ -98,6 +102,5 @@ export class CartService {
       }
     });
   }
-
 
 }

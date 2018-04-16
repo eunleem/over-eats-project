@@ -14,12 +14,11 @@ import { SearchService } from '../core/search.service';
 })
 export class MenuListComponent implements OnInit {
   products: any[];
-  items: Product[];
-  categories: any[];
-  selectedItem: Product;
+  categories: string[];
+
   onClick = false;
-  sub;
-  restaurantInfo;
+  selectedRestaurant: any;
+
 
   constructor(
     private searchService: SearchService,
@@ -29,23 +28,20 @@ export class MenuListComponent implements OnInit {
 
   ngOnInit() {
     let uuid: any;
-    this.sub = this.activateRoute
+    this.activateRoute
       .params.subscribe(params => {
         uuid = params.id;
         this.searchService.getProducts(uuid)
           .subscribe((data: any) => {
             this.products = data;
             this.categories = data.map(item => item.title);
-            console.log(this.products);
           });
-      });
-    this.restaurantInfo = this.searchService.selectedRes;
-    console.log(this.restaurantInfo);
+        });
   }
 
   clickItem(item: Product) {
     this.onClick = true;
-    this.selectedItem = item;
+    this.cartService.selectedProduct = item;
   }
 
 }

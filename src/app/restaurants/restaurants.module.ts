@@ -5,7 +5,6 @@ import { RestaurantsComponent } from './restaurants.component';
 
 import { RestaurantRoutingModule } from './restaurants-routing.module';
 import { FormsModule } from '@angular/forms';
-import { CategoryComponent } from './category/category.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { SharedModule } from '../shared/shared.module';
   ],
   declarations: [
     RestaurantsComponent,
-    CategoryComponent
   ],
   exports: [
     RestaurantsComponent
