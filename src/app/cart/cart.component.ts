@@ -18,11 +18,11 @@ interface ICartItemWithProduct extends CartItem {
   selector: 'app-cart',
   styleUrls: ['./cart.component.scss'],
   template: `
-  <app-editor
+  <app-selector
     *ngIf="onClick"
     [editItem]="cartItem"
     (close)="onClick = false">
-  </app-editor>
+  </app-selector>
   <div class="cart">
     <div class="button-group">
       <button

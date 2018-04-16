@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { SearchService } from '../core/search.service';
 import { Subject } from 'rxjs/Subject';
+import { CartService } from '../core/cart.service';
 
 @Component({
   selector: 'app-restaurants',
@@ -32,6 +33,7 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     public el: ElementRef,
     private activateRoute: ActivatedRoute,
     private searchService: SearchService,
+    private cartService: CartService,
     public router: Router
   ) {}
 
@@ -95,7 +97,14 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     }
   }
 
+  get selectedRes() {
+    return this.cartService.selectedRestaurant;
+  }
+  set selectedRes(res) {
+    this.cartService.selectedRestaurant = res;
+  }
   selectedRestaurant(restaurant) {
+    this.selectedRes = restaurant;
     this.router.navigate(['/restaurant', `${restaurant.uuid}`]);
   }
 }

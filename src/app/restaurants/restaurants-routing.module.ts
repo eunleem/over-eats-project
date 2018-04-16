@@ -7,9 +7,7 @@ import { MenuListComponent } from '../menu-list/menu-list.component';
 
 
 const routes: Routes = [
-  { path: 'restaurants/:lat/:lng', component: RestaurantsComponent },
-  // { path: 'restaurants', component: RestaurantsComponent },
-  // { path: 'menu-list/:id', component: MenuListComponent}
+  { path: 'restaurants/:lat/:lng', component: RestaurantsComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -15,10 +15,16 @@ import { SearchService } from '../core/search.service';
 export class MenuListComponent implements OnInit {
   products: any[];
   categories: string[];
-
+  restaurantInfo;
   onClick = false;
-  selectedRestaurant: any;
 
+  get selectedRes() {
+    return this.cartService.selectedRestaurant;
+  }
+
+  set selectedProduct(item) {
+    this.cartService.selectedProduct = item;
+  }
 
   constructor(
     private searchService: SearchService,
@@ -35,13 +41,15 @@ export class MenuListComponent implements OnInit {
           .subscribe((data: any) => {
             this.products = data;
             this.categories = data.map(item => item.title);
+            this.restaurantInfo = this.selectedRes;
+            console.log('restaurant info', this.restaurantInfo);
           });
         });
   }
 
   clickItem(item: Product) {
     this.onClick = true;
-    this.cartService.selectedProduct = item;
+    this.selectedProduct = item;
   }
 
 }

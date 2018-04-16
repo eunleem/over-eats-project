@@ -21,14 +21,14 @@ import { CartService } from '../../core/cart.service';
             </path>
           </svg>
         </button>
-        <h3>{{ thisItem.title }}</h3>
-        <p class="menu-disc">{{ thisItem.description }}</p>
+        <h3>{{ item.product.title }}</h3>
+        <p class="menu-disc">{{ item.product.description }}</p>
         <div class="formgroup">
           <label>조리시 요청사항
             <input
               type="text"
               class="comment"
-              [(ngModel)]="comment"
+              [(ngModel)]="item.comments"
               placeholder="음식 조리 시 요청할 사항을 적어주세요">
           </label>
           <div class="group">
@@ -38,25 +38,35 @@ import { CartService } from '../../core/cart.service';
                     class="input-button"
                     type="button"
                     (click)="decrement()"
-                    [disabled]="quantity === min">
+                    [disabled]="item.quantity === min">
                   -
                   </button>
-                  <p class="value">{{ quantity }}</p>
+                  <input class="value"
+                    type="number" [(ngModel)]="item.quantity">
                   <button
                     class="input-button"
                     type="button"
                     (click)="increment()"
-                    [disabled]="quantity === max">
+                    [disabled]="item.quantity === max">
                   +
                   </button>
                 </div>
               </div>
             <button
+              *ngIf="!editItem"
               type="button"
               (click)="onAdd()"
               class="add-button button uber button-fluid">
-              <span>장바구니 {{ quantity }} 추가</span>
-              <em>{{ thisItem.price * quantity }} 원</em>
+              <span>장바구니 {{ item.quantity }} 추가</span>
+              <em>{{ item.product.price * item.quantity }} 원</em>
+            </button>
+            <button
+              *ngIf="editItem"
+              type="button"
+              (click)="onEdit()"
+              class="add-button button uber button-fluid">
+              <span>장바구니 {{ item.quantity }} 수정</span>
+              <em>{{ item.product.price * item.quantity }} 원</em>
             </button>
           </div>
         </div>
@@ -67,25 +77,33 @@ import { CartService } from '../../core/cart.service';
 })
 export class SelectorComponent implements OnInit {
   @Output() close = new EventEmitter();
+  @Input() editItem: any;
 
-  selectedProduct;
-  comment = '';
-  quantity = 1;
+  item: CartItem;
   min = 0;
   max = 20;
+
+  get selectedProduct() {
+    return this.cartService.selectedProduct;
+  }
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
-    this.selectedProduct = this.cartService.selectedProduct;
+    if (!this.editItem) {
+      this.item = this.cartService.initializeCartItem(this.selectedProduct);
+    } else {
+      this.item = this.editItem;
+    }
+    console.log('selected item is ', this.item);
   }
 
   increment() {
-    this.quantity++;
+    this.item.quantity++;
   }
 
   decrement() {
-    this.quantity--;
+    this.item.quantity--;
   }
 
   toggle() {
@@ -93,7 +111,12 @@ export class SelectorComponent implements OnInit {
   }
 
   onAdd() {
-    this.cartService.addItem(this.selectedProduct, this.quantity, this.comment);
+    this.cartService.addItem(this.item);
+    this.close.emit(null);
+  }
+
+  onEdit() {
+    this.cartService.editItem(this.item);
     this.close.emit(null);
   }
 

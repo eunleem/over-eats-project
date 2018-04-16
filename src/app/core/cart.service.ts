@@ -13,9 +13,11 @@ const CART_KEY = 'cart';
 @Injectable()
 export class CartService {
   products: Product[];
-  selectedProduct: Product;
-  selectedRestaurant: any;
   cart: ShoppingCart;
+
+  // setter and getter
+  selectedRestaurant;
+  selectedProduct: Product;
 
   subscribers = new Array<Observer<ShoppingCart>>();
   subscriptionObservable: Observable<ShoppingCart>;
@@ -31,32 +33,39 @@ export class CartService {
     return this.subscriptionObservable;
   }
 
-  addItem(product: Product, quantity: number, comment: string) {
+  initializeCartItem(product: Product): CartItem {
+    return {
+      quantity: 1,
+      comments: '',
+      product: product
+    };
+  }
+
+  addItem(product: CartItem) {
     const cart = this.retrieve();
-    let item = cart.items.find(ci => ci.product.uuid === product.uuid);
+    let item = cart.items.find(ci => ci.product.uuid === product.product.uuid);
     if (item === undefined) {
       item = new CartItem();
-      item.product = product;
+      item.product = product.product;
       cart.items.push(item);
     }
 
-    item.quantity += quantity;
-    item.comments = comment;
+    item.quantity += product.quantity;
+    item.comments = product.comments;
     cart.items = cart.items.filter((i) => i.quantity > 0);
 
     this.calculateCart(cart);
     this.save(cart);
     this.dispatch(cart);
-    console.log(cart);
+    console.log('add to cart', cart);
   }
 
-  // editItem(product: Product, quantity: number, comment: string)
-  editItem(product: Product, quantity: number, comment: string) {
+  editItem(product: CartItem) {
     const cart = this.retrieve();
-    const item = cart.items.find(ci => ci.product.uuid === product.uuid);
+    const item = cart.items.find(ci => ci.product.uuid === product.product.uuid);
 
-    item.quantity = quantity;
-    item.comments = comment;
+    item.quantity = product.quantity;
+    item.comments = product.comments;
     cart.items = cart.items.filter(i => i.quantity > 0);
 
     this.calculateCart(cart);
