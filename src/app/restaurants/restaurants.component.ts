@@ -19,8 +19,6 @@ import { Subscription } from 'rxjs/Subscription';
 export class RestaurantsComponent implements OnInit {
 
   isShow: boolean; // 스크롤 이동에 따른 버튼의 표시
-  isClick: boolean;
-  showContainer: boolean;
   restaurants: any;
   value: string;
   id: number;
@@ -106,9 +104,9 @@ export class RestaurantsComponent implements OnInit {
   // }
 
   // // 텍스트를 지우면 카테고리 컨테이너가 사라짐
-  input(value) {
-    if (!value.length) { this.showContainer = false; }
-  }
+  // input(value) {
+  //   if (!value.length) { this.showContainer = false; }
+  // }
 
   // 버튼을 누르면 카테고리 컨테이너가 사라짐
   // removeCategory() {

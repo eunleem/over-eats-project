@@ -7,17 +7,27 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   template: `
     <footer>
       <div class="constraint footer-content">
-        <div class="name">Product</div>
+        <div class="name">Participants</div>
         <div class="participants-container">
           <div>
-            <li class="learn">FDS</li>
-            <a href="https://github.com/yogicat"><li>Dahe Oh</li></a>
-            <a href="https://github.com/bluelion2"><li>Seunghun Kang</li></a>
+            <ul>
+              <li class="learn">OverEats</li>
+              <a href="https://github.com/FastCampusTeamTwo"><li>Project</li></a>
+            </ul>
           </div>
           <div>
-            <li class="learn">WDS</li>
-            <a href="https://github.com/archomai"><li>Seungri Cho</li></a>
-            <a href="https://github.com/callorange"><li>JeongYeob Song</li></a>
+            <ul>
+              <li class="learn">Frontend</li>
+              <a href="https://github.com/yogicat"><li>Dahe Oh</li></a>
+              <a href="https://github.com/bluelion2"><li>Seunghun Kang</li></a>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="learn">Backend </li>
+              <a href="https://github.com/archomai"><li>Seungri Cho</li></a>
+              <a href="https://github.com/callorange"><li>JeongYeob Song</li></a>
+            </ul>
           </div>
         </div>
         <div class="news constraint">
