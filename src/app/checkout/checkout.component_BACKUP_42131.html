@@ -1,0 +1,108 @@
+<div class="constraint">
+  <section class="checkout">
+    <h2 class="page-title">체크아웃</h2>
+    <form [formGroup]="form">
+      <div class="form-group group1">
+        <label>
+          <h3 class="form-title">1. 배달시간</h3>
+          <div class="selector-group">
+            <span>배달 시간을 선택해 주세요</span>
+            <div
+              class="date-picker">
+              <div class="select-group">
+                <i class="fas fa-caret-down"></i>
+                <select
+                  formControlName="date">
+                  <option value="asap">ASAP 최대한 빨리</option>
+                  <option *ngFor="let day of [0,1,2,3,4,5,6,7]">
+                    {{ myDate | amLocale:'ko'| amAdd: day : 'days' | amDateFormat: 'MM월 DD일 ddd'}}
+                  </option>
+                </select>
+              </div>
+              <div class="select-group">
+                <i class="fas fa-caret-down"></i>
+                <select
+                  formControlName="time">
+                  <option value="">시간을 선택하세요</option>
+                  <option *ngFor="let hour of  [1,2,3,4,5,6,7,8,9]">
+                    {{ '2018-01-01 09:00:00' | amLocale:'ko'| amAdd: hour : 'hours' | amDateFormat: 'h시 mm분'}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="form-group group2">
+        <label>
+          <h3 class="form-title">2. 위치 확인</h3>
+          <div class="selector-group">
+            <div class="map"></div>
+            <div class="input-group">
+              <input 
+                formControlName="address1"
+                class="input"
+                type="text"
+                placeholder="주소 입력">
+              <input 
+                 formControlName="address2"
+                class="input"
+                type="text"
+                placeholder="세부주소">
+              <input 
+                 formControlName="comments"
+                class="input"
+                type="text"
+                placeholder="배달 메모 추가">
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="form-group group3">
+        <label>
+          <h3 class="form-title">3. 결제</h3>
+          <div class="selector-group">
+            <div class="input-group">
+              <input
+                class="input"
+                type="text"
+                pattern="[0-9.]+"
+                min="0"
+                minlength="4"
+                maxlength="4"
+                placeholder="0000">
+              <input 
+                class="input"
+                type="text"
+                pattern="[0-9.]+"
+                min="0"
+                minlength="4"
+                maxlength="4"
+                placeholder="0000">
+              <input 
+                class="input"
+                type="text"
+                pattern="[0-9.]+"
+                min="0"
+                minlength="4"
+                maxlength="4"
+                placeholder="0000">
+              <input 
+                class="input"
+                type="text"
+                pattern="[0-9.]+"
+                min="0"
+                minlength="4"
+                maxlength="4"
+                placeholder="0000">
+            </div>
+          </div>
+        </label>
+      </div>
+      <pre>{{ form.value | json }}</pre>
+    </form>
+  </section>
+  <section class="cart-group">
+    <app-cart></app-cart>
+  </section>
+</div>

@@ -5,7 +5,6 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Product } from '../models/product.interface';
 
-
 interface SearchResult {
    search_text: string;
    result: any[];
