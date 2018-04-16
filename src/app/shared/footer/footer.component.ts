@@ -7,27 +7,31 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   template: `
     <footer>
       <div class="constraint footer-content">
-        <div class="name">Product</div>
+        <div class="name">Participants</div>
         <div class="participants-container">
           <div>
-            <li class="learn">IOS</li>
-            <a href="https://github.com/wargi"><li>Sangwook Park</li></a>
-            <a href="https://github.com/solchan87"><li>Solchan Ahn</li></a>
-            <a href="https://github.com/baeraemo"><li>Taewoong Bae</li></a>
+            <ul>
+              <li class="learn">OverEats</li>
+              <a href="https://github.com/FastCampusTeamTwo"><li>Project</li></a>
+            </ul>
           </div>
           <div>
-            <li class="learn">FDS</li>
-            <a href="https://github.com/yogicat"><li>Dahe Oh</li></a>
-            <a href="https://github.com/bluelion2"><li>Seunghun Kang</li></a>
+            <ul>
+              <li class="learn">Frontend</li>
+              <a href="https://github.com/yogicat"><li>Dahe Oh</li></a>
+              <a href="https://github.com/bluelion2"><li>Seunghun Kang</li></a>
+            </ul>
           </div>
           <div>
-            <li class="learn">WDS</li>
-            <a href="https://github.com/archomai"><li>Seungri Cho</li></a>
-            <a href="https://github.com/callorange"><li>JeongYeob Song</li></a>
+            <ul>
+              <li class="learn">Backend </li>
+              <a href="https://github.com/archomai"><li>Seungri Cho</li></a>
+              <a href="https://github.com/callorange"><li>JeongYeob Song</li></a>
+            </ul>
           </div>
         </div>
         <div class="news constraint">
-          <h3>패스트캠퍼스의 뉴스레터를 구독하시면, 간편하게 신규 교육과정 및 이벤트/세미나 소식을 메일로 받아보실 수 있습니다!</h3>
+          <h3>궁금하신 점이 있다면 이메일을 보내주세요!</h3>
           <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="formGroup">
               <input type="text" name="Email" formControlName="Email" placeholder="E-mail Address">
