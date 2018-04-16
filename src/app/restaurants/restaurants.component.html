@@ -1,41 +1,49 @@
 <div class="constraint">
-  <div class="container">
     <div class="search-container">
-      <div class="search">
+      <div class="search" [class.active]="isClick">
+        <i class="fas fa-search"></i>
         <input class="input-search"
           type="text"
-          (click)="click()"
-          (input)="input()"
+          (click)="isClick = true"
           [(ngModel)]="value"
           placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
-          <li *ngIf="value">{{ value }}</li>
-        <div class="input-value" *ngIf= "value ? true : false">검색할 값을 입력하세요.</div>
-        <button *ngIf="showContainer" (click)="removeCategory()">X</button>
+        <div class="input-value" *ngIf= "value">검색할 값을 입력하세요.</div>
+        <button
+          *ngIf="isClick == true"
+          (click)="isClick = false">
+         <i class="fas fa-times"></i>
+        </button>
       </div>
     </div>
-    <section *ngIf="showContainer">
-      <div class="category-container">
-        <h1 class="categorys">상위 카테고리</h1>
-        <div class="category-list">
-          <div class="category" *ngFor="let item of categoryLists">
-            <a (click)="selectedRestaurant(item.count)">
-              <img class="category-image" src="{{item.logo_url}}">
-            </a>
+    <section *ngIf="isClick == true">
+      <div *ngIf="value?.length > 0">
+        <p>{{ value }}</p>
+      </div>
+      <div class="category-group" *ngIf="!value">
+        <div class="category-container">
+          <h1 class="category-title">상위 카테고리</h1>
+          <div class="category-list">
+            <div class="category" *ngFor="let item of categoryLists">
+              <a (click)="selectedRestaurant(item.count)">
+                <img class="category-image" [src]="item.logo_url">
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="more-category-container">
-        <h1 class="categorys">더 많은 카테고리</h1>
-        <div class="more-category-list">
-          <div class="more-category" *ngFor="let item of moreLists">
-            <a (click)="selectedRestaurant(item.count)">
-              <img class="more-category-image" src="{{item.logo_url}}" alt="moreListImage">
-            </a>
+        <div class="more-category-container">
+          <h1 class="category-title">더 많은 카테고리</h1>
+          <div class="more-category-list">
+            <div class="more-category" *ngFor="let item of moreLists">
+              <a (click)="selectedRestaurant(item.count)">
+                <img class="more-category-image" [src]="item.logo_url" alt="moreListImage">
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </section>
-<div class="restaraunt-component-container constraint" *ngIf="!showContainer">
+
+<div class="restaraunt-component-container" *ngIf="!isClick">
     <app-preloader 
       *ngIf="isLoading" 
       [ngStyle]="{ 'top': '25%', 'left': '50%', 'position': 'absolute' }">
@@ -74,4 +82,5 @@
         <button>더 로드하기</button>
       </div>
     </div>
+</div>
 </div>
