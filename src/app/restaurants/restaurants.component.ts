@@ -84,11 +84,16 @@ export class RestaurantsComponent implements OnInit {
       }
     }
 
+    closeContainer() {
+      this.value = '';
+      this.isClick = false;
+    }
+
     // 클릭하면 placeholder가 변경 / 상위 카테고리, 더 많은 카테고리가 나옴
-  click() {
-    this.isClick = !this.isClick;
-    this.showContainer = !this.showContainer;
-  }
+  // click() {
+  //   this.isClick = !this.isClick;
+  //   this.showContainer = !this.showContainer;
+  // }
 
   // // 더보기를 누르면 추가적인 레스토랑 리스트가 나온다.
   // loadMore() {
@@ -101,11 +106,11 @@ export class RestaurantsComponent implements OnInit {
   //   if (!value.length) { this.showContainer = false; }
   // }
 
-  // // 버튼을 누르면 카테고리 컨테이너가 사라짐
+  // 버튼을 누르면 카테고리 컨테이너가 사라짐
   // removeCategory() {
   //   this.showContainer = false;
   // }
-  
+
 
   // // 레스토랑을 클릭하면 넘어감
   // selectedRestaurant(id: number) {

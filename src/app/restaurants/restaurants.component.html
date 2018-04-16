@@ -10,7 +10,7 @@
         <div class="input-value" *ngIf= "value">검색할 값을 입력하세요.</div>
         <button
           *ngIf="isClick == true"
-          (click)="isClick = false">
+          (click)="closeContainer()">
          <i class="fas fa-times"></i>
         </button>
       </div>
