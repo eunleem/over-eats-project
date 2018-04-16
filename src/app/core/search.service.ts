@@ -3,11 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
+import { Product } from '../models/product.interface';
 
 interface SearchResult {
    search_text: string;
@@ -16,17 +12,12 @@ interface SearchResult {
 
 @Injectable()
 export class SearchService {
-  URL = 'https://www.overeats.kr/api';
+  URL = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
-  search(terms: Observable<string>) {
-    return terms.debounceTime(1000)
-      .distinctUntilChanged()
-      .switchMap(term => this.searchAddress(term));
-  }
-
   searchAddress(term) {
+    console.log('searching addresses');
     return this.http.post<SearchResult>(`${this.URL}/address/`, { search_text: term }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -34,6 +25,22 @@ export class SearchService {
     });
   }
 
+
+  // restaurant services
+  getRestaurants(geometry): Observable<any> {
+    console.log('getting restaurants from db');
+    const {lat, lng} = geometry;
+    return this.http.get(`${this.URL}/restaurant/?lat=${lat}&lng=${lng}`);
+  }
+
+  loadMore(url) {
+    return this.http.get(url);
+  }
+
+  // get menu
+  getProducts(uuid): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.URL}/restaurant/${uuid}/menu`);
+  }
 
 }
 

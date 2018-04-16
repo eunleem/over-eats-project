@@ -5,7 +5,6 @@ import { RestaurantsComponent } from './restaurants.component';
 
 import { RestaurantRoutingModule } from './restaurants-routing.module';
 import { FormsModule } from '@angular/forms';
-import { RestaurantsService } from '../core/restaurants.service';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -21,6 +20,6 @@ import { SharedModule } from '../shared/shared.module';
   exports: [
     RestaurantsComponent
   ],
-  providers: [RestaurantsService]
+  providers: []
 })
 export class RestaurantsModule { }

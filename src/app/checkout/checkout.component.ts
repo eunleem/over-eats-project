@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -9,14 +9,23 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CheckoutComponent implements OnInit {
   showCalendar = false;
-  today = Date.now();
-  myDate = new Date();
+  myDate = Date.now();
   days: [0, 1, 2, 3, 4, 5, 6];
-  form = this.fb.group({
-    date: '',
-    time: ''
-  });
-  constructor(private fb: FormBuilder) { }
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      date: ['', Validators.required],
+      time: '',
+      address1: ['', Validators.required],
+      address2: '',
+      comments: ''
+    });
+
+    this.form.valueChanges
+      .filter(data => this.form.valid)
+      .subscribe(data => console.log(JSON.stringify(data)));
+  }
 
   ngOnInit() {
   }

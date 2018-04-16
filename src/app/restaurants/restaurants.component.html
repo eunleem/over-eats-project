@@ -35,29 +35,43 @@
         </div>
       </div>
     </section>
-    <div class="restaraunt-container" *ngIf="!showContainer">
-      <div class="main-container">
-        <h1 class="restaurant-name"> local - 레스토랑 </h1>
-        <div class="content-list">
-          <div class="content" *ngFor="let item of restaurantsList">
-            <a (click)="selectedRestaurant(item.count)">
+<div class="restaraunt-component-container constraint" *ngIf="!showContainer">
+    <app-preloader 
+      *ngIf="isLoading" 
+      [ngStyle]="{ 'top': '25%', 'left': '50%', 'position': 'absolute' }">
+    </app-preloader>
+    <div class="restaraunt-container">
+      <div class="main-container" *ngIf="restaurants">
+        <h1>레스토랑</h1>
+        <ul class="content-list">
+          <li class="content" *ngFor="let restaurant of restaurants">
+            <a (click)="selectedRestaurant(restaurant)">
               <div class="content-wrap">
-                <img class="img" src={{item.logo}}>
-                <div class="ready" *ngIf="!checkOpenTimes(item)">준비중</div>
-                <div class="name">{{item.title}}</div>
-                <div class="food-types">{{item.tags[0].name}}</div>
-                <div class="making-time" *ngIf="checkOpenTimes(item)"> {{item.eta_range.min}} ~ {{item.eta_range.max}} 분 </div>
-                <div calss="making-time" *ngIf="!checkOpenTimes(item)">{{nextOpenTime(item.open_time)}}</div>
+                <div class="img">
+                  <img width="100%" height="auto" [src]="restaurant.logo">
+                </div>
+                <div class="ready" *ngIf="!restaurant.r_status">준비중</div>
+                <div class="text-group">
+                  <h3 class="name">{{restaurant.title}}</h3>
+                  <div class="food-types">
+                    <span *ngFor="let type of restaurant.tags">
+                        {{type.name}}
+                    </span>
+                  </div>
+                  <span class="duration" *ngIf="restaurant.r_status">{{restaurant.eta_range.min}} ~ {{restaurant.eta_range.max}}분 </span>
+                  <span class="open-time" *ngIf="!restaurant.r_status">오픈시간 {{ getOpenTime(restaurant) }}</span>
+                </div>
               </div>
             </a>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
       <button class="go-up" *ngIf="isShow" (click)="goUp()">&uarr;</button>
-      <div class="load-more" (click)="loadMore()">
+      <div 
+        class="load-more" 
+        *ngIf="restaurants && nextPage"
+        (click)="loadMore()">
         <button>더 로드하기</button>
       </div>
     </div>
-  </div>
 </div>
-<app-footer></app-footer>

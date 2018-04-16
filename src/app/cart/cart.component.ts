@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
@@ -9,10 +9,8 @@ import { CartItem } from '../models/cart-item.model';
 import { ShoppingCart } from '../models/shopping-cart.model';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { ProductsService } from '../core/products.service';
 
 interface ICartItemWithProduct extends CartItem {
-  product: Product;
   totalCost: number;
 }
 
@@ -20,11 +18,11 @@ interface ICartItemWithProduct extends CartItem {
   selector: 'app-cart',
   styleUrls: ['./cart.component.scss'],
   template: `
-  <app-editor
+  <app-selector
     *ngIf="onClick"
     [editItem]="cartItem"
     (close)="onClick = false">
-  </app-editor>
+  </app-selector>
   <div class="cart">
     <div class="button-group">
       <button
@@ -36,13 +34,13 @@ interface ICartItemWithProduct extends CartItem {
         <li class="item-list"
           *ngFor="let item of cartItems">
             <div (click)="onEdit(item)">
-              {{ item.product.name }}
+              {{ item.product.title }}
             </div>
             <span>{{ item.quantity }}</span>
             <span>{{ item.totalCost }}</span>
             <span
               type="button"
-              (click)="onRemove(item.product_id)">
+              (click)="onRemove(item.product.uuid)">
             <i class="far fa-trash-alt"></i>
             </span>
         </li>
@@ -50,7 +48,7 @@ interface ICartItemWithProduct extends CartItem {
     <div class="price-group">
       <p *ngIf="itemCount">
         <span>총 {{ itemCount }} 개 아이템</span>
-        <span>25,000원</span>
+        <span>{{ getTotal() }}</span>
       </p>
       <span *ngIf="!itemCount || itemCount == 0">
         카트에 아이템을 추가하면 여기에 나타납니다.</span>
@@ -58,40 +56,38 @@ interface ICartItemWithProduct extends CartItem {
   </div>
   `
 })
-export class CartComponent implements OnInit, OnDestroy {
-  cart: Observable<ShoppingCart>;
-  cartItems: ICartItemWithProduct[];
-  itemCount: number;
-  products: Product[];
-  cartSubscription: Subscription;
-  cartItem: ICartItemWithProduct;
+export class CartComponent implements OnInit {
   onClick: boolean;
+  itemCount: number;
+  cartItem: ICartItemWithProduct;
+  cartItems: ICartItemWithProduct[];
+  cart: Observable<ShoppingCart>;
+  cartSubscription: Subscription;
 
   constructor(
     private router: Router,
-    private productsService: ProductsService,
     private cartService: CartService
   ) {}
 
   ngOnInit() {
     this.cart = this.cartService.get();
-    this.cartSubscription = this.cart.subscribe(cart => {
+    this.cart
+      .subscribe(cart => {
       this.itemCount = cart.items.map(i => i.quantity).reduce((prev, current) => prev + current, 0);
-      this.productsService.getProducts().subscribe((products) => {
-        this.products = products;
-        this.cartItems = cart.items.map((item) => {
-          const product = this.products.find(p => p.id === item.product_id);
-          return {
-            ...item,
-            product,
-            totalCost: product.price * item.quantity
-          };
-        });
+      this.cartItems = cart.items.map((item) => {
+        return {
+          ...item,
+          totalCost: item.product.price * item.quantity
+        };
       });
     });
   }
 
   onSubmit() {
+  }
+
+  getTotal() {
+    return this.cartItems.map(i => i.totalCost).reduce((prev, current) => prev + current, 0);
   }
 
   onRemove(id) {
@@ -107,9 +103,9 @@ export class CartComponent implements OnInit, OnDestroy {
     this.router.navigate(['checkout']);
   }
 
-  ngOnDestroy() {
-    if (this.cartSubscription) {
-      this.cartSubscription.unsubscribe();
-    }
-  }
+  // ngOnDestroy() {
+  //   if (this.cartSubscription) {
+  //     this.cartSubscription.unsubscribe();
+  //   }
+  // }
 }
