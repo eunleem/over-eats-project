@@ -23,7 +23,7 @@
   margin-bottom: 46px;
 }
 
-.form-group1 {
+.form-group {
   width: 100%;
   border: 1px solid $light-grey;
   border-radius: 4px;
@@ -54,7 +54,6 @@
   padding-top: 20px;
   display: flex;
 
-
   .select-group {
     position: relative;
   }
@@ -62,7 +61,7 @@
   select {
     border-bottom: 1px solid $grey;
     border-radius: 0px;
-    padding: 10px 20px;
+    padding: 10px 20px 10px 0;
     font-weight: 400;
     margin-right: 16px;
     cursor: pointer;
@@ -79,8 +78,46 @@
   cursor: pointer;
 }
 
-// cart
 
+.group2 {
+  .selector-group {
+    display: flex;
+  }
+  .map {
+    width: 145px;
+    height: 145px;
+    background: wheat;
+    margin-right: 20px;
+  }
+  .input-group {
+    width: calc(100% - 165px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  input {
+    height: 42px;
+    padding: 0 10px 0 16px;
+
+    &::placeholder {
+      color: black;
+    }
+  }
+}
+
+.group3 {
+  .input-group {
+    display: flex;
+  }
+  input {
+    margin: 10px;
+    letter-spacing: 3px;
+    text-align: center;
+    padding-left: 0;
+  }
+}
+
+// cart
 .cart-group {
   margin-top: 80px;
   min-width: 360px;
@@ -89,4 +126,10 @@
     width: 380px;
     min-width: 380px;
   }
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }

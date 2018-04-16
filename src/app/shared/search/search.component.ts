@@ -1,11 +1,20 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnDestroy } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { SearchService } from '../../core/search.service';
 import { HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
+
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+
+import { SearchService } from '../../core/search.service';
+import { PreloaderService } from '../preloader/preloader.service';
 
 interface SearchResult {
   search_text: string;
@@ -21,22 +30,30 @@ interface SearchResult {
   [ngClass]="{'onHeader': onMenu, 'onMain': !onMenu}">
   <div class="input-group">
     <label>
-      <i class="fas fa-map-marker-alt"></i>
+       <span *ngIf="!isShow">
+          <i class="fas fa-map-marker-alt"></i>
+        </span>
+      <app-preloader *ngIf="isShow" [onMenu]="onMenu"></app-preloader>
       <input
         type="text"
         class="input uber input-search"
         name="searchAddress"
-        (keyup)="searchAddress($event.target.value)"
-        (keydown)="onKeyDown($event)"
+        [(ngModel)]="terms"
+        (ngModelChange)="searchAddress(terms)"
+        (keyup.arrowup)="onKeyDown($event)"
+        (keyup.arrowdown)="onKeyDown($event)"
         placeholder="배달 주소를 입력하세요">
       <ul
         *ngIf="addresses"
         class="search-list">
-        <li class="button"
+        <li
+          class="button"
           *ngFor="let address of addresses; let i = index"
-          [class.active] = "i == arrowKeyLocation"
-          (click)="sendAddress(address)">
-          <em>{{ address.formatted_address }}</em>
+          (click)="sendAddress(address)"
+          [class.active] = "i == arrowKeyLocation">
+          <a>
+          {{ address.formatted_address }}
+          </a>
         </li>
       </ul>
     </label>
@@ -44,36 +61,65 @@ interface SearchResult {
 </div>
   `
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
-  @Input()
-  onMenu: boolean;
+  @Input() onMenu: boolean;
+  @Input() onMain: boolean;
 
+  isHeader = true;
+  isShow = false;
+  results;
+  terms: string;
   arrowKeyLocation = 0;
   searchTerm$ = new Subject<string>();
-  addresses: any;
+  addresses: any[];
+
 
   constructor(
     private router: Router,
-    private searchService: SearchService
+    private searchService: SearchService,
+    public preloader: PreloaderService
   ) {
-      this.searchService.search(this.searchTerm$)
-        .subscribe(results => {
-          this.addresses = results.result;
-          console.log(this.addresses);
-        });
+    this.results = this.search(this.searchTerm$)
+      .subscribe(results => {
+        this.terms = '';
+        this.addresses = results.result;
+        this.isShow = false;
+        console.log('result', this.addresses);
+      }, error => {
+        this.isShow = false;
+      });
   }
 
-  ngOnInit() { }
 
-  searchAddress(value) {
-    if (value && value.length > 1) {
-      this.searchTerm$.next(value);
+  ngOnInit() {
+    this.isShow = false;
+  }
+
+  ngOnDestroy(): void {
+    this.results.unsubscribe();
+  }
+
+  searchAddress(terms) {
+    if (terms && terms.length > 1) {
+      this.searchTerm$.next(terms);
     }
   }
 
+  search(term: Observable<string>) {
+    return term
+      .debounceTime(1000)
+      .distinctUntilChanged()
+      .filter(str => !!str)
+      .switchMap(res => {
+        this.isShow = true;
+        return this.searchService.searchAddress(res);
+      });
+  }
+
   sendAddress(address) {
-    this.router.navigate(['menu', address.place_id]);
+    this.router.navigate(['/restaurants', address.geometry.lat, address.geometry.lng]);
+    this.addresses = undefined;
   }
 
   onKeyDown(e: KeyboardEvent) {
@@ -88,5 +134,6 @@ export class SearchComponent implements OnInit {
         break;
     }
   }
+
 
 }

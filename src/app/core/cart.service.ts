@@ -7,52 +7,65 @@ import { CartItem } from '../models/cart-item.model';
 import { Product } from '../models/product.interface';
 import { ShoppingCart } from '../models/shopping-cart.model';
 
-import { ProductsService } from './products.service';
+import { SearchService } from './search.service';
 
 const CART_KEY = 'cart';
 @Injectable()
 export class CartService {
   products: Product[];
-  subscribers: Array<Observer<ShoppingCart>> = new Array<Observer<ShoppingCart>>();
+  cart: ShoppingCart;
+
+  // setter and getter
+  selectedRestaurant;
+  selectedProduct: Product;
+
+  subscribers = new Array<Observer<ShoppingCart>>();
   subscriptionObservable: Observable<ShoppingCart>;
 
-  constructor(private productsService: ProductsService) {
-    this.subscriptionObservable = new Observable<ShoppingCart>((observer: Observer<ShoppingCart>) => {
+  constructor(private searchService: SearchService) {
+    this.subscriptionObservable = new Observable<ShoppingCart>((observer) => {
       this.subscribers.push(observer);
       observer.next(this.retrieve());
     });
-    this.productsService.getProducts().subscribe((data: Product[]) => this.products = data);
   }
 
   get(): Observable<ShoppingCart> {
     return this.subscriptionObservable;
   }
 
-  addItem(product: Product, quantity: number, comment: string) {
+  initializeCartItem(product: Product): CartItem {
+    return {
+      quantity: 1,
+      comments: '',
+      product: product
+    };
+  }
+
+  addItem(product: CartItem) {
     const cart = this.retrieve();
-    let item = cart.items.find(cp => cp.product_id === product.id);
+    let item = cart.items.find(ci => ci.product.uuid === product.product.uuid);
     if (item === undefined) {
       item = new CartItem();
-      item.product_id = product.id;
+      item.product = product.product;
       cart.items.push(item);
     }
 
-    item.quantity += quantity;
-    item.comments = comment;
+    item.quantity += product.quantity;
+    item.comments = product.comments;
     cart.items = cart.items.filter((i) => i.quantity > 0);
 
     this.calculateCart(cart);
     this.save(cart);
     this.dispatch(cart);
+    console.log('add to cart', cart);
   }
 
-  // editItem(product: Product, quantity: number, comment: string)
-  editItem(product: Product, quantity: number, comment: string) {
+  editItem(product: CartItem) {
     const cart = this.retrieve();
-    const item = cart.items.find(cp => cp.product_id === product.id);
+    const item = cart.items.find(ci => ci.product.uuid === product.product.uuid);
 
-    item.quantity = quantity;
-    item.comments = comment;
+    item.quantity = product.quantity;
+    item.comments = product.comments;
     cart.items = cart.items.filter(i => i.quantity > 0);
 
     this.calculateCart(cart);
@@ -60,9 +73,9 @@ export class CartService {
     this.dispatch(cart);
   }
 
-  removeItem(id: number) {
+  removeItem(id: string) {
     const cart = this.retrieve();
-    cart.items = cart.items.filter(item => item.product_id !== id);
+    cart.items = cart.items.filter(item => item.product.uuid !== id);
 
     this.calculateCart(cart);
     this.save(cart);
@@ -80,7 +93,7 @@ export class CartService {
 
   calculateCart(cart: ShoppingCart) {
     cart.itemsTotal = cart.items
-      .map(item => item.quantity * this.products.find(p => p.id === item.product_id).price)
+      .map(item => item.quantity * item.product.price)
       .reduce((prev, current) => prev + current, 0);
     cart.grossTotal = cart.itemsTotal + cart.deliveryTotal;
   }
@@ -98,6 +111,5 @@ export class CartService {
       }
     });
   }
-
 
 }

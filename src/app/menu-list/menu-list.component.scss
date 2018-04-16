@@ -37,6 +37,7 @@
   .category {
     color: $grey;
     font-size: 1.2em;
+    padding-right: 10px;
   }
 
   .cooking-time {
@@ -80,6 +81,9 @@
   }
 }
 
+.category-group {
+  margin: 10px 0;
+}
 .active-item {
   color: $uber-green;
 }

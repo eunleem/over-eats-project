@@ -1,5 +1,7 @@
+import { Product } from './product.interface';
+
 export class CartItem {
-  public product_id: number;
   public quantity = 0;
   public comments = '';
+  public product: Product;
 }

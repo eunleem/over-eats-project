@@ -1,8 +1,12 @@
 export interface Product {
-  id: number;
-  name: string;
-  disc: string;
+  uuid: string;
+  title: string;
+  description: string;
+  disable_description: string;
   price: number;
-  category: string;
-  img: string;
+  image_url: string;
+  alcoholic_items: number;
+  created_at: string;
+  restaurant: string;
+  section: string;
 }
