@@ -5,18 +5,20 @@ import { MenuListComponent } from './menu-list.component';
 import { MenuRoutingModule } from './menu-routing.module';
 import { CartModule } from '../cart/cart.module';
 import { SelectorModule } from '../cart/selector/selector.module';
-
-
+import { SharedModule } from '../auth/shared/shared.module';
+import { PipeModule } from '../pipe/pipe.module';
 
 @NgModule({
   imports: [
     CommonModule,
     MenuRoutingModule,
     CartModule,
-    SelectorModule
+    SelectorModule,
+    SharedModule,
+    PipeModule.forRoot()
   ],
   declarations: [
-    MenuListComponent
+    MenuListComponent,
   ],
   exports: [],
   providers: []

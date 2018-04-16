@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Product } from '../models/product.interface';
 
 import { CartService } from '../core/cart.service';
-import { EventEmitter } from 'protractor';
 import { ActivatedRoute } from '@angular/router';
 import { SearchService } from '../core/search.service';
+
 @Component({
   selector: 'app-menu-list',
   templateUrl: './menu-list.component.html',
@@ -17,6 +17,7 @@ export class MenuListComponent implements OnInit {
   categories: string[];
   restaurantInfo;
   onClick = false;
+  restaurantID: string;
 
   get selectedRes() {
     return this.cartService.selectedRestaurant;
@@ -29,19 +30,22 @@ export class MenuListComponent implements OnInit {
   constructor(
     private searchService: SearchService,
     private cartService: CartService,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private el: ElementRef
   ) { }
 
+  // this.searchService.getRestaurant(params.id)
+  // .subscribe(data => this.restaurantInfo = data);
   ngOnInit() {
-    let uuid: any;
     this.activateRoute
       .params.subscribe(params => {
-        uuid = params.id;
-        this.searchService.getProducts(uuid)
+        this.restaurantID = params.id;
+        this.searchService.getProducts(params.id)
           .subscribe((data: any) => {
             this.products = data;
             this.categories = data.map(item => item.title);
             this.restaurantInfo = this.selectedRes;
+            console.log(data);
             console.log('restaurant info', this.restaurantInfo);
           });
         });
@@ -51,5 +55,6 @@ export class MenuListComponent implements OnInit {
     this.onClick = true;
     this.selectedProduct = item;
   }
+
 
 }

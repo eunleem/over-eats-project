@@ -27,14 +27,15 @@ interface ICartItemWithProduct extends CartItem {
     <div class="button-group">
       <button
       (click)="goCheckout()"
-      [ngClass]="{'disabled': cartItems?.length === 0}"
+      [disabled]="cartItems?.length == 0"
+      [class.disabled]="cartItems?.length == 0"
       class="button uber button-fluid">장바구니 확인</button>
     </div>
     <ul class="item-group">
         <li class="item-list"
           *ngFor="let item of cartItems">
             <div (click)="onEdit(item)">
-              {{ item.product.title }}
+              {{ item.product.title | korean }}
             </div>
             <span>{{ item.quantity }}</span>
             <span>{{ item.totalCost }}</span>

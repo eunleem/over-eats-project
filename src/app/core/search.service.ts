@@ -18,7 +18,7 @@ export class SearchService {
 
   searchAddress(term) {
     console.log('searching addresses');
-    return this.http.post<SearchResult>(`${this.URL}/address/`, { search_text: term }, {
+    return this.http.post<SearchResult>(`${this.URL}/address/`, { search_text: term, language: 'ko' }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -33,13 +33,17 @@ export class SearchService {
     return this.http.get(`${this.URL}/restaurant/?lat=${lat}&lng=${lng}`);
   }
 
+  getRestaurant(uuid): Observable<any> {
+    return this.http.get(`${this.URL}/restaurant/${uuid}`);
+  }
+
   loadMore(url) {
     return this.http.get(url);
   }
 
   // get menu
-  getProducts(uuid): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.URL}/restaurant/${uuid}/menu`);
+  getProducts(uuid): Observable<any> {
+    return this.http.get<any>(`${this.URL}/restaurant/${uuid}/menu`);
   }
 
 }

@@ -66,6 +66,13 @@
   & ul {
     display: flex;
     justify-content: flex-start; 
+    height: 60px;
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    li {
+      height: 60px;
+    }
   }
 }
 

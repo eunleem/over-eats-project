@@ -29,6 +29,11 @@
   background: white;
   height: 100vh;
   padding: 30px;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column;
   
   @media only screen and (min-width: $medium) {
     width: 70%;
@@ -37,12 +42,15 @@
 	}
 
   .closeButton {
-    margin-left: 96%;
+    position: absolute;
+    width: 20px;
+    right: 20px;
   }
 
   h3 {
     font-size: 2em;
     font-weight: 300;
+    margin-top: 0;
   }
 
   p {
@@ -60,16 +68,23 @@
     height: 46px;
   }
   .group {
-    height: 120px;
+    height: 90px;
     display: flex;
     border-top: 1px solid #E0E0E0;
-    align-items: center;
+    align-items: flex-end;
   
     em {
       padding: 0 10px;
       font-style: normal;
     }
   }
+}
+
+.menu-disc {
+  word-break: keep-all;
+}
+.formgroup {
+  margin-top: auto;
 }
 
 .button-group {

@@ -7,6 +7,7 @@ import { CartComponent } from './cart.component';
 import { CartService } from '../core/cart.service';
 import { SelectorComponent } from './selector/selector.component';
 import { SelectorModule } from './selector/selector.module';
+import { PipeModule } from '../pipe/pipe.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { SelectorModule } from './selector/selector.module';
     ReactiveFormsModule,
     FormsModule,
     SelectorModule,
+    PipeModule
   ],
   declarations: [
     CartComponent

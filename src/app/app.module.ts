@@ -24,10 +24,9 @@ import { AuthService } from './auth/services/auth.service';
 import { SearchService } from './core/search.service';
 import { AuthGuard } from './auth/services/auth.guard';
 
-
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     // default module
@@ -42,7 +41,7 @@ import { AuthGuard } from './auth/services/auth.guard';
     AuthModule,
     MenuListModule,
     CheckoutModule,
-    CartModule
+    CartModule,
   ],
   providers: [
     CartService,

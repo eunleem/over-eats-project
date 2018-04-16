@@ -14,15 +14,15 @@ import { CartService } from '../../core/cart.service';
       class="modal-background">
       <div class="modal">
         <button class="closeButton" (click)="toggle()">
-          <svg viewBox="0 0 64 64" width="16px" height="16px"
+          <svg viewBox="0 0 64 64" width="20px" height="20px"
           class="closeButtonBase_ b4 bw a7z u8 kz l0 a80 a81 a82 a83 a84 closeButtonLight_ a3 ds">
             <path fill-rule="evenodd" clip-rule="evenodd"
             d="M34.828 32l18.385 18.385-2.828 2.828L32 34.83 13.615 53.213l-2.828-2.828L29.172 32 10.787 13.616l2.828-2.829L32 29.172l18.385-18.385 2.828 2.829L34.828 32z">
             </path>
           </svg>
         </button>
-        <h3>{{ item.product.title }}</h3>
-        <p class="menu-disc">{{ item.product.description }}</p>
+        <h3>{{ item.product.title | korean }}</h3>
+        <p class="menu-disc">{{ item.product.description | korean }}</p>
         <div class="formgroup">
           <label>조리시 요청사항
             <input
@@ -58,7 +58,7 @@ import { CartService } from '../../core/cart.service';
               (click)="onAdd()"
               class="add-button button uber button-fluid">
               <span>장바구니 {{ item.quantity }} 추가</span>
-              <em>{{ item.product.price * item.quantity }} 원</em>
+              <em>{{ (item.product.price * item.quantity) | currency:'KRW' : true : '1.0'}}</em>
             </button>
             <button
               *ngIf="editItem"
