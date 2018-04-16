@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { hostElement } from '@angular/core/src/render3/instructions';
 import { NgModel } from '@angular/forms';
@@ -9,13 +9,14 @@ import 'rxjs/add/operator/switchMap';
 
 import { SearchService } from '../core/search.service';
 import { CartService } from '../core/cart.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
   styleUrls: ['./restaurants.component.scss'],
 })
-export class RestaurantsComponent implements OnInit, OnDestroy {
+export class RestaurantsComponent implements OnInit {
 
   isShow: boolean; // 스크롤 이동에 따른 버튼의 표시
   restaurants: any;
@@ -26,9 +27,11 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
   isLoading = false;
   nextPage: string;
   hideMoreButton = false;
+  subscription: Subscription;
 
-  sub;
-  subscription;
+  // category variables
+  isClick = false;
+  showContainer = false;
 
   constructor(
     public el: ElementRef,
@@ -38,14 +41,10 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     public router: Router
   ) {}
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
-
   ngOnInit() {
     this.isLoading = true;
     let geometry;
-    this.sub = this.activateRoute
+    this.activateRoute
       .params.subscribe(params => {
         geometry = params;
         this.searchService.getRestaurants(geometry)
@@ -85,7 +84,12 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
       }
     }
 
-  //   // 클릭하면 placeholder가 변경 / 상위 카테고리, 더 많은 카테고리가 나옴
+    closeContainer() {
+      this.value = '';
+      this.isClick = false;
+    }
+
+    // 클릭하면 placeholder가 변경 / 상위 카테고리, 더 많은 카테고리가 나옴
   // click() {
   //   this.isClick = !this.isClick;
   //   this.showContainer = !this.showContainer;
@@ -102,10 +106,11 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
   //   if (!value.length) { this.showContainer = false; }
   // }
 
-  // // 버튼을 누르면 카테고리 컨테이너가 사라짐
+  // 버튼을 누르면 카테고리 컨테이너가 사라짐
   // removeCategory() {
   //   this.showContainer = false;
   // }
+
 
   // // 레스토랑을 클릭하면 넘어감
   // selectedRestaurant(id: number) {
