@@ -7,15 +7,14 @@ import { CartComponent } from './cart.component';
 import { CartService } from '../core/cart.service';
 import { SelectorComponent } from './selector/selector.component';
 import { SelectorModule } from './selector/selector.module';
-import { EditorModule } from './editor/editor.module';
-
+// import { EditorModule } from './editor/editor.module';
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     SelectorModule,
-    EditorModule
+    // EditorModule
   ],
   declarations: [
     CartComponent

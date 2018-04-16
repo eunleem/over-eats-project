@@ -5,7 +5,7 @@
         <input class="input-search"
           type="text"
           (click)="click()"
-          (input)="input()"
+          (input)="input(value)"
           [(ngModel)]="value"
           placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
           <li *ngIf="value">{{ value }}</li>
@@ -17,7 +17,7 @@
       <div class="category-container">
         <h1 class="categorys">상위 카테고리</h1>
         <div class="category-list">
-          <div class="category" *ngFor="let item of categoryLists">
+          <div class="category" *ngFor="let item of restaurants">
             <a (click)="selectedRestaurant(item.count)">
               <img class="category-image" src="{{item.logo_url}}">
             </a>
@@ -27,7 +27,7 @@
       <div class="more-category-container">
         <h1 class="categorys">더 많은 카테고리</h1>
         <div class="more-category-list">
-          <div class="more-category" *ngFor="let item of moreLists">
+          <div class="more-category" *ngFor="let item of restaurants">
             <a (click)="selectedRestaurant(item.count)">
               <img class="more-category-image" src="{{item.logo_url}}" alt="moreListImage">
             </a>
@@ -36,8 +36,8 @@
       </div>
     </section>
 <div class="restaraunt-component-container constraint" *ngIf="!showContainer">
-    <app-preloader 
-      *ngIf="isLoading" 
+    <app-preloader
+      *ngIf="isLoading"
       [ngStyle]="{ 'top': '25%', 'left': '50%', 'position': 'absolute' }">
     </app-preloader>
     <div class="restaraunt-container">
@@ -67,11 +67,12 @@
         </ul>
       </div>
       <button class="go-up" *ngIf="isShow" (click)="goUp()">&uarr;</button>
-      <div 
-        class="load-more" 
+      <div
+        class="load-more"
         *ngIf="restaurants && nextPage"
         (click)="loadMore()">
         <button>더 로드하기</button>
       </div>
     </div>
 </div>
+<app-footer *ngIf="!showContainer"></app-footer>

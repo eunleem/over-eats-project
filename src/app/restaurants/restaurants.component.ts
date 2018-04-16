@@ -18,6 +18,8 @@ import { CartService } from '../core/cart.service';
 export class RestaurantsComponent implements OnInit, OnDestroy {
 
   isShow: boolean; // 스크롤 이동에 따른 버튼의 표시
+  isClick: boolean;
+  showContainer: boolean;
   restaurants: any;
   value: string;
   id: number;
@@ -55,6 +57,8 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
             this.nextPage = data.next;
           });
     });
+    this.isClick = false;
+    this.showContainer = false;
   }
 
   getOpenTime(restaurant) {
@@ -86,10 +90,10 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     }
 
   //   // 클릭하면 placeholder가 변경 / 상위 카테고리, 더 많은 카테고리가 나옴
-  // click() {
-  //   this.isClick = !this.isClick;
-  //   this.showContainer = !this.showContainer;
-  // }
+  click() {
+    this.isClick = !this.isClick;
+    this.showContainer = !this.showContainer;
+  }
 
   // // 더보기를 누르면 추가적인 레스토랑 리스트가 나온다.
   // loadMore() {
@@ -98,14 +102,14 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
   // }
 
   // // 텍스트를 지우면 카테고리 컨테이너가 사라짐
-  // input(value) {
-  //   if (!value.length) { this.showContainer = false; }
-  // }
+  input(value) {
+    if (!value.length) { this.showContainer = false; }
+  }
 
   // // 버튼을 누르면 카테고리 컨테이너가 사라짐
-  // removeCategory() {
-  //   this.showContainer = false;
-  // }
+  removeCategory() {
+    this.showContainer = false;
+  }
 
   // // 레스토랑을 클릭하면 넘어감
   // selectedRestaurant(id: number) {
@@ -156,10 +160,12 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     return this.cartService.selectedRestaurant;
   }
   set selectedRes(res) {
+    console.log('res', res);
     this.cartService.selectedRestaurant = res;
   }
   selectedRestaurant(restaurant) {
     this.selectedRes = restaurant;
+    console.log('selec', this.selectedRes);
     this.router.navigate(['/restaurant', `${restaurant.uuid}`]);
   }
 }
