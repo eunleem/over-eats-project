@@ -40,8 +40,8 @@ export class RestaurantsService {
   } // moreCategory
 
   // 더 로드하기 버튼을 누르면 데이터를 가지고 와서 기존의 리스트에 더해준다.
-  loadMore(): Observable<Restaurants[]> {
-      return this.http.get<Restaurants[]>('../../assets/db.json');
+  loadMore(): Observable<any> {
+      return this.http.get<any>('../../assets/db.json');
   } // loadMore
 
 }

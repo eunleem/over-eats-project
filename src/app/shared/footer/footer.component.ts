@@ -7,12 +7,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   template: `
     <footer>
       <div class="constraint footer-content">
-        <div class="name">Participants</div>
+        <div class="name">Participants Github</div>
         <div class="participants-container">
           <div>
             <ul>
               <li class="learn">OverEats</li>
-              <a href="https://github.com/FastCampusTeamTwo"><li>Project</li></a>
+              <a href="https://github.com/FastCampusTeamTwo"><li>Project Github</li></a>
             </ul>
           </div>
           <div>
@@ -35,8 +35,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
           <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="formGroup">
               <input type="text" name="Email" formControlName="Email" placeholder="E-mail Address">
-              <em *ngIf="Email.errors?.required && Email.touched" class="alert">이메일을 입력하세요.</em>
-              <em *ngIf="Email.errors?.pattern && Email.touched" class="alert">이메일 형식을 지켜주세요</em>
+              <em *ngIf="!!Email.errors?.required && Email.touched" class="alert">이메일을 입력하세요.</em>
+              <em *ngIf="!!Email.errors?.pattern && Email.touched" class="alert">이메일 형식을 지켜주세요</em>
             </div>
             <div>
               <button type="submit" [disabled]="userForm.invalid">Subscribe</button>
