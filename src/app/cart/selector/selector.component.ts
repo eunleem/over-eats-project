@@ -58,7 +58,7 @@ import { CartService } from '../../core/cart.service';
               (click)="onAdd()"
               class="add-button button uber button-fluid">
               <span>장바구니 {{ item.quantity }} 추가</span>
-              <em>{{ (item.product.price * item.quantity) | currency:'KRW' : true : '1.0'}}</em>
+              <em>{{ (item.product.price * item.quantity) | currency:'KRW' : 'symbol' : '1.0'}}</em>
             </button>
             <button
               *ngIf="editItem"
@@ -82,9 +82,14 @@ export class SelectorComponent implements OnInit {
   item: CartItem;
   min = 0;
   max = 20;
+  restaurantID: string;
 
   get selectedProduct() {
     return this.cartService.selectedProduct;
+  }
+
+  get selectedRes() {
+    return this.cartService.selectedRestaurant;
   }
 
   constructor(private cartService: CartService) {}
@@ -95,7 +100,9 @@ export class SelectorComponent implements OnInit {
     } else {
       this.item = this.editItem;
     }
+    this.restaurantID = this.selectedRes.uuid;
     console.log('selected item is ', this.item);
+    console.log('selected restaurant is ', this.restaurantID);
   }
 
   increment() {
@@ -111,7 +118,7 @@ export class SelectorComponent implements OnInit {
   }
 
   onAdd() {
-    this.cartService.addItem(this.item);
+    this.cartService.addItem(this.item, this.selectedRes.uuid);
     this.close.emit(null);
   }
 

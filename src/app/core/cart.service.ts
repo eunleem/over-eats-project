@@ -41,15 +41,19 @@ export class CartService {
     };
   }
 
-  addItem(product: CartItem) {
+
+  addItem(product: CartItem, restaurantID: string) {
     const cart = this.retrieve();
+    if (cart.restaurantID && cart.restaurantID !== restaurantID) {
+      return console.log('different restaurant cart already exist');
+    }
     let item = cart.items.find(ci => ci.product.uuid === product.product.uuid);
     if (item === undefined) {
       item = new CartItem();
       item.product = product.product;
       cart.items.push(item);
     }
-
+    cart.restaurantID = restaurantID;
     item.quantity += product.quantity;
     item.comments = product.comments;
     cart.items = cart.items.filter((i) => i.quantity > 0);
@@ -59,6 +63,7 @@ export class CartService {
     this.dispatch(cart);
     console.log('add to cart', cart);
   }
+
 
   editItem(product: CartItem) {
     const cart = this.retrieve();
@@ -82,6 +87,10 @@ export class CartService {
     this.dispatch(cart);
   }
 
+  emptryCart() {
+    localStorage.removeItem(CART_KEY);
+  }
+
   retrieve(): ShoppingCart {
     const cart = new ShoppingCart();
     const storedCart = localStorage.getItem(CART_KEY);
@@ -95,7 +104,6 @@ export class CartService {
     cart.itemsTotal = cart.items
       .map(item => item.quantity * item.product.price)
       .reduce((prev, current) => prev + current, 0);
-    cart.grossTotal = cart.itemsTotal + cart.deliveryTotal;
   }
 
   save(cart: ShoppingCart) {

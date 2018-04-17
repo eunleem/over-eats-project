@@ -16,8 +16,8 @@
           {{ tag.name }}
         </span>
       </div>
-      <p class="cooking-time">
-        {{ restaurantInfo?.eta_range.min }}분 ~ {{ restaurantInfo?.eta_range.max }}분
+      <p class="cooking-time" *ngIf="restaurantInfo.eta_range">
+        {{ restaurantInfo.eta_range.min }}분 ~ {{ restaurantInfo.eta_range.max }}분
       </p>
     </div>
   </div>

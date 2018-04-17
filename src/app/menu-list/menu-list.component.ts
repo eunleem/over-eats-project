@@ -23,6 +23,10 @@ export class MenuListComponent implements OnInit {
     return this.cartService.selectedRestaurant;
   }
 
+  set selectedRes(res) {
+    this.cartService.selectedRestaurant = res;
+  }
+
   set selectedProduct(item) {
     this.cartService.selectedProduct = item;
   }
@@ -34,19 +38,22 @@ export class MenuListComponent implements OnInit {
     private el: ElementRef
   ) { }
 
-  // this.searchService.getRestaurant(params.id)
-  // .subscribe(data => this.restaurantInfo = data);
+
   ngOnInit() {
     this.activateRoute
       .params.subscribe(params => {
         this.restaurantID = params.id;
+          this.searchService.getRestaurant(params.id)
+            .subscribe(data => {
+              this.restaurantInfo = data;
+              this.selectedRes = data;
+              console.log('restaurant info', this.restaurantInfo);
+            });
         this.searchService.getProducts(params.id)
           .subscribe((data: any) => {
             this.products = data;
             this.categories = data.map(item => item.title);
-            this.restaurantInfo = this.selectedRes;
             console.log(data);
-            console.log('restaurant info', this.restaurantInfo);
           });
         });
   }
