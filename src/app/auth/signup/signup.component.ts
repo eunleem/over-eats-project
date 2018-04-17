@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthFormComponent } from '../shared/auth-form/auth-form.component';
 
 @Component({
   selector: 'app-signup',
@@ -29,12 +30,16 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   error: boolean;
+
+  @ViewChild(AuthFormComponent) authformComponent: AuthFormComponent;
+
   constructor(
     private auth: AuthService,
     private router: Router
   ) { }
 
   ngOnInit() {
+    this.toggle();
   }
 
 
@@ -50,5 +55,8 @@ export class SignupComponent implements OnInit {
         },
         ({ error }) => this.error = true
       );
+  }
+  toggle() {
+    this.authformComponent.isshow = true;
   }
 }

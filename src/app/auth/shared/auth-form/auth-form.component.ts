@@ -43,44 +43,47 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
         </span>
       </div>
 
-      <div class="form-group name">
-        <div class="first-name">
-          <label>
-          <input
-            class="uber"
-            type="text"
-            placeholder="first name"
-            formControlName="firstName">
-          </label>
-          <span class="error" *ngIf="firstNameInvalid">
-            성을 입력해 주세요.
-          </span>
+      <div *ngIf="isshow" class="form-group">
+        <div class="choice">선택 사항</div>
+        <div class="name">
+          <div class="first-name">
+            <label>
+            <input
+              class="uber"
+              type="text"
+              placeholder="first name"
+              formControlName="firstName">
+            </label>
+            <span class="error" *ngIf="firstNameInvalid">
+              성을 입력해 주세요.
+            </span>
+          </div>
+          <div class="last-name">
+            <label>
+            <input
+              class="uber"
+              type="text"
+              placeholder="last-name"
+              formControlName="lastName">
+            </label>
+            <span class="error" *ngIf="lastNameInvalid">
+              이름을 입력해 주세요.
+            </span>
+          </div>
         </div>
-        <div class="last-name">
-          <label>
-          <input
-            class="uber"
-            type="text"
-            placeholder="last-name"
-            formControlName="lastName">
-          </label>
-          <span class="error" *ngIf="lastNameInvalid">
-            이름을 입력해 주세요.
-          </span>
-        </div>
-      </div>
 
-      <div class="form-group">
-        <label>
-          <input
-            class="uber"
-            type="text"
-            placeholder="전화번호"
-            formControlName="phoneNumber">
-        </label>
-        <span class="error" *ngIf="phoneNumberInvalid">
-          전화번호를 입력해 주세요.
-        </span>
+        <div class="form-group">
+          <label>
+            <input
+              class="uber"
+              type="text"
+              placeholder="전화번호"
+              formControlName="phoneNumber">
+          </label>
+          <span class="error" *ngIf="phoneNumberInvalid">
+            전화번호를 입력해 주세요.
+          </span>
+        </div>
       </div>
 
       <ng-content select=".error"></ng-content>
@@ -103,7 +106,7 @@ export class AuthFormComponent implements OnInit {
   form: FormGroup;
   formValid: boolean;
   usernameExist: boolean;
-
+  isshow = false;
   @Input()
   error: boolean;
 
@@ -115,6 +118,7 @@ export class AuthFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.form = this.fb.group({
       username: ['', [
         Validators.required,
