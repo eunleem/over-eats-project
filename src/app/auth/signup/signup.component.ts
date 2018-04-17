@@ -39,7 +39,8 @@ export class SignupComponent implements OnInit {
 
 
   signupUser(event: FormGroup) {
-    const newUser = Object.assign({}, event.value, {first_name: '', last_name: '', phone_number: '010-0000-0000'});
+    const newUser = Object.assign(
+      {}, event.value, {first_name: event.value.firstName, last_name: event.value.lastName, phone_number: event.value.phoneNumber});
     this.auth.signup(newUser)
       .subscribe(
         () => {

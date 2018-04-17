@@ -54,6 +54,18 @@ label {
   margin-top: 30px;
 }
 
+.name {
+  display: flex;
+}
+.first-name {
+  width: 40%
+}
+
+.last-name {
+  width: 60%;
+  padding-left: 10px;
+}
+
 @keyframes errorIn {
   0% {
     transform: translateX(-2px);
