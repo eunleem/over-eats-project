@@ -23,7 +23,7 @@
         <div class="category-container">
           <h1 class="category-title">상위 카테고리</h1>
           <div class="category-list">
-            <div class="category" *ngFor="let item of categoryLists">
+            <div class="category" *ngFor="let item of category">
               <a (click)="selectedRestaurant(item.count)">
                 <img class="category-image" [src]="item.logo_url">
               </a>
@@ -33,7 +33,7 @@
         <div class="more-category-container">
           <h1 class="category-title">더 많은 카테고리</h1>
           <div class="more-category-list">
-            <div class="more-category" *ngFor="let item of moreLists">
+            <div class="more-category" *ngFor="let item of moreCategory">
               <a (click)="selectedRestaurant(item.count)">
                 <img class="more-category-image" [src]="item.logo_url" alt="moreListImage">
               </a>

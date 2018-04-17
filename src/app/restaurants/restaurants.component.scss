@@ -28,7 +28,7 @@
         }
     }
 
-  
+
 
     .fa-search {
         position: absolute;
@@ -92,6 +92,7 @@
         background: 100% 100%;
         cursor: pointer;
         border-radius: 2px;
+
     }
 
 
@@ -129,18 +130,13 @@
     }
 }
 
-.content-wrap {
-    // margin: 0 0.8em;
-    // position: relative;
-}
-
 
 .img {
     border-radius: 4px;
     height: 240px;
     overflow: hidden;
 
-     &:hover {
+    &:hover {
         transition: all 1s ease;
         transform: translateY(-4px);
     }
@@ -163,7 +159,7 @@
 
 .food-types {
     margin: 7px 0;
-    color: grey;    
+    color: grey;
     height: 20px;
     overflow-y: hidden;
 }
@@ -210,7 +206,7 @@
     cursor: pointer;
     color:white;
     font-size: 20px;
-        
+
     &:hover {
         background-color: $uber-green-hover;
         transition: all 0.7s ease;
