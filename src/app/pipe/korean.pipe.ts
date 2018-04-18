@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class KoreanPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    value = value.replace(/[a-zA-Z]+./g, '');
+    value = value.replace(/[a-zA-Z].*/g, '');
     return value;
   }
 }
