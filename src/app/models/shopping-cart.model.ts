@@ -1,13 +1,13 @@
 import { CartItem } from '../models/cart-item.model';
 
+
 export class ShoppingCart {
-  public restaurantID: string;
+  public restaurant: any;
   public items: CartItem[] = new Array<CartItem>();
-  public itemsTotal = 0;
+  public comment: string;
 
   public updateFrom(src: ShoppingCart) {
     this.items = src.items;
-    this.restaurantID = src.restaurantID;
-    this.itemsTotal = src.itemsTotal;
+    this.restaurant = src.restaurant;
   }
 }

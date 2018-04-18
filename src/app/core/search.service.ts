@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Product } from '../models/product.interface';
 
+const ADDRESS = 'address';
 interface SearchResult {
    search_text: string;
    result: any[];
@@ -13,7 +14,7 @@ interface SearchResult {
 @Injectable()
 export class SearchService {
   URL = environment.apiUrl;
-
+  addressResult;
   constructor(private http: HttpClient) { }
 
   searchAddress(term) {
@@ -25,6 +26,15 @@ export class SearchService {
     });
   }
 
+  saveAddress(address) {
+    this.addressResult = address;
+    localStorage.setItem(ADDRESS, JSON.stringify(address));
+  }
+
+  getAddress() {
+    const address = JSON.parse(localStorage.getItem(ADDRESS));
+    return address;
+  }
 
   // restaurant services
   getRestaurants(geometry): Observable<any> {
@@ -46,7 +56,19 @@ export class SearchService {
     return this.http.get<any>(`${this.URL}/restaurant/${uuid}/menu`);
   }
 
+
+  getImage(geometry) {
+    const { lat, lng } = geometry;
+    return `${this.URL}/address/map/?lat=${lat}&lng=${lng}`;
+  }
+
+  sendOrder(form, token): Observable<any> {
+    console.log('sending order');
+    return this.http.post<SearchResult>(`${this.URL}/order/payment/`, form , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `token ${token}`
+      })
+    });
+  }
 }
-
-
-

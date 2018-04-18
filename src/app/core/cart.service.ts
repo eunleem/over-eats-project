@@ -36,16 +36,16 @@ export class CartService {
   initializeCartItem(product: Product): CartItem {
     return {
       quantity: 1,
-      comments: '',
+      comment: '',
       product: product
     };
   }
 
 
-  addItem(product: CartItem, restaurantID: string) {
+  addItem(product: CartItem, restaurant: any) {
     const cart = this.retrieve();
-    if (cart.restaurantID && cart.restaurantID !== restaurantID) {
-      return console.log('different restaurant cart already exist');
+    if (cart.restaurant && cart.restaurant.uuid !== restaurant.uuid) {
+      throw Error;
     }
     let item = cart.items.find(ci => ci.product.uuid === product.product.uuid);
     if (item === undefined) {
@@ -53,12 +53,13 @@ export class CartService {
       item.product = product.product;
       cart.items.push(item);
     }
-    cart.restaurantID = restaurantID;
+    cart.restaurant = restaurant;
+    cart.comment = '';
     item.quantity += product.quantity;
-    item.comments = product.comments;
+    item.comment = product.comment;
     cart.items = cart.items.filter((i) => i.quantity > 0);
 
-    this.calculateCart(cart);
+    // this.calculateCart(cart);
     this.save(cart);
     this.dispatch(cart);
     console.log('add to cart', cart);
@@ -70,10 +71,11 @@ export class CartService {
     const item = cart.items.find(ci => ci.product.uuid === product.product.uuid);
 
     item.quantity = product.quantity;
-    item.comments = product.comments;
+    item.comment = product.comment;
     cart.items = cart.items.filter(i => i.quantity > 0);
 
-    this.calculateCart(cart);
+
+    // this.calculateCart(cart);
     this.save(cart);
     this.dispatch(cart);
   }
@@ -81,14 +83,18 @@ export class CartService {
   removeItem(id: string) {
     const cart = this.retrieve();
     cart.items = cart.items.filter(item => item.product.uuid !== id);
-
-    this.calculateCart(cart);
+    if (cart.items.length < 1) {
+      cart.restaurant = '';
+    }
+    // this.calculateCart(cart);
     this.save(cart);
     this.dispatch(cart);
   }
 
   emptryCart() {
-    localStorage.removeItem(CART_KEY);
+    const cart = this.retrieve();
+    cart.items = [];
+    cart.restaurant = {};
   }
 
   retrieve(): ShoppingCart {
@@ -100,11 +106,11 @@ export class CartService {
     return cart;
   }
 
-  calculateCart(cart: ShoppingCart) {
-    cart.itemsTotal = cart.items
-      .map(item => item.quantity * item.product.price)
-      .reduce((prev, current) => prev + current, 0);
-  }
+  // calculateCart(cart: ShoppingCart) {
+  //   cart.itemsTotal = cart.items
+  //     .map(item => item.quantity * item.product.price)
+  //     .reduce((prev, current) => prev + current, 0);
+  // }
 
   save(cart: ShoppingCart) {
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
