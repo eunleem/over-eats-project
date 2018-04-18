@@ -9,6 +9,17 @@
   }
 }
 
+.warning {
+  position: absolute;
+  padding: 40px;
+  width: 70%;
+  max-width: 580px;
+  background: #4CAF50;
+  color: white;
+  z-index: 100;
+  box-shadow: 0px 0px 20px 2px #00000059;
+}
+
 .modal-background {
   animation: show 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: fixed;

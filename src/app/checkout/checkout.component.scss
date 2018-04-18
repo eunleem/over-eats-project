@@ -1,4 +1,5 @@
 @import '../../sass/_variables';
+
 .constraint {
   display: flex;
   justify-content: space-between;
@@ -27,7 +28,6 @@
   width: 100%;
   border: 1px solid $light-grey;
   border-radius: 4px;
-  padding-bottom: 20px;
   margin-bottom: 20px;
 
   label {
@@ -45,9 +45,17 @@
 .selector-group {
   padding: 20px;
 
-  span {
+  & > span {
     color: $uber-green;
   }
+
+  .selectors {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    justify-content: space-between;
+  }
+
 }
 
 .date-picker {
@@ -109,11 +117,19 @@
   .input-group {
     display: flex;
   }
+  label {
+    display: flex;
+  }
   input {
     margin: 10px;
-    letter-spacing: 3px;
     text-align: center;
-    padding-left: 0;
+    margin: 10px;
+    text-align: left;
+    padding: 0 20px;
+    letter-spacing: 6px;
+  }
+  .selector-group {
+    height: 120px;
   }
 }
 
@@ -132,4 +148,31 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+
+.button-group {
+  p {
+    margin: 0;
+  }
+
+  h3 {
+    font-size: 1.4em;
+    font-weight: 400;
+  }
+}
+
+@keyframes errorIn {
+  0% {
+    transform: translateX(-2px);
+  }
+  100%{
+    transform: translateX(2px);
+  }
+}
+.error {
+  font-size: 1em;
+  padding: 10px 10px;
+  color: #FF5722;
+  animation: errorIn 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-iteration-count: 4;
 }

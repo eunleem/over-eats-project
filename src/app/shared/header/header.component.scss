@@ -75,4 +75,13 @@ button {
   }
 }
 
-
+.member-button {
+  width: 32px;
+  // border-radius: 50%;
+  border-radius: 2px;
+  margin-left: 6px;
+  height: 32px;
+  border: 1px solid $uber-green;
+  background-size: cover;
+  background-color: $uber-green;
+}
