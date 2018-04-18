@@ -15,7 +15,7 @@ import { AuthService } from '../services/auth.service';
           <span>아직 회원이 아닌가요?</span>
           <a
             class="text-link"
-            routerLink="/auth/signup">
+            routerLink="/signup">
           회원가입
           </a>
           <button
