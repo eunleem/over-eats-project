@@ -74,7 +74,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   searchTerm$ = new Subject<string>();
   addresses: any[];
 
-
+  set addressResult(address) {
+    this.searchService.addressResult = address;
+  }
   constructor(
     private router: Router,
     private searchService: SearchService,
@@ -101,14 +103,16 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   searchAddress(terms) {
-    if (terms && terms.length > 1) {
+    const filteredString = terms.replace(/[a-z]/gi, '');
+    console.log(filteredString);
+    if (filteredString && filteredString.length > 1) {
       this.searchTerm$.next(terms);
     }
   }
 
   search(term: Observable<string>) {
     return term
-      .debounceTime(1000)
+      .debounceTime(500)
       .distinctUntilChanged()
       .filter(str => !!str)
       .switchMap(res => {
@@ -118,6 +122,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   sendAddress(address) {
+    this.searchService.saveAddress(address);
     this.router.navigate(['/restaurants', address.geometry.lat, address.geometry.lng]);
     this.addresses = undefined;
   }
