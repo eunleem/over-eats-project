@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgModel } from '@angular/forms';
+
 import { Order } from '../models/order.interface';
 import { ShoppingCart } from '../models/shopping-cart.model';
 import { CartService } from '../core/cart.service';
 import { Observable } from 'rxjs/Observable';
+import { SearchService } from '../core/search.service';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -14,49 +16,76 @@ import { Observable } from 'rxjs/Observable';
 export class CheckoutComponent implements OnInit {
   showCalendar = false;
   myDate = Date.now();
-  days: [0, 1, 2, 3, 4, 5, 6];
+
   form: FormGroup;
   orderForm: Order;
   cart: Observable<ShoppingCart>;
-
   order: ShoppingCart;
 
+  restaurantInfo;
+  cardNum = '';
+  mask = [/[0-9]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  image;
+  address;
+  token: string;
 
   constructor(
     private fb: FormBuilder,
-    private cartService: CartService
+    private cartService: CartService,
+    private searchService: SearchService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
+    this.token = this.auth.getToken();
+    this.address = this.searchService.getAddress();
+    this.image = this.searchService.getImage(this.address.geometry);
     this.cart = this.cartService.get();
     this.cart.subscribe(data => {
       this.order = data;
-      console.log(this.order);
+      this.restaurantInfo = data.restaurant;
     });
     this.form = this.fb.group({
       delivery: this.fb.group({
+        lat: `${this.address.geometry.lat}`,
+        lng: `${this.address.geometry.lng}`,
         date_time: '',
-        address: '',
-        address_detail: '',
-        position: this.fb.group({ lat: '', lng: '' }),
+        address: [this.address.formatted_address, {disabled: true}],
+        address_detail: ['', Validators.required],
         comment: ''
       }),
       payment: this.fb.group({
         form: 'card',
-        num: ['', Validators.required]
+        num: ['', [
+            Validators.required,
+            Validators.minLength(19),
+            Validators.maxLength(19)
+            ]
+          ]
       })
     });
 
     this.form.valueChanges
       .filter(data => this.form.valid)
       .subscribe(data => {
-        data.payment.num = data.payment.num.replace(/1/, 'hi');
-        data.delivery.date_time = Date.now();
         this.orderForm = Object.assign({}, data);
+        console.log(this.orderForm);
       });
   }
+
+  get num() { return this.form.get('payment.num'); }
+
+  generateOrder(order) {
+    const items = order.items.map(item => {
+      return Object.assign({}, { item: item.product.uuid }, {comment: item.comment}, {cnt: item.quantity});
+    });
+    return Object.assign({}, {restaurant: order.restaurant.uuid}, {comment: ''}, {items: items});
+  }
+
   goCheckout() {
-    this.orderForm = Object.assign({}, this.orderForm, { order: this.order });
-    console.log(this.orderForm);
+    const order = this.generateOrder(this.order);
+    this.orderForm = Object.assign({}, this.orderForm, { order: order});
+    console.log(this.orderForm, this.token);
+    // this.searchService.sendOrder(this.orderForm, )
   }
 }
