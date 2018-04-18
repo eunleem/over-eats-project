@@ -5,6 +5,8 @@ import { FormControl, FormGroup, FormArray, FormBuilder, Validators, NgModel } f
 import { Product } from '../../models/product.interface';
 import { CartItem } from '../../models/cart-item.model';
 import { CartService } from '../../core/cart.service';
+import { Observable } from 'rxjs/Observable';
+import { ShoppingCart } from '../../models/shopping-cart.model';
 
 @Component({
   selector: 'app-selector',
@@ -12,6 +14,11 @@ import { CartService } from '../../core/cart.service';
   template: `
     <div
       class="modal-background">
+      <div class="warning" *ngIf="error">
+        <p>장바구니가 이미 존재합니다. 비우시겠습니까?</p>
+        <button (click)="emptyCart()" class="button uber">비우기</button>
+        <button (click)="closePopup()" class="button uber">취소</button>
+      </div>
       <div class="modal">
         <button class="closeButton" (click)="toggle()">
           <svg viewBox="0 0 64 64" width="20px" height="20px"
@@ -28,7 +35,7 @@ import { CartService } from '../../core/cart.service';
             <input
               type="text"
               class="comment"
-              [(ngModel)]="item.comments"
+              [(ngModel)]="item.comment"
               placeholder="음식 조리 시 요청할 사항을 적어주세요">
           </label>
           <div class="group">
@@ -79,10 +86,12 @@ export class SelectorComponent implements OnInit {
   @Output() close = new EventEmitter();
   @Input() editItem: any;
 
+  cart: ShoppingCart;
   item: CartItem;
   min = 0;
   max = 20;
-  restaurantID: string;
+
+  error = false;
 
   get selectedProduct() {
     return this.cartService.selectedProduct;
@@ -100,9 +109,10 @@ export class SelectorComponent implements OnInit {
     } else {
       this.item = this.editItem;
     }
-    this.restaurantID = this.selectedRes.uuid;
+    this.cartService.get().subscribe(data => {
+      this.cart = data;
+    });
     console.log('selected item is ', this.item);
-    console.log('selected restaurant is ', this.restaurantID);
   }
 
   increment() {
@@ -117,9 +127,17 @@ export class SelectorComponent implements OnInit {
     this.close.emit(null);
   }
 
+  closePopup() {
+    this.error = false;
+  }
   onAdd() {
-    this.cartService.addItem(this.item, this.selectedRes.uuid);
-    this.close.emit(null);
+    try {
+      this.cartService.addItem(this.item, this.selectedRes);
+      this.close.emit(null);
+    } catch (error) {
+      this.error = true;
+      console.log('please empty your cart first');
+    }
   }
 
   onEdit() {
