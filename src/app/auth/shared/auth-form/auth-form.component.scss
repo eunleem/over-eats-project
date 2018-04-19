@@ -53,6 +53,24 @@ label {
   position: relative;
   margin-top: 30px;
 }
+.choice {
+  font-size: 20px;
+  position: relative;
+}
+.name {
+  display: flex;
+}
+
+.first-name {
+  width: 40%;
+  position: relative;
+}
+
+.last-name {
+  width: 60%;
+  padding-left: 10px;
+  position: relative;
+}
 
 @keyframes errorIn {
   0% {

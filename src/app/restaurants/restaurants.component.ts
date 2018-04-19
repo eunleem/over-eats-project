@@ -1,16 +1,17 @@
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { hostElement } from '@angular/core/src/render3/instructions';
+import { HttpClient } from '@angular/common/http';
 import { NgModel } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/switchMap';
 
+import { RestaurantsService } from '../core/restaurants.service';
 import { SearchService } from '../core/search.service';
 import { CartService } from '../core/cart.service';
 import { Subscription } from 'rxjs/Subscription';
-
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
@@ -20,6 +21,8 @@ export class RestaurantsComponent implements OnInit {
 
   isShow: boolean; // 스크롤 이동에 따른 버튼의 표시
   restaurants: any;
+  category: any;
+  moreCategory: any;
   value: string;
   id: number;
 
@@ -38,8 +41,11 @@ export class RestaurantsComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private searchService: SearchService,
     private cartService: CartService,
+    public restaurantsService: RestaurantsService,
+    public http: HttpClient,
     public router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.isLoading = true;
@@ -54,9 +60,18 @@ export class RestaurantsComponent implements OnInit {
             this.nextPage = data.next;
           });
     });
+
+    this.restaurantsService.getCategory()
+    .subscribe(res => this.category = res.categories);
+    this.restaurantsService.getMoreCategory()
+    .subscribe(res => this.moreCategory = res.categories);
+
+    this.isClick = false;
+    this.showContainer = false;
   }
 
   getOpenTime(restaurant) {
+    console.log('open', restaurant);
     if (this.today > 5) { this.today = 0; }
     const time = restaurant.open_time.map(item => item.start_time)[this.today];
     const hour = Math.floor(time / 60);
@@ -106,10 +121,12 @@ export class RestaurantsComponent implements OnInit {
     return this.cartService.selectedRestaurant;
   }
   set selectedRes(res) {
+    console.log('res', res);
     this.cartService.selectedRestaurant = res;
   }
   selectedRestaurant(restaurant) {
     this.selectedRes = restaurant;
+    console.log('selec', this.selectedRes);
     this.router.navigate(['/restaurant', `${restaurant.uuid}`]);
   }
 }

@@ -21,7 +21,6 @@ import { PipeModule } from '../pipe/pipe.module';
   ],
   exports: [
     RestaurantsComponent
-  ],
-  providers: []
+  ]
 })
 export class RestaurantsModule { }
