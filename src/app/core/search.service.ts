@@ -43,6 +43,12 @@ export class SearchService {
     const {lat, lng} = geometry;
     return this.http.get(`${this.URL}/restaurant/?lat=${lat}&lng=${lng}`);
   }
+  // 키워드 서치
+  getRestaurantsByKeyword(geometry, search_text): Observable<any> {
+    console.log('getting restaurants from db');
+    const {lat, lng} = geometry;
+    return this.http.get(`${this.URL}/restaurant/?lat=${lat}&lng=${lng}&search_text=${search_text}`);
+  }
 
   getRestaurant(uuid): Observable<any> {
     return this.http.get(`${this.URL}/restaurant/${uuid}`);
