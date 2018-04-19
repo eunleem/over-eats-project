@@ -45,25 +45,25 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 
       <div *ngIf="isshow" class="form-group">
         <div class="name">
-          <div class="first-name">
-            <label>
-            <input
-              class="uber"
-              type="text"
-              placeholder="first-name"
-              formControlName="firstName">
-            </label>
-            <span class="error" *ngIf="firstNameInvalid">
-              성을 입력해 주세요.
-            </span>
-          </div>
           <div class="last-name">
             <label>
             <input
               class="uber"
               type="text"
-              placeholder="last-name"
+              placeholder="last name"
               formControlName="lastName">
+            </label>
+            <span class="error" *ngIf="firstNameInvalid">
+              성을 입력해 주세요.
+            </span>
+          </div>
+          <div class="first-name">
+            <label>
+            <input
+              class="uber"
+              type="text"
+              placeholder="first name"
+              formControlName="firstName">
             </label>
             <span class="error" *ngIf="lastNameInvalid">
               이름을 입력해 주세요.
