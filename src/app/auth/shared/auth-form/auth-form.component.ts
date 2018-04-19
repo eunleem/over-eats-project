@@ -129,13 +129,13 @@ export class AuthFormComponent implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(10)
       ]],
-      firstName: ['', [
+      firstName: ['', [ Validators.required,
         Validators.pattern(/[a-zA-z]/),
       ]],
-      lastName: ['', [
+      lastName: ['', [ Validators.required,
         Validators.pattern(/[a-zA-z]/),
       ]],
-      phoneNumber: ['', [
+      phoneNumber: ['', [ Validators.required,
         Validators.pattern(/[0-9]/),
         Validators.minLength(10),
         Validators.maxLength(12)
