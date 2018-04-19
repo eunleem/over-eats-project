@@ -44,7 +44,6 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
       </div>
 
       <div *ngIf="isshow" class="form-group">
-        <div class="choice">선택 사항</div>
         <div class="name">
           <div class="first-name">
             <label>
