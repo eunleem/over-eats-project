@@ -23,12 +23,23 @@
       <button class="button dark" *ngIf="!this.auth.isAuthenticated()">
         <a routerLink="/signup">회원가입</a>        
       </button>
-      <button class="member-button" *ngIf="this.auth.isAuthenticated()"
-        [ngStyle]="{'background-image': 'url(' + this.auth.getUser().img_profile + ')'}">
-        <a routerLink="/user">
-          <!-- <img width="100%" height="auto" [src]="this.auth.getUser().img_profile"> -->
-        </a>
-      </button>
+      <div class="hover-group">
+        <button
+          (mouseenter)="showMenu = true"
+          class="member-button" *ngIf="this.auth.isAuthenticated()"
+          [ngStyle]="{'background-image': 'url(' + this.auth.getUser().img_profile + ')'}">
+          <!-- <a routerLink="/user"> -->
+            <!-- <img width="100%" height="auto" [src]="this.auth.getUser().img_profile"> -->
+          <!-- </a> -->
+        </button>
+        <div
+          *ngIf="showMenu"
+          (mouseleave)="showMenu = false"
+          class="hover-menu">     
+          <a routerLink="/user">계정</a>
+          <a routerLink="/orders">주문내역</a>
+        </div>
+      </div>
       <button class="icon-group" *ngIf="itemCount">
         <a routerLink="/checkout" class="icon">
           <svg width="22px" height="20px" viewBox="0 0 20 22" version="1.1">

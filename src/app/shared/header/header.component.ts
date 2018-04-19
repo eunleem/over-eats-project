@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   onMenu = false;
   isCart = true;
   isLoggedIn: boolean;
+  showMenu: boolean;
   thisUrl: string;
   user;
   cart: Observable<ShoppingCart>;
