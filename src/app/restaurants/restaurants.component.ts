@@ -61,11 +61,10 @@ export class RestaurantsComponent implements OnInit {
           });
     });
 
-    this.restaurantsService.getCategory()
+    this.searchService.getCategory()
     .subscribe(res => this.category = res.categories);
-    this.restaurantsService.getMoreCategory()
+    this.searchService.getMoreCategory()
     .subscribe(res => this.moreCategory = res.categories);
-
     this.isClick = false;
     this.showContainer = false;
   }
