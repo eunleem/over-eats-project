@@ -176,3 +176,8 @@ input[type=number]::-webkit-outer-spin-button {
   animation: errorIn 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
   animation-iteration-count: 4;
 }
+
+input[disabled] {
+    font-style: italic;
+    color: $grey;
+}

@@ -95,6 +95,8 @@ export class CartService {
     const cart = this.retrieve();
     cart.items = [];
     cart.restaurant = {};
+    this.save(cart);
+    this.dispatch(cart);
   }
 
   retrieve(): ShoppingCart {

@@ -7,6 +7,7 @@ import { CartService } from '../core/cart.service';
 import { Observable } from 'rxjs/Observable';
 import { SearchService } from '../core/search.service';
 import { AuthService } from '../auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -33,7 +34,8 @@ export class CheckoutComponent implements OnInit {
     private fb: FormBuilder,
     private cartService: CartService,
     private searchService: SearchService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -85,8 +87,15 @@ export class CheckoutComponent implements OnInit {
   goCheckout() {
     const order = this.generateOrder(this.order);
     this.orderForm = Object.assign({}, this.orderForm, { order: order});
-    // console.log(this.orderForm, `token ${this.token}`);
+    console.log(this.orderForm, `token ${this.token}`);
+    this.router.navigate(['orders']);
     this.searchService.sendOrder(this.orderForm, this.token)
-      .subscribe(data => console.log(data));
+      .subscribe(
+        (data) => {
+          this.cartService.emptryCart();
+          console.log('order has been made', data);
+        }
+      , (error) => console.log('error!!')
+    );
   }
 }
