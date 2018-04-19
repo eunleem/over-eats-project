@@ -37,6 +37,12 @@ export class SearchService {
     return this.http.get(url);
   }
 
+  getCategory(): Observable<any> {
+    return this.http.get('https://www.overeats.kr/api/restaurant/category/?page_size=10');
+  }
+  getMoreCategory(): Observable<any> {
+    return this.http.get('https://www.overeats.kr/api/restaurant/category/?page_size=40');
+  }
   // get menu
   getProducts(uuid): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.URL}/restaurant/${uuid}/menu`);
