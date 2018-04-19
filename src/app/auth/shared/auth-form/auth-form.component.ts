@@ -51,7 +51,7 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
             <input
               class="uber"
               type="text"
-              placeholder="first name"
+              placeholder="first-name"
               formControlName="firstName">
             </label>
             <span class="error" *ngIf="firstNameInvalid">
