@@ -6,7 +6,7 @@ import { RestaurantsComponent } from './restaurants.component';
 import { RestaurantRoutingModule } from './restaurants-routing.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { RestaurantsService } from '../core/restaurants.service';
+import { PipeModule } from '../pipe/pipe.module';
 
 @NgModule({
   imports: [
@@ -14,13 +14,13 @@ import { RestaurantsService } from '../core/restaurants.service';
     RestaurantRoutingModule,
     FormsModule,
     SharedModule,
+    PipeModule.forRoot()
   ],
   declarations: [
-    RestaurantsComponent,
+    RestaurantsComponent
   ],
   exports: [
     RestaurantsComponent
-  ],
-  providers: [RestaurantsService]
+  ]
 })
 export class RestaurantsModule { }

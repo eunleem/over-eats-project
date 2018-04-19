@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgModel } from '@angular/forms';
+
+import { Order } from '../models/order.interface';
+import { ShoppingCart } from '../models/shopping-cart.model';
+import { CartService } from '../core/cart.service';
+import { Observable } from 'rxjs/Observable';
+import { SearchService } from '../core/search.service';
+import { AuthService } from '../auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -10,24 +17,85 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CheckoutComponent implements OnInit {
   showCalendar = false;
   myDate = Date.now();
-  days: [0, 1, 2, 3, 4, 5, 6];
-  form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  form: FormGroup;
+  orderForm: Order;
+  cart: Observable<ShoppingCart>;
+  order: ShoppingCart;
+
+  restaurantInfo;
+  cardNum = '';
+  mask = [/[0-9]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  image;
+  address;
+  token: string;
+
+  constructor(
+    private fb: FormBuilder,
+    private cartService: CartService,
+    private searchService: SearchService,
+    private auth: AuthService,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.token = this.auth.getToken();
+    this.address = this.searchService.getAddress();
+    this.image = this.searchService.getImage(this.address.geometry);
+    this.cart = this.cartService.get();
+    this.cart.subscribe(data => {
+      this.order = data;
+      this.restaurantInfo = data.restaurant;
+    });
     this.form = this.fb.group({
-      date: ['', Validators.required],
-      time: '',
-      address1: ['', Validators.required],
-      address2: '',
-      comments: ''
+      delivery: this.fb.group({
+        lat: this.address.geometry.lat,
+        lng: this.address.geometry.lng,
+        date_time: '',
+        address: [this.address.formatted_address, {disabled: true}],
+        address_detail: ['', Validators.required],
+        comment: ''
+      }),
+      payment: this.fb.group({
+        method: 'card',
+        num: ['', [
+            Validators.required,
+            Validators.minLength(19),
+            Validators.maxLength(19)
+            ]
+          ]
+      })
     });
 
     this.form.valueChanges
       .filter(data => this.form.valid)
-      .subscribe(data => console.log(JSON.stringify(data)));
+      .subscribe(data => {
+        this.orderForm = Object.assign({}, data);
+        console.log(this.orderForm);
+      });
   }
 
-  ngOnInit() {
+  get num() { return this.form.get('payment.num'); }
+
+  generateOrder(order) {
+    const items = order.items.map(item => {
+      return Object.assign({}, { item: item.product.uuid }, {comment: item.comment}, {cnt: item.quantity});
+    });
+    return Object.assign({}, {restaurant: order.restaurant.uuid}, {comment: ''}, {items: items});
   }
 
+  goCheckout() {
+    const order = this.generateOrder(this.order);
+    this.orderForm = Object.assign({}, this.orderForm, { order: order});
+    console.log(this.orderForm, `token ${this.token}`);
+    this.router.navigate(['orders']);
+    this.searchService.sendOrder(this.orderForm, this.token)
+      .subscribe(
+        (data) => {
+          this.cartService.emptryCart();
+          console.log('order has been made', data);
+        }
+      , (error) => console.log('error!!')
+    );
+  }
 }

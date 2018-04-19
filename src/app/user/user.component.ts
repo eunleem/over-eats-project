@@ -11,6 +11,7 @@ import { User } from '../auth/user';
       <h2>{{ user?.username }}</h2>
       <p>{{ user?.first_name}}</p>
       <p>{{ user?.last_name}}</p>
+      <p><img [src]="user?.img_profile"></p>
     </div>
   `
 })

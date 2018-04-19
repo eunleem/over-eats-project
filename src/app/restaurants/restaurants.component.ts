@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/switchMap';
 
-import { RestaurantsService } from '../core/restaurants.service';
+// import { RestaurantsService } from '../core/restaurants.service';
 import { SearchService } from '../core/search.service';
 import { CartService } from '../core/cart.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -41,8 +41,6 @@ export class RestaurantsComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private searchService: SearchService,
     private cartService: CartService,
-    public restaurantsService: RestaurantsService,
-    public http: HttpClient,
     public router: Router
   ) {
   }
@@ -61,10 +59,10 @@ export class RestaurantsComponent implements OnInit {
           });
     });
 
-    this.restaurantsService.getCategory()
-    .subscribe(res => this.category = res.categories);
-    this.restaurantsService.getMoreCategory()
-    .subscribe(res => this.moreCategory = res.categories);
+    // this.restaurantsService.getCategory()
+    // .subscribe(res => this.category = res.categories);
+    // this.restaurantsService.getMoreCategory()
+    // .subscribe(res => this.moreCategory = res.categories);
 
     this.isClick = false;
     this.showContainer = false;
@@ -73,7 +71,7 @@ export class RestaurantsComponent implements OnInit {
   getOpenTime(restaurant) {
     console.log('open', restaurant);
     if (this.today > 5) { this.today = 0; }
-    const time = restaurant.open_time.map(item => item.start_time)[this.today];
+    const time = restaurant.open_time.map(item => item.start_time)[this.today + 1];
     const hour = Math.floor(time / 60);
     const min = Math.floor(time % 60);
     return `${hour} : ${min === 0 ? '00' : min}`;
@@ -103,61 +101,6 @@ export class RestaurantsComponent implements OnInit {
       this.value = '';
       this.isClick = false;
     }
-
-    // 클릭하면 placeholder가 변경 / 상위 카테고리, 더 많은 카테고리가 나옴
-  // click() {
-  //   this.isClick = !this.isClick;
-  //   this.showContainer = !this.showContainer;
-  // }
-
-  // // 더보기를 누르면 추가적인 레스토랑 리스트가 나온다.
-  // loadMore() {
-  //   this.restaurantService.loadMore()
-  //     .subscribe(loadMore => this.restaurants = [...this.restaurants, ...loadMore]);
-  // }
-
-  // // 텍스트를 지우면 카테고리 컨테이너가 사라짐
-  // input(value) {
-  //   if (!value.length) { this.showContainer = false; }
-  // }
-
-  // 버튼을 누르면 카테고리 컨테이너가 사라짐
-  // removeCategory() {
-  //   this.showContainer = false;
-  // }
-
-
-  // // 레스토랑을 클릭하면 넘어감
-  // selectedRestaurant(id: number) {
-  //   this.router.navigate(['menu/', id]);
-  // }
-
-  // // 운영시간과 현재 시간을 비교해서 내일 몇시에 여는지 표시해주기
-  // nextOpenTime(opentime) {
-  //   // console.log('opentime', opentime); // opentime 영업시간(배열)을 가져옴
-  //   const today = (new Date()).getDay(); // 오늘의 요일
-  //   const nextday = today + 1;
-  //   const nextdayOpen = opentime.find(function (item) {
-  //     return +item.day_of_week === nextday;
-  //   });
-  //   // console.log('a', nextdayOpen);
-  //   // 다음날 배열이 있으면 그배열의 오픈시간을, 그렇지 않으면, 첫 배열의 오픈시간을 가지고 온다.
-  //   const nextOpenTime = nextdayOpen ? nextdayOpen.start_time : opentime[0].start_time;
-  //   // console.log('nextopen', nextOpenTime);
-  //   const nextOpenHour = Math.floor(nextOpenTime / 60);
-  //   const nextOpenMin = nextOpenTime % 60;
-  //   const AmPm = nextOpenHour >= 12 ? 'PM' : 'AM';
-  //   return nextOpenHour + ':' + nextOpenMin + '  ' + AmPm + ' 오픈';
-  // }
-
-  // // 현재 시간과 가게 운영시간을 비교해서 true / false
-  // checkOpenTimes(item) {
-  //   if (item.r_status === 'ACTIVE') {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
 
   loadMore() {

@@ -75,4 +75,61 @@ button {
   }
 }
 
+.member-button {
+  width: 32px;
+  // border-radius: 50%;
+  border-radius: 2px;
+  margin-left: 6px;
+  height: 32px;
+  border: 1px solid $uber-green;
+  background-size: cover;
+  background-color: $uber-green;
 
+  a {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.menus {
+  display: flex;
+}
+
+.hover-group {
+  position: relative;
+}
+
+.hover-menu {
+  position: absolute;
+  top: 50px;
+  right: -34px;
+  background: $uber-green;
+  border-radius: 2px;
+
+  &::before {
+    content: '';
+    width: 13px;
+    background: $uber-green;
+    height: 13px;
+    position: absolute;
+    transform: rotate(45deg);
+    top: -4px;
+    border-radius: 2px;
+    left: 65%;
+    z-index: -1;
+  }
+
+  a {
+    display: block;
+    width: 160px;
+    height: 40px;
+    color: #ffffff;
+    text-align: left;
+    padding-left: 20px;
+    line-height: 40px;
+
+    &:hover {
+      background: $uber-green-hover;
+    }
+  }
+}

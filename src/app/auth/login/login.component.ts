@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Router } from '@angular/router';
@@ -8,14 +8,16 @@ import { AuthService } from '../services/auth.service';
   selector: 'app-login',
   template: `
     <div class="centered">
-        <app-auth-form (submitted)="loginUser($event)">
+        <app-auth-form
+          [error]="error"
+          (submitted)="loginUser($event)">
           <h1 class="form-title">로그인하기</h1>
           <p class="form-sub">이메일 계정으로
 간편하게 오버잇츠를 만나보세요!</p>
           <span>아직 회원이 아닌가요?</span>
           <a
             class="text-link"
-            routerLink="/auth/signup">
+            routerLink="/signup">
           회원가입
           </a>
           <button
@@ -29,6 +31,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   message: string;
+  error: boolean;
 
   constructor(
     private auth: AuthService,
@@ -40,13 +43,17 @@ export class LoginComponent implements OnInit {
 
 
   loginUser(event: FormGroup) {
-    this.auth.signin(event.value)
+    const user = {username: event.value.username, password: event.value.password};
+    this.auth.signin(user)
       .subscribe(
         () => {
           console.log(this.auth.isAuthenticated());
           this.router.navigate(['home']);
         },
-        ({ error }) => this.message = error.message
+        ( error ) => {
+          console.log('error', error);
+          this.error = true;
+        }
       );
   }
 

@@ -9,6 +9,7 @@ import { AuthFormComponent } from '../shared/auth-form/auth-form.component';
   template: `
     <div class="centered signup">
         <app-auth-form
+          [isSignup]="true"
           [error]="error"
           (submitted)="signupUser($event)">
           <h1 class="form-title">회원가입</h1>
@@ -16,7 +17,7 @@ import { AuthFormComponent } from '../shared/auth-form/auth-form.component';
           <span>이미 회원이신가요?</span>
           <a
             class="text-link"
-            routerLink="/auth/login">
+            routerLink="/login">
           로그인
           </a>
           <button
@@ -30,30 +31,25 @@ import { AuthFormComponent } from '../shared/auth-form/auth-form.component';
 })
 export class SignupComponent implements OnInit {
   error: boolean;
-
-  @ViewChild(AuthFormComponent) authformComponent: AuthFormComponent;
+  isSignup = true;
 
   constructor(
     private auth: AuthService,
     private router: Router
   ) { }
 
-  ngOnInit() {
-    this.authformComponent.isshow = true;
-  }
+  ngOnInit() {}
 
 
   signupUser(event: FormGroup) {
-    const newUser = Object.assign(
-      {}, event.value, {first_name: event.value.firstName, last_name: event.value.lastName, phone_number: event.value.phoneNumber});
-    this.auth.signup(newUser)
+    this.auth.signup(event.value)
       .subscribe(
         () => {
           console.log('sign up');
           this.auth.signin(event.value)
             .subscribe(() => this.router.navigate(['user']));
         },
-        ({ error }) => this.error = true
+        ( error ) => this.error = true
       );
   }
 }

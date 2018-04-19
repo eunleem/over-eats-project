@@ -36,39 +36,46 @@ export class CartService {
   initializeCartItem(product: Product): CartItem {
     return {
       quantity: 1,
-      comments: '',
+      comment: '',
       product: product
     };
   }
 
-  addItem(product: CartItem) {
+
+  addItem(product: CartItem, restaurant: any) {
     const cart = this.retrieve();
+    if (cart.restaurant && cart.restaurant.uuid !== restaurant.uuid) {
+      throw Error;
+    }
     let item = cart.items.find(ci => ci.product.uuid === product.product.uuid);
     if (item === undefined) {
       item = new CartItem();
       item.product = product.product;
       cart.items.push(item);
     }
-
+    cart.restaurant = restaurant;
+    cart.comment = '';
     item.quantity += product.quantity;
-    item.comments = product.comments;
+    item.comment = product.comment;
     cart.items = cart.items.filter((i) => i.quantity > 0);
 
-    this.calculateCart(cart);
+    // this.calculateCart(cart);
     this.save(cart);
     this.dispatch(cart);
     console.log('add to cart', cart);
   }
+
 
   editItem(product: CartItem) {
     const cart = this.retrieve();
     const item = cart.items.find(ci => ci.product.uuid === product.product.uuid);
 
     item.quantity = product.quantity;
-    item.comments = product.comments;
+    item.comment = product.comment;
     cart.items = cart.items.filter(i => i.quantity > 0);
 
-    this.calculateCart(cart);
+
+    // this.calculateCart(cart);
     this.save(cart);
     this.dispatch(cart);
   }
@@ -76,8 +83,18 @@ export class CartService {
   removeItem(id: string) {
     const cart = this.retrieve();
     cart.items = cart.items.filter(item => item.product.uuid !== id);
+    if (cart.items.length < 1) {
+      cart.restaurant = '';
+    }
+    // this.calculateCart(cart);
+    this.save(cart);
+    this.dispatch(cart);
+  }
 
-    this.calculateCart(cart);
+  emptryCart() {
+    const cart = this.retrieve();
+    cart.items = [];
+    cart.restaurant = {};
     this.save(cart);
     this.dispatch(cart);
   }
@@ -91,12 +108,11 @@ export class CartService {
     return cart;
   }
 
-  calculateCart(cart: ShoppingCart) {
-    cart.itemsTotal = cart.items
-      .map(item => item.quantity * item.product.price)
-      .reduce((prev, current) => prev + current, 0);
-    cart.grossTotal = cart.itemsTotal + cart.deliveryTotal;
-  }
+  // calculateCart(cart: ShoppingCart) {
+  //   cart.itemsTotal = cart.items
+  //     .map(item => item.quantity * item.product.price)
+  //     .reduce((prev, current) => prev + current, 0);
+  // }
 
   save(cart: ShoppingCart) {
     localStorage.setItem(CART_KEY, JSON.stringify(cart));

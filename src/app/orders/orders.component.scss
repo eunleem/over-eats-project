@@ -1,0 +1,42 @@
+@import '../../sass/_variables.scss';
+h2 {
+  font-size: 2em;
+}
+
+.category {
+  margin: 20px 0;
+}
+
+section {
+  border: 1px solid #dadada;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  position: relative;
+
+  button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  padding: 0 10px;
+  }
+}
+
+.image {
+  display: none;
+
+  @media only screen and (min-width: $medium) {
+    display: initial;
+    width: 150px;
+    height: 150px;
+    background: salmon;
+
+  }
+}
+
+.ordercontents {
+  padding-left: 20px;
+  width: 100%;
+  max-width: 300px;
+}
+

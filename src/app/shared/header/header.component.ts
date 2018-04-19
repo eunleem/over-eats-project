@@ -15,8 +15,9 @@ export class HeaderComponent implements OnInit {
   onMenu = false;
   isCart = true;
   isLoggedIn: boolean;
+  showMenu: boolean;
   thisUrl: string;
-
+  user;
   cart: Observable<ShoppingCart>;
   itemCount: number;
   cartSubscription: Subscription;
@@ -32,6 +33,9 @@ export class HeaderComponent implements OnInit {
         this.thisUrl = data.urlAfterRedirects;
       }
     });
+    if (this.auth.isAuthenticated()) {
+      this.user = this.auth.getUser();
+    }
   }
 
   ngOnInit() {

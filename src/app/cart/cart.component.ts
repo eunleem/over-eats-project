@@ -24,17 +24,21 @@ interface ICartItemWithProduct extends CartItem {
     (close)="onClick = false">
   </app-selector>
   <div class="cart">
-    <div class="button-group">
+    <div class="button-group" *ngIf="!isCheckout else checkOut">
       <button
       (click)="goCheckout()"
-      [ngClass]="{'disabled': cartItems?.length === 0}"
+      [disabled]="cartItems?.length == 0"
+      [class.disabled]="cartItems?.length == 0"
       class="button uber button-fluid">장바구니 확인</button>
     </div>
+    <ng-template #checkOut>
+        <ng-content select=".button-group"></ng-content>
+    </ng-template>
     <ul class="item-group">
         <li class="item-list"
           *ngFor="let item of cartItems">
             <div (click)="onEdit(item)">
-              {{ item.product.title }}
+              {{ item.product.title | korean }}
             </div>
             <span>{{ item.quantity }}</span>
             <span>{{ item.totalCost }}</span>
@@ -45,14 +49,17 @@ interface ICartItemWithProduct extends CartItem {
             </span>
         </li>
     </ul>
-    <div class="price-group">
+    <div class="price-group" *ngIf="!isCheckout else orderPrice">
       <p *ngIf="itemCount">
         <span>총 {{ itemCount }} 개 아이템</span>
         <span>{{ getTotal() }}</span>
       </p>
-      <span *ngIf="!itemCount || itemCount == 0">
-        카트에 아이템을 추가하면 여기에 나타납니다.</span>
+      <p *ngIf="!itemCount || itemCount == 0">
+        카트에 아이템을 추가하면 여기에 나타납니다.</p>
     </div>
+    <ng-template #orderPrice>
+      <ng-content select=".order-price-group"></ng-content>
+    </ng-template>
   </div>
   `
 })
@@ -63,6 +70,8 @@ export class CartComponent implements OnInit {
   cartItems: ICartItemWithProduct[];
   cart: Observable<ShoppingCart>;
   cartSubscription: Subscription;
+
+  @Input() isCheckout = false;
 
   constructor(
     private router: Router,

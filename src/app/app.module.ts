@@ -23,6 +23,7 @@ import { CartService } from './core/cart.service';
 import { AuthService } from './auth/services/auth.service';
 import { SearchService } from './core/search.service';
 import { AuthGuard } from './auth/services/auth.guard';
+import { OrdersModule } from './orders/orders.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AuthGuard } from './auth/services/auth.guard';
     AuthModule,
     MenuListModule,
     CheckoutModule,
-    CartModule
+    CartModule,
+    OrdersModule
   ],
   providers: [
     CartService,

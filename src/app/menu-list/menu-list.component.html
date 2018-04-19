@@ -5,17 +5,19 @@
 <section
   *ngIf="restaurantInfo"
   class="card-header"
-  [ngStyle]="{'background-image': 'url(../../assets/images/yakynina-anastasia-543605-unsplash.jpg)'}">
+  [ngStyle]="{'background-image': 'url(' + restaurantInfo.logo + ')'}">
   <div class="card-group constraint">
     <div class="card">
-      <h2>{{ restaurantInfo?.title }}</h2>
+      <h2>{{ restaurantInfo.title | korean }}</h2>
       <div class="category-group">
-        <span 
+        <span
           *ngFor="let tag of restaurantInfo.tags"
-          class="category">{{ tag?.name }}</span>
+          class="category">
+          {{ tag.name }}
+        </span>
       </div>
-      <p class="cooking-time">
-        {{ restaurantInfo?.eta_range.min }}분 ~ {{ restaurantInfo?.eta_range.max }}분
+      <p class="cooking-time" *ngIf="restaurantInfo.eta_range">
+        {{ restaurantInfo.eta_range.min }}분 ~ {{ restaurantInfo.eta_range.max }}분
       </p>
     </div>
   </div>
@@ -25,24 +27,30 @@
     <li
       *ngFor="let category of categories; let i = index"
       class="category-item">
-      <a href="#">{{ i }}</a></li>
+      <a
+      (click)="navigateCategory(category,i)" 
+      [class.active]="category.active" >{{ category | korean }}</a></li>
   </ul>
 </div>
 <div class="menu-wrapper constraint">
   <section class="menu-list">
-    <div class="group" *ngFor="let group of products">
-      <h2>{{ group.title }}</h2>
+    <div 
+      class="group" 
+      *ngFor="let group of products; let i = index"
+      #div
+      [id]="i">
+      <h2>{{ group.title | korean }}</h2>
       <ul class="menu-group">
         <li 
           *ngFor="let item of group.items"
           class="menu-item"
           (click)="clickItem(item)">
           <div class="menu-text">
-            <h3>{{ item.title }}</h3>
-            <p class="menu-disc">{{ item.description }}</p>
+            <h3>{{ item.title | korean  }}</h3>
+            <p class="menu-disc">{{ item.description | korean }}</p>
             <p class="menu-price">{{ item.price | currency:'KRW' : 'symbol' : '1.0' }}</p>
           </div>
-          <div class="menu-img" *ngIf="item.img">
+          <div class="menu-img" *ngIf="item.image_url">
             <img [src]="item.image_url" width="400" height="auto" [alt]="item.name">
           </div>
         </li>

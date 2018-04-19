@@ -21,13 +21,13 @@ import { PreloaderService } from './preloader/preloader.service';
     HeaderComponent,
     FooterComponent,
     SearchComponent,
-    PreloaderComponent
+    PreloaderComponent,
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     SearchComponent,
-    PreloaderComponent
+    PreloaderComponent,
   ],
   providers: [PreloaderService]
 })
