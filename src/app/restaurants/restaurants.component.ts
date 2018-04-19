@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/switchMap';
 
-import { RestaurantsService } from '../core/restaurants.service';
+// import { RestaurantsService } from '../core/restaurants.service';
 import { SearchService } from '../core/search.service';
 import { CartService } from '../core/cart.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -41,8 +41,6 @@ export class RestaurantsComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private searchService: SearchService,
     private cartService: CartService,
-    public restaurantsService: RestaurantsService,
-    public http: HttpClient,
     public router: Router
   ) {
   }
@@ -61,10 +59,10 @@ export class RestaurantsComponent implements OnInit {
           });
     });
 
-    this.restaurantsService.getCategory()
-    .subscribe(res => this.category = res.categories);
-    this.restaurantsService.getMoreCategory()
-    .subscribe(res => this.moreCategory = res.categories);
+    // this.restaurantsService.getCategory()
+    // .subscribe(res => this.category = res.categories);
+    // this.restaurantsService.getMoreCategory()
+    // .subscribe(res => this.moreCategory = res.categories);
 
     this.isClick = false;
     this.showContainer = false;
@@ -73,7 +71,7 @@ export class RestaurantsComponent implements OnInit {
   getOpenTime(restaurant) {
     console.log('open', restaurant);
     if (this.today > 5) { this.today = 0; }
-    const time = restaurant.open_time.map(item => item.start_time)[this.today];
+    const time = restaurant.open_time.map(item => item.start_time)[this.today + 1];
     const hour = Math.floor(time / 60);
     const min = Math.floor(time % 60);
     return `${hour} : ${min === 0 ? '00' : min}`;
