@@ -47,15 +47,15 @@ export class CheckoutComponent implements OnInit {
     });
     this.form = this.fb.group({
       delivery: this.fb.group({
-        lat: `${this.address.geometry.lat}`,
-        lng: `${this.address.geometry.lng}`,
+        lat: this.address.geometry.lat,
+        lng: this.address.geometry.lng,
         date_time: '',
         address: [this.address.formatted_address, {disabled: true}],
         address_detail: ['', Validators.required],
         comment: ''
       }),
       payment: this.fb.group({
-        form: 'card',
+        method: 'card',
         num: ['', [
             Validators.required,
             Validators.minLength(19),
@@ -85,7 +85,8 @@ export class CheckoutComponent implements OnInit {
   goCheckout() {
     const order = this.generateOrder(this.order);
     this.orderForm = Object.assign({}, this.orderForm, { order: order});
-    console.log(this.orderForm, this.token);
-    // this.searchService.sendOrder(this.orderForm, )
+    // console.log(this.orderForm, `token ${this.token}`);
+    this.searchService.sendOrder(this.orderForm, this.token)
+      .subscribe(data => console.log(data));
   }
 }

@@ -23,9 +23,9 @@
       <button class="button dark" *ngIf="!this.auth.isAuthenticated()">
         <a routerLink="/signup">회원가입</a>        
       </button>
-      <button class="member-button"
+      <button class="member-button" *ngIf="this.auth.isAuthenticated()"
         [ngStyle]="{'background-image': 'url(' + this.auth.getUser().img_profile + ')'}">
-        <a routerLink="/user" *ngIf="this.auth.isAuthenticated()">
+        <a routerLink="/user">
           <!-- <img width="100%" height="auto" [src]="this.auth.getUser().img_profile"> -->
         </a>
       </button>

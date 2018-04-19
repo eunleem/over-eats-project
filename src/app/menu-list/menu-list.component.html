@@ -50,7 +50,7 @@
             <p class="menu-disc">{{ item.description | korean }}</p>
             <p class="menu-price">{{ item.price | currency:'KRW' : 'symbol' : '1.0' }}</p>
           </div>
-          <div class="menu-img" *ngIf="item.img_url">
+          <div class="menu-img" *ngIf="item.image_url">
             <img [src]="item.image_url" width="400" height="auto" [alt]="item.name">
           </div>
         </li>

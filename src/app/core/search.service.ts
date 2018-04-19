@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Product } from '../models/product.interface';
+import { Order } from '../models/order.interface';
 
 const ADDRESS = 'address';
 interface SearchResult {
@@ -64,10 +65,11 @@ export class SearchService {
 
   sendOrder(form, token): Observable<any> {
     console.log('sending order');
-    return this.http.post<SearchResult>(`${this.URL}/order/payment/`, form , {
+    const tokenstr = `token ${token}`;
+    return this.http.post<Order>(`${this.URL}/order/payment/`, form , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `token ${token}`
+        'Authorization': tokenstr
       })
     });
   }
