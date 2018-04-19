@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.toggle();
+    this.authformComponent.isshow = true;
   }
 
 
@@ -55,8 +55,5 @@ export class SignupComponent implements OnInit {
         },
         ({ error }) => this.error = true
       );
-  }
-  toggle() {
-    this.authformComponent.isshow = true;
   }
 }

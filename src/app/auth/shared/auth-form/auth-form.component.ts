@@ -44,27 +44,26 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
       </div>
 
       <div *ngIf="isshow" class="form-group">
-        <div class="choice">선택 사항</div>
         <div class="name">
-          <div class="first-name">
-            <label>
-            <input
-              class="uber"
-              type="text"
-              placeholder="first-name"
-              formControlName="firstName">
-            </label>
-            <span class="error" *ngIf="firstNameInvalid">
-              성을 입력해 주세요.
-            </span>
-          </div>
           <div class="last-name">
             <label>
             <input
               class="uber"
               type="text"
-              placeholder="last-name"
+              placeholder="last name"
               formControlName="lastName">
+            </label>
+            <span class="error" *ngIf="firstNameInvalid">
+              성을 입력해 주세요.
+            </span>
+          </div>
+          <div class="first-name">
+            <label>
+            <input
+              class="uber"
+              type="text"
+              placeholder="first name"
+              formControlName="firstName">
             </label>
             <span class="error" *ngIf="lastNameInvalid">
               이름을 입력해 주세요.
@@ -129,13 +128,13 @@ export class AuthFormComponent implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(10)
       ]],
-      firstName: ['', [
+      firstName: ['', [ Validators.required,
         Validators.pattern(/[a-zA-z]/),
       ]],
-      lastName: ['', [
+      lastName: ['', [ Validators.required,
         Validators.pattern(/[a-zA-z]/),
       ]],
-      phoneNumber: ['', [
+      phoneNumber: ['', [ Validators.required,
         Validators.pattern(/[0-9]/),
         Validators.minLength(10),
         Validators.maxLength(12)
