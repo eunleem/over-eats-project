@@ -43,7 +43,7 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
         </span>
       </div>
 
-      <div *ngIf="isshow" class="form-group">
+      <div *ngIf="isSignup" class="form-group">
         <div class="name">
           <div class="last-name">
             <label>
@@ -109,6 +109,9 @@ export class AuthFormComponent implements OnInit {
   @Input()
   error: boolean;
 
+  @Input()
+  isSignup: boolean;
+
   @Output()
   submitted = new EventEmitter<FormGroup>();
 
@@ -143,10 +146,10 @@ export class AuthFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      this.submitted.emit(this.form);
-    }
-    console.log(typeof this.form.valid, this.form.valid);
+    // TODO: VALID NOT WORKING - since login and signup shares same form
+    // if (this.form.valid) {
+    // }
+    this.submitted.emit(this.form);
   }
 
   get passwordInvalid() {

@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     // 토큰 유효 기간 확인
     if (!this.auth.isAuthenticated()) {
       console.log('[AuthGuard] invalid token!');
-      this.router.navigate(['auth/login']);
+      this.router.navigate(['/login']);
       return false;
     }
     return true;
