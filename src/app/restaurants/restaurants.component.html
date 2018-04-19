@@ -5,6 +5,7 @@
         <input class="input-search"
           type="text"
           (click)="isClick = true"
+          (keyup.enter)="search(value)"
           [(ngModel)]="value"
           placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
         <div class="input-value" *ngIf= "value">검색할 값을 입력하세요.</div>
@@ -24,10 +25,12 @@
           <h1 class="category-title">상위 카테고리</h1>
           <div class="category-list">
             <div class="category" *ngFor="let item of category">
-              <div class=category-wrap>
-                <div class="readys">{{item.name}}</div>
-                <img class="category-image" [src]="item.logo_url">
-              </div>
+              <a (click)="selectedCategory(item)">
+                <div class=category-wrap>
+                  <div class="readys">{{item.name}}</div>
+                  <img class="category-image" [src]="item.logo_url">
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -35,17 +38,19 @@
           <h1 class="category-title">더 많은 카테고리</h1>
           <div class="more-category-list">
             <div class="more-category" *ngFor="let item of moreCategory">
-              <div class=category-wrap>
-                <div class="readys">{{item.name}}</div>
-                <img class="more-category-image" [src]="item.logo_url" alt="moreListImage">
-              </div>
+              <a (click)="selectedCategory(item)">
+                <div class=category-wrap>
+                  <div class="readys">{{item.name}}</div>
+                  <img class="more-category-image" [src]="item.logo_url" alt="moreListImage">
+                </div>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-<div class="restaraunt-component-container" *ngIf="!isClick">
+  <div class="restaraunt-component-container" *ngIf="!isClick">
     <app-preloader
       *ngIf="isLoading"
       [ngStyle]="{ 'top': '25%', 'left': '50%', 'position': 'absolute' }">
@@ -84,5 +89,5 @@
         <button>더 로드하기</button>
       </div>
     </div>
-</div>
+  </div>
 </div>
