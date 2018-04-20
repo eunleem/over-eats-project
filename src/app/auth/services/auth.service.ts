@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
@@ -69,9 +69,18 @@ export class AuthService {
   //   return
   // }
 
-  getUser(): User {
+  getUser(): any {
     const user = JSON.parse(localStorage.getItem(this.USER));
-    return user;
+    console.log('local', user);
+    const token = this.getToken();
+    console.log('token', token, typeof token);
+    const headers = new HttpHeaders()
+      .get[token];
+      console.log('head', headers);
+    return this.http.get(`${this.URL}/member/user/${user.pk}`, {headers: headers} )
+      .subscribe((res) => console.log('get', res));
+    // return this.http.get(`https://www.overeats.kr/api/member/user/8/`); ${user.pk}
+    // return user;
   }
 
   setUser(user: any): void {
