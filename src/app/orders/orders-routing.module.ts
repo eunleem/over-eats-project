@@ -8,7 +8,7 @@ import { StatusComponent } from './status/status.component';
 
 const routes: Routes = [
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
-  { path: 'status', component: StatusComponent, canActivate: [AuthGuard] }
+  { path: 'status/:id', component: StatusComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -1,24 +1,57 @@
 @import '../../sass/_variables.scss';
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1)
+  }
+}
+
 h2 {
   font-size: 2em;
 }
 
 .category {
   margin: 20px 0;
+  button {
+    margin-right: 10px;
+    height: 35px;
+    border-bottom: 2px solid white;
+    
+    &.on {
+      border-color: $uber-green;
+    }
+  }
+  span {
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 0.8em;
+  }
 }
 
 section {
   border: 1px solid #dadada;
   border-radius: 4px;
-  padding: 20px;
   display: flex;
   position: relative;
+  height: 160px;
+  justify-content: space-between;
+  margin: 20px 0;
 
   button {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  padding: 0 10px;
+    width: 100%;
+    margin: 6px 0;
   }
 }
 
@@ -27,16 +60,83 @@ section {
 
   @media only screen and (min-width: $medium) {
     display: initial;
-    width: 150px;
-    height: 150px;
+    width: 30%;
+    height: 160px;
+    max-width: 160px;
     background: salmon;
-
+    background-size: cover;
   }
 }
 
 .ordercontents {
   padding-left: 20px;
-  width: 100%;
-  max-width: 300px;
+  width: 70%;
+  margin-right: auto;
+  overflow: hidden;
+  margin-top: auto;
+  margin-bottom: auto;
+  
+  @media only screen and (min-width: $medium) {
+    width: 50%;
+  }
+
+  p {
+    color: #737373;
+    font-size: 0.9em;
+    line-height: 1.6em;
+    em {
+      font-style: normal;
+      font-weight: 400;
+      color: black;
+      font-size: 1.1em;
+    }
+  }
+
 }
 
+.button-group {
+  min-width: 140px;
+  max-width: 200px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  padding-right: 20px;
+  align-items: flex-end;
+  width: 30%;
+}
+
+
+.detail-background {
+  animation: show 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  top: 0;
+  background: #0000006e;
+  left: 0;
+  display: flex;
+  overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-modal {
+  width: 100%;
+  background: white;
+  height: 100vh;
+  padding: 30px;
+  position: relative;
+  z-index: 100;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column;
+  animation: pop 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  
+  @media only screen and (min-width: $medium) {
+    width: 70%;
+    max-width: 580px;
+    height: 600px;
+	}
+}
