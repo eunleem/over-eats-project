@@ -35,6 +35,7 @@ export class RestaurantsComponent implements OnInit {
 
   // category variables
   isClick = false;
+  showName = true;
   showContainer = false;
 
   constructor(
@@ -60,9 +61,9 @@ export class RestaurantsComponent implements OnInit {
     });
 
     this.searchService.getCategory()
-    .subscribe(res => this.category = res.categories);
+      .subscribe(res => this.category = res.categories);
     this.searchService.getMoreCategory()
-      .subscribe(res => this.moreCategory = res.categories.splice(10.1));
+      .subscribe(res => this.moreCategory = res.categories.splice(10));
     this.isClick = false;
     this.showContainer = false;
   }
@@ -129,6 +130,7 @@ export class RestaurantsComponent implements OnInit {
 
   search(value: string) {
     this.isClick = false;
+    this.showName = false;
     this.searchService.getRestaurantsByKeyword(this.geometry , value)
     .subscribe((res: any) =>
       this.restaurants = res.restaurants

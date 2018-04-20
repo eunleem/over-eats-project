@@ -57,7 +57,8 @@
     </app-preloader>
     <div class="restaraunt-container">
       <div class="main-container" *ngIf="restaurants">
-        <h1>레스토랑</h1>
+        <h1 *ngIf="showName || !value.length">레스토랑</h1>
+        <h1 *ngIf="!isClick">{{value}}</h1>
         <ul class="content-list">
           <li class="content" *ngFor="let restaurant of restaurants">
             <a (click)="selectedRestaurant(restaurant)">
