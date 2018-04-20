@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
@@ -7,7 +7,6 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/shareReplay';
 
 import { environment } from '../../../environments/environment';
-import { JwtHelper } from 'angular2-jwt';
 
 import { User } from '../user';
 import { Token } from '../token';
@@ -25,8 +24,7 @@ export class AuthService {
   subscriptionObservable: Observable<User>;
 
   constructor(
-    private http: HttpClient,
-    private jwtHelper: JwtHelper
+    private http: HttpClient
   ) {
   }
 
@@ -54,11 +52,6 @@ export class AuthService {
     return token ? true : false;
   }
 
-  // 토큰으로부터 사용자 아이디 취득
-  getUserid(): string {
-    // console.log(this.getDecodeToken());
-    return this.getDecodeToken().username;
-  }
 
   getToken(): string {
     return localStorage.getItem(this.TOKEN_NAME);
@@ -86,14 +79,16 @@ export class AuthService {
     localStorage.removeItem(this.TOKEN_NAME);
     localStorage.removeItem(this.USER);
   }
-  // token 유효 기간 체크
-  isTokenExpired(token: string) {
-    return this.jwtHelper.isTokenExpired(token);
-  }
 
-  // 토큰으로부터 사용자 정보 취득
-  getDecodeToken() {
-    return this.jwtHelper.decodeToken(this.getToken());
+
+  updateUser(user, pk, token) {
+    const tokenstr = `token ${token}`;
+    return this.http.put<Token>(`${this.URL}/member/user/${pk}`, user , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': tokenstr
+      })
+    });
   }
 
 }

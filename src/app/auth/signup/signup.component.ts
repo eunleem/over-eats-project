@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { AuthFormComponent } from '../shared/auth-form/auth-form.component';
         <app-auth-form
           [isSignup]="true"
           [error]="error"
-          (submitted)="signupUser($event)">
+          (submitted)="signupUser($event)" #authForm>
           <h1 class="form-title">회원가입</h1>
           <p class="form-sub">이메일 계정으로 간편하게 오버잇츠 회원이 되세요!</p>
           <span>이미 회원이신가요?</span>
@@ -21,6 +21,8 @@ import { AuthFormComponent } from '../shared/auth-form/auth-form.component';
           로그인
           </a>
           <button
+            [disabled]="!authForm.f.valid"
+            [class.disabled]="!authForm.f.valid"
             type="submit"
             class="button uber button-fluid">
             회원가입하기
@@ -40,8 +42,8 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {}
 
-
   signupUser(event: FormGroup) {
+    console.log(event.value);
     this.auth.signup(event.value)
       .subscribe(
         () => {

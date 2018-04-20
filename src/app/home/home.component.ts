@@ -9,11 +9,11 @@ import { CartService } from '../core/cart.service';
 export class HomeComponent implements OnInit, OnDestroy {
   onMain = true;
   constructor(
-    private cartService: CartService
+    // private cartService: CartService
   ) { }
 
   ngOnInit() {
-    this.cartService.emptryCart();
+    // this.cartService.emptyCart();
   }
 
   ngOnDestroy() {

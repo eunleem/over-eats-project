@@ -91,10 +91,10 @@ export class CartService {
     this.dispatch(cart);
   }
 
-  emptryCart() {
+  emptyCart() {
     const cart = this.retrieve();
     cart.items = [];
-    cart.restaurant = {};
+    cart.restaurant = '';
     this.save(cart);
     this.dispatch(cart);
   }

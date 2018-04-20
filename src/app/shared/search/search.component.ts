@@ -40,8 +40,7 @@ interface SearchResult {
         name="searchAddress"
         [(ngModel)]="terms"
         (ngModelChange)="searchAddress(terms)"
-        (keyup.arrowup)="onKeyDown($event)"
-        (keyup.arrowdown)="onKeyDown($event)"
+        (keyup)="onKeyDown($event)"
         placeholder="배달 주소를 입력하세요">
       <ul
         *ngIf="addresses"
@@ -112,7 +111,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   search(term: Observable<string>) {
     return term
-      .debounceTime(500)
+      .debounceTime(700)
       .distinctUntilChanged()
       .filter(str => !!str)
       .switchMap(res => {
@@ -134,6 +133,9 @@ export class SearchComponent implements OnInit, OnDestroy {
         break;
       case 'ArrowUp':
         this.arrowKeyLocation--;
+        break;
+      case 'Escape':
+        this.addresses = [];
         break;
       default:
         break;

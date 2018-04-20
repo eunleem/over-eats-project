@@ -103,6 +103,17 @@ body {
       border-color: $uber-green-hover;
     }
   }
+
+  &.warning {
+    color: white;
+    background: $warning;
+    border-color: $warning;
+
+    &:hover {
+      background: $warning-hover;
+      border-color: $warning-hover;
+    }
+  }
 }
 
 // input text 기본 스타일입니다. 

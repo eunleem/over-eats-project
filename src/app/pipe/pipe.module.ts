@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { KoreanPipe } from './korean.pipe';
+import { OrderFilterPipe } from './order-filter.pipe';
 
 @NgModule({
   imports: [],
   declarations: [
-    KoreanPipe
+    KoreanPipe,
+    OrderFilterPipe
   ],
   exports: [
-    KoreanPipe
+    KoreanPipe,
+    OrderFilterPipe
   ]
 })
 export class PipeModule {

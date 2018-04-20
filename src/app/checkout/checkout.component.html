@@ -1,12 +1,28 @@
 <div class="constraint">
   <section class="checkout">
     <h2 class="page-title">체크아웃</h2>
-    <form [formGroup]="form" novalidate>
+    <div class="form-group group0" *ngIf="!this.isAuth">
+      <label>
+        <h3 class="form-title">로그인</h3>
+        <div class="selector-group">
+          <span>회원만 이용 가능합니다.</span>
+          <div class="button-group">
+            <button class="button">
+              <a routerLink="/login">로그인</a>
+            </button>
+            <button class="button dark">
+              <a routerLink="/signup">회원가입</a>
+            </button>
+          </div>
+        </div>
+      </label>
+    </div>
+    <form [formGroup]="form" novalidate [class.disabled]="!this.isAuth">
     <div class="delivery" formGroupName="delivery">
       <div class="form-group group1">
         <label>
-          <h3 class="form-title">1. 배달시간</h3>
-          <div class="selector-group">
+          <h3 class="form-title">1. 배달 시간</h3>
+          <div class="selector-group"  *ngIf="this.isAuth">
             <span>배달 시간을 선택해 주세요</span>
             <div class="selectors">
               <span>ASAP 최대한 빨리</span>
@@ -18,7 +34,7 @@
       <div class="form-group group2">
         <label>
           <h3 class="form-title">2. 위치 확인</h3>
-          <div class="selector-group">
+          <div class="selector-group" *ngIf="this.isAuth">
             <div class="map">
               <img 
               width="100%" height="auto"
@@ -51,7 +67,7 @@
       </div>
       <div class="form-group group3" formGroupName="payment">
           <h3 class="form-title">3. 결제</h3>
-          <div class="selector-group">
+          <div class="selector-group" *ngIf="this.isAuth">
             <label for="num">
               <input
                 formControlName="num"
@@ -74,12 +90,11 @@
             </div>
           </div>
       </div>
-      <pre>{{ orderForm | json }}</pre>
     </form>
   </section>
   <section class="cart-group">
     <app-cart [isCheckout]="true">
-      <div class="button-group">
+      <div class="button-group" *ngIf="restaurantInfo">
         <p>다음 레스토랑에서 주문한 음식</p>
         <a [routerLink]="['/restaurant', restaurantInfo.uuid]">
           <h3>
@@ -88,12 +103,9 @@
         </a>
         <button 
         (click)="goCheckout()"
+        [class.disabled]="!auth.isAuthenticated()"
+        [disabled]="!auth.isAuthenticated()"
         class="button uber button-fluid">주문하기</button>
-      </div>
-      <div class="order-price-group">
-        <p>
-          <span>주문 가격</span><em>10000원</em>
-        </p>
       </div>
     </app-cart>
   </section>

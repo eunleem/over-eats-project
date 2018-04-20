@@ -49,17 +49,14 @@ interface ICartItemWithProduct extends CartItem {
             </span>
         </li>
     </ul>
-    <div class="price-group" *ngIf="!isCheckout else orderPrice">
+    <div class="price-group">
       <p *ngIf="itemCount">
         <span>총 {{ itemCount }} 개 아이템</span>
-        <span>{{ getTotal() }}</span>
+        <span>{{ getTotal() | currency:'KRW' : 'symbol' : '1.0'}}</span>
       </p>
       <p *ngIf="!itemCount || itemCount == 0">
         카트에 아이템을 추가하면 여기에 나타납니다.</p>
     </div>
-    <ng-template #orderPrice>
-      <ng-content select=".order-price-group"></ng-content>
-    </ng-template>
   </div>
   `
 })
