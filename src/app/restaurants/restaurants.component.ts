@@ -25,6 +25,7 @@ export class RestaurantsComponent implements OnInit {
   moreCategory: any;
   value: string;
   id: number;
+  geometry: any;
 
   today = new Date().getDay();
   isLoading = false;
@@ -34,6 +35,7 @@ export class RestaurantsComponent implements OnInit {
 
   // category variables
   isClick = false;
+  showName = true;
   showContainer = false;
 
   constructor(
@@ -47,11 +49,10 @@ export class RestaurantsComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    let geometry;
     this.activateRoute
       .params.subscribe(params => {
-        geometry = params;
-        this.searchService.getRestaurants(geometry)
+        this.geometry = params;
+        this.searchService.getRestaurants(this.geometry)
           .subscribe((data: any) => {
             this.isLoading = false;
             this.restaurants = data.restaurants;
@@ -60,9 +61,9 @@ export class RestaurantsComponent implements OnInit {
     });
 
     this.searchService.getCategory()
-    .subscribe(res => this.category = res.categories);
+      .subscribe(res => this.category = res.categories);
     this.searchService.getMoreCategory()
-    .subscribe(res => this.moreCategory = res.categories);
+      .subscribe(res => this.moreCategory = res.categories.splice(10));
     this.isClick = false;
     this.showContainer = false;
   }
@@ -125,5 +126,21 @@ export class RestaurantsComponent implements OnInit {
     this.selectedRes = restaurant;
     console.log('selec', this.selectedRes);
     this.router.navigate(['/restaurant', `${restaurant.uuid}`]);
+  }
+
+  search(value: string) {
+    this.isClick = false;
+    this.showName = false;
+    this.searchService.getRestaurantsByKeyword(this.geometry , value)
+    .subscribe((res: any) =>
+      this.restaurants = res.restaurants
+    );
+  }
+  selectedCategory(category) {
+    this.isClick = false;
+    this.searchService.getRestaurantsByKeyword(this.geometry, category.name)
+    .subscribe((res: any) =>
+      this.restaurants = res.restaurants
+    );
   }
 }
