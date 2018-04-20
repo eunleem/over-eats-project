@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
@@ -83,6 +83,46 @@ export class SearchService {
         'Content-Type': 'application/json',
         'Authorization': tokenstr
       })
+    });
+  }
+
+
+  getAllOrder(token): Observable<any> {
+    const tokenstr = `token ${token}`;
+    return this.http.get<Order>(`${this.URL}/order/list/?page_size=10`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': tokenstr
+      })
+    });
+  }
+
+  getPrepareOrder(token): Observable<any> {
+    const tokenstr = `token ${token}`;
+    return this.http.get<any>(`${this.URL}/order/list/prepare?page_size=5`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': tokenstr
+      })
+    });
+  }
+
+  getPastOrder(token): Observable<any> {
+    const tokenstr = `token ${token}`;
+    return this.http.get<any>(`${this.URL}/order/list/past?page_size=20`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': tokenstr
+      })
+    });
+  }
+
+  cancelOrder(token, id): Observable<any> {
+    const tokenstr = `token ${token}`;
+    return this.http.put(`${this.URL}/order/${id}/`, null, {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('Authorization', tokenstr)
     });
   }
 }

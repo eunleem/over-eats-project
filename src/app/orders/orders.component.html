@@ -1,18 +1,39 @@
+<div class="detail-background" *ngIf="!hide">
+  <div class="detail-modal">
+    <p>{{ list.delivery_address }}</p>
+    <button class="button uber" (click)="hide = true">닫기</button>
+  </div>
+</div>
 <div class="constraint">
   <h2>주문</h2>
   <div class="category">
-    <button>이전</button>
-    <button>준비중</button>
+    <button 
+      *ngFor="let navItem of navItems"
+      [class.on]="navItem === selectedNavItem">
+      <a (click)="setCurrentNavItem(navItem)">{{ navItem }}</a>
+    </button>
   </div>
-  <div class="contents">
-    <section>
-      <div class="image"></div>
+  <div class="contents" *ngIf="orderList?.orders">
+    <section
+      *ngFor="let list of (orderList.orders | orderFilter: selectedNavItem)">
+      <div class="image" [ngStyle]="{'background-image':'url('+ list.order_restaurant.logo +')'}"></div>
       <div class="ordercontents">
-        <h3>주문없음</h3>
-        <p>현재 주문 내역이 없습니다.</p>
-        <small><a routerLink="/status">주문 상태 보기</a></small>
+        <p>주문 레스토랑 <em><a routerLink="/status">{{ list.order_restaurant.title | korean }}</a></em></p>
+        <p>주문 일시 <em>{{ list.order_create_at | amLocal:'ko' | amDateFormat: 'YYYY-MM-DD HH:mm' }}</em></p>
+        <p>결제 금액 <em>{{ list.price_total | currency:'KRW' : 'symbol' : '1.0'}}</em></p>
+        <p>배송지 <em>{{ list.delivery_address }}</em></p>
       </div>
-      <button class="button uber">레스토랑 보기</button>
+      <div class="button-group">
+        <button class="button" (click)="showDetail(list)">영수증 보기</button>
+        <button class="button" *ngIf="list.order_status === '준비중'" (click)="cancelOrder(list.id)"><a>주문 취소</a></button>
+        <button class="button uber" *ngIf="list.order_status === '준비중'">
+          <a [routerLink]="['/status', list.id]">{{ list.order_status }}</a>
+        </button>
+        <button class="button dark" *ngIf="list.order_status !== '준비중'" [class.disabled]="true">
+          {{ list.order_status }}
+        </button>
+      </div>
     </section>
   </div>
 </div>
+

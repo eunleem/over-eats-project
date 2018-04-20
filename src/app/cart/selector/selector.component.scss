@@ -9,15 +9,54 @@
   }
 }
 
-.warning {
-  position: absolute;
-  padding: 40px;
-  width: 70%;
-  max-width: 580px;
-  background: #4CAF50;
-  color: white;
+@keyframes pop {
+  from {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1)
+  }
+}
+
+@keyframes errorIn {
+  0% {
+    transform: translateX(-2px);
+  }
+  100%{
+    transform: translateX(2px);
+  }
+}
+
+.warning-modal-background {
+  animation: show 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
   z-index: 100;
-  box-shadow: 0px 0px 20px 2px #00000059;
+  top: 0;
+  background: #0000006e;
+  left: 0;
+  display: flex;
+  overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
+}
+.warning-modal {
+  width: 38%;
+  background: white;
+  padding: 30px;
+  margin-top: auto;
+  position: relative;
+  margin-bottom: auto;
+  position: relative;
+  text-align: center;
+
+  animation: errorIn 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-iteration-count: 4;
+
+  button {
+    width: 45%;
+  }
 }
 
 .modal-background {
@@ -45,6 +84,7 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   flex-direction: column;
+  animation: pop 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   
   @media only screen and (min-width: $medium) {
     width: 70%;
@@ -123,7 +163,7 @@
   padding: 0;
   margin: 0 10px;
   border: 0;
-  padding-left: 15px;
+  padding-left: 10px;
 }
 
 .add-button {

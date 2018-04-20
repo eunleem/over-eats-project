@@ -7,6 +7,7 @@ import { CartItem } from '../../models/cart-item.model';
 import { CartService } from '../../core/cart.service';
 import { Observable } from 'rxjs/Observable';
 import { ShoppingCart } from '../../models/shopping-cart.model';
+import { SearchService } from '../../core/search.service';
 
 @Component({
   selector: 'app-selector',
@@ -14,10 +15,12 @@ import { ShoppingCart } from '../../models/shopping-cart.model';
   template: `
     <div
       class="modal-background">
-      <div class="warning" *ngIf="error">
-        <p>장바구니가 이미 존재합니다. 비우시겠습니까?</p>
-        <button (click)="emptyCart()" class="button uber">비우기</button>
-        <button (click)="closePopup()" class="button uber">취소</button>
+      <div class="warning-modal-background" *ngIf="error">
+        <div class="warning-modal">
+            <p>장바구니가 이미 존재합니다. 비우시겠습니까?</p>
+            <button (click)="emptyCart()" class="button warning">비우기</button>
+            <button (click)="closePopup()" class="button dark">취소</button>
+        </div>
       </div>
       <div class="modal">
         <button class="closeButton" (click)="toggle()">
@@ -48,7 +51,9 @@ import { ShoppingCart } from '../../models/shopping-cart.model';
                     [disabled]="item.quantity === min">
                   -
                   </button>
-                  <input class="value"
+                  <input
+                    disabled="true"
+                    class="value"
                     type="number" [(ngModel)]="item.quantity">
                   <button
                     class="input-button"
@@ -73,7 +78,7 @@ import { ShoppingCart } from '../../models/shopping-cart.model';
               (click)="onEdit()"
               class="add-button button uber button-fluid">
               <span>장바구니 {{ item.quantity }} 수정</span>
-              <em>{{ item.product.price * item.quantity }} 원</em>
+              <em>{{ (item.product.price * item.quantity) | currency:'KRW' : 'symbol' : '1.0'}}</em>
             </button>
           </div>
         </div>
@@ -101,7 +106,9 @@ export class SelectorComponent implements OnInit {
     return this.cartService.selectedRestaurant;
   }
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService
+  ) {}
 
   ngOnInit() {
     if (!this.editItem) {
@@ -127,9 +134,15 @@ export class SelectorComponent implements OnInit {
     this.close.emit(null);
   }
 
+  emptyCart() {
+    this.cartService.emptyCart();
+    this.closePopup();
+  }
+
   closePopup() {
     this.error = false;
   }
+
   onAdd() {
     try {
       this.cartService.addItem(this.item, this.selectedRes);
@@ -144,6 +157,7 @@ export class SelectorComponent implements OnInit {
     this.cartService.editItem(this.item);
     this.close.emit(null);
   }
+
 
 
 }

@@ -1,5 +1,24 @@
-<div class="map"
-  [ngStyle]="{'background-image': 'url(http://simonpan.com/wp-content/themes/sp_portfolio/assets/uber-challenge.jpg)'}">
+<div class="map">
+<agm-map 
+  [latitude]="geometry?.latitude"
+  [longitude]="geometry?.longtitude"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false">
+  <agm-marker 
+    *ngFor="let m of markers; let i = index"
+    (markerClick)="clickedMarker(m.label, i)"
+    [latitude]="m.lat"
+    [longitude]="m.lng"
+    [label]="{ color: '#ffffff', text: m.label }"
+    [iconUrl]="m.icon"
+    [markerDraggable]="m.draggable"
+    (dragEnd)="markerDragEnd(m, $event)">
+    <agm-info-window>
+      <strong>레스토랑</strong>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
   <div class="time">
     18분
   </div>
@@ -10,7 +29,7 @@
       <i class="fas fa-clipboard-list"></i>
       <h3>주문 접수</h3>
     </div>
-    <div class="status">
+    <div class="status now">
       <i class="fas fa-utensils"></i>
       <h3>조리 중</h3>
     </div>

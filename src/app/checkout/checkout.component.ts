@@ -29,6 +29,7 @@ export class CheckoutComponent implements OnInit {
   image;
   address;
   token: string;
+  isAuth: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +40,7 @@ export class CheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isAuth = this.auth.isAuthenticated();
     this.token = this.auth.getToken();
     this.address = this.searchService.getAddress();
     this.image = this.searchService.getImage(this.address.geometry);
@@ -87,15 +89,19 @@ export class CheckoutComponent implements OnInit {
   goCheckout() {
     const order = this.generateOrder(this.order);
     this.orderForm = Object.assign({}, this.orderForm, { order: order});
-    console.log(this.orderForm, `token ${this.token}`);
-    this.router.navigate(['orders']);
-    this.searchService.sendOrder(this.orderForm, this.token)
-      .subscribe(
-        (data) => {
-          this.cartService.emptryCart();
-          console.log('order has been made', data);
-        }
-      , (error) => console.log('error!!')
-    );
+    if (this.auth.isAuthenticated()) {
+      this.searchService.sendOrder(this.orderForm, this.token)
+        .subscribe(
+          (data) => {
+            this.cartService.emptyCart();
+            this.router.navigate(['orders']);
+            console.log('order has been made', data);
+          }
+        , (error) => console.log('error!!')
+      );
+    } else {
+      alert('you have to login first');
+      this.router.navigate(['login']);
+    }
   }
 }

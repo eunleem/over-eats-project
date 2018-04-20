@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
     <div class="centered">
         <app-auth-form
           [error]="error"
-          (submitted)="loginUser($event)">
+          (submitted)="loginUser($event)" #authForm>
           <h1 class="form-title">로그인하기</h1>
           <p class="form-sub">이메일 계정으로
 간편하게 오버잇츠를 만나보세요!</p>
@@ -21,6 +21,8 @@ import { AuthService } from '../services/auth.service';
           회원가입
           </a>
           <button
+            [disabled]="!authForm.f.valid"
+            [class.disabled]="!authForm.f.valid"
             type="submit"
             class="button uber button-fluid">
             로그인하기
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit {
   message: string;
   error: boolean;
 
+
   constructor(
     private auth: AuthService,
     private router: Router
@@ -43,7 +46,10 @@ export class LoginComponent implements OnInit {
 
 
   loginUser(event: FormGroup) {
-    const user = {username: event.value.username, password: event.value.password};
+    const user = {
+      username: event.value.username,
+      password: event.value.password
+    };
     this.auth.signin(user)
       .subscribe(
         () => {

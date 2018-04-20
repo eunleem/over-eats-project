@@ -34,6 +34,7 @@
         </button>
         <div
           *ngIf="showMenu"
+          (mouseenter)="showMenu = true"
           (mouseleave)="showMenu = false"
           class="hover-menu">     
           <a routerLink="/user">계정</a>
