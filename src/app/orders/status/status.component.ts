@@ -11,7 +11,6 @@ interface Imarker {
   draggable: boolean;
   icon?: string;
 }
-
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
@@ -51,6 +50,7 @@ export class StatusComponent implements OnInit {
     this.token = this.auth.getToken();
   }
 
+  // TODOS url fix, activate route으로 현재 param (id)받아서 데이터 가져오기.
   ngOnInit() {
     if (this.auth.isAuthenticated()) {
       this.searchService.getPrepareOrder(this.token)
