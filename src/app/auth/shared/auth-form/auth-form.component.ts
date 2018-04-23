@@ -177,7 +177,6 @@ export class AuthFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
       this.submitted.emit(this.form);
     }
   }
