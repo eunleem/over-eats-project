@@ -45,6 +45,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  connectUser() {
+    this.router.navigate(['/user', `${this.user.pk}`]);
+  }
+
   signout() {
     this.auth.signout();
     this.router.navigate(['home']);

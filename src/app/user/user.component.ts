@@ -15,10 +15,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
       </div>
       <div class="user-info">
         <p> 기본 정보 </p>
-
         <div class="user-name user"> 유저 이름
           <input type="text"
-          value={{user?.username}}
+          value={{this.user.username}}
           formControlName="username">
           <span class="error" *ngIf="usernameFormat">
             이메일을 입력해 주세요.
@@ -30,7 +29,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
         <div class="user"> 이메일 :
           <input type="text"
-          value={{user?.email}}
+          value={{this.user.email}}
           formControlName="email">
           <span class="error" *ngIf="usernameFormat">
             이메일을 입력해 주세요.
@@ -43,7 +42,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
         <div class="name user">
           <div class="last-name"> 성
             <input type="text"
-            value={{user?.last_name}}
+            value={{this.user.last_name}}
             formControlName="lastName">
             <span class="error" *ngIf="lastNameInvalid">
               성을 입력해 주세요.
@@ -52,7 +51,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
           <div class="first-name"> 이름
             <input type="text"
-            value={{user.first_name}}
+            value={{this.user.first_name}}
             formControlName="firstName">
             <span class="error" *ngIf="firstNameInvalid">
               이름을 입력해 주세요.
@@ -62,7 +61,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
         <div class="phone-number user">휴대전화 번호
           <input type="text"
-            value={{user?.phone_number}}
+            value={{this.user.phone_number}}
             formControlName="phoneNumber">
             <span class="error" *ngIf="phoneNumberInvalid">
             전화번호를 입력해 주세요.
@@ -75,7 +74,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
       <button type="submit"> 저장하기 </button>
     </div>
   </form>
-  <pre>{{ userform.value | json}}</pre>
+  <pre>{{ this.user | json}}</pre>
   `
 })
 export class UserComponent implements OnInit {
@@ -86,11 +85,16 @@ export class UserComponent implements OnInit {
     private auth: AuthService,
     private fb: FormBuilder,
   ) {
-    this.user = this.auth.getUser();
+    this.auth.getUserFromServer()
+    .subscribe((res) => {
+      this.user = res;
+    });
   }
 
   ngOnInit() {
+    // this.user = this.auth.getUser();
     console.log('who is user?', this.user);
+
     this.userform = this.fb.group({
       username: ['', [
         Validators.required,
@@ -115,15 +119,14 @@ export class UserComponent implements OnInit {
   }
 
   saveUser() {
-    console.log('event', this.userform);
+    // this.auth.updateUser(this.user , this.user.pk, this.auth.getToken());
+
+
+    console.log('save', typeof this.user, this.user);
   }
 
-  // getUser() {
-  //   const user = JSON.parse(localStorage.getItem(this.USER));
-  //   const token = localStorage.getItem(this.TOKEN_NAME);
-  //   console.log(user.pk, token);
-  //   return this.http.get(`${this.URL}/member/user/${user.pk}`);
-  // }
+
+
 
   get usernameFormat() {
     const control = this.userform.get('username');

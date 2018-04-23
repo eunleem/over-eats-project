@@ -19,6 +19,7 @@ export class AuthService {
   TOKEN_NAME = environment.tokenName;
   USER = 'user';
 
+  result: any;
   thisUser: any;
   subscriber = new Array<Observer<User>>();
   subscriptionObservable: Observable<User>;
@@ -57,23 +58,19 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_NAME);
   }
 
-  // getUser(): Observable<User> {
-  //   const thisUser = localStorage.getItem(this.USER);
-  //   return
-  // }
+  // 로컬에 있는 유저 정보 가져오기
+  getUser(): Observable<User> {
+    return JSON.parse(localStorage.getItem(this.USER));
+  }
 
-  getUser(): any {
+  // 서버에 있는 유저 정보 가지고 오기
+  getUserFromServer() {
     const user = JSON.parse(localStorage.getItem(this.USER));
-    console.log('local', user);
     const token = this.getToken();
-    console.log('token', token, typeof token);
-    const headers = new HttpHeaders()
-      .get[token];
-      console.log('head', headers);
-    return this.http.get(`${this.URL}/member/user/${user.pk}`, {headers: headers} )
-      .subscribe((res) => console.log('get', res));
-    // return this.http.get(`https://www.overeats.kr/api/member/user/8/`); ${user.pk}
-    // return user;
+    const headers = new HttpHeaders({
+      'Authorization': `token ${token}`
+    });
+    return this.http.get<any>(`${this.URL}/member/user/${user.pk}`, {headers: headers} )
   }
 
   setUser(user: any): void {
