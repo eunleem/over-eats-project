@@ -17,12 +17,15 @@ import { User } from '../auth/user';
 })
 export class UserComponent implements OnInit {
   user: any;
+  token: string;
   constructor(private auth: AuthService) {
-    this.user = this.auth.getUser();
   }
 
   ngOnInit() {
-    console.log('who is user?', this.user);
+    this.user = this.auth.getUser();
+    this.token = this.auth.getToken();
+    this.auth.getUserFromServer(this.token, this.user.pk)
+      .subscribe( data => console.log('user', data));
   }
 
 }
