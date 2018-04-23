@@ -51,7 +51,10 @@ export class SignupComponent implements OnInit {
           this.auth.signin(event.value)
             .subscribe(() => this.router.navigate(['user']));
         },
-        ( error ) => this.error = true
+        ( error ) => {
+          console.log('sign up error', error);
+          this.error = true;
+        }
       );
   }
 }

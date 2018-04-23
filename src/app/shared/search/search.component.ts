@@ -103,7 +103,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   searchAddress(terms) {
     const filteredString = terms.replace(/[a-z]/gi, '');
-    console.log(filteredString);
     if (filteredString && filteredString.length > 1) {
       this.searchTerm$.next(terms);
     }

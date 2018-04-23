@@ -76,6 +76,17 @@ export class AuthService {
     // return user;
   }
 
+
+  getUserFromServer(token, pk) {
+    const tokenstr = `token ${token}`;
+    return this.http.get<any>(`${this.URL}/member/user/${pk}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': tokenstr
+      })
+    });
+  }
+
   setUser(user: any): void {
     localStorage.setItem(this.USER, JSON.stringify(user));
   }

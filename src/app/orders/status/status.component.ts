@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 import { SearchService } from '../../core/search.service';
 import { AuthService } from '../../auth/services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 interface Imarker {
@@ -11,7 +12,6 @@ interface Imarker {
   draggable: boolean;
   icon?: string;
 }
-
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
@@ -21,7 +21,8 @@ export class StatusComponent implements OnInit {
 
   // google maps zoom level
   zoom = 16;
-  token;
+  token: string;
+  id: string;
   orderList;
   geometry;
   deliveryGeometry;
@@ -46,24 +47,28 @@ export class StatusComponent implements OnInit {
 
   constructor(
     private searchService: SearchService,
-    private auth: AuthService
+    private auth: AuthService,
+    private activateRoute: ActivatedRoute
   ) {
     this.token = this.auth.getToken();
   }
 
+  // TODOS url fix, activate route으로 현재 param (id)받아서 데이터 가져오기.
   ngOnInit() {
-    if (this.auth.isAuthenticated()) {
-      this.searchService.getPrepareOrder(this.token)
-        .subscribe(data => {
-          this.geometry = data.orders[0].order_restaurant.position;
-          this.deliveryGeometry = {
-            lat: data.orders[0].delivery_lat, lng: data.orders[0].delivery_lng
-          };
-          this.setMarker(this.geometry, this.deliveryGeometry);
-          console.log(this.geometry, this.deliveryGeometry);
-        },
-          (err) => console.log('error occured'));
-    }
+    this.activateRoute
+      .params.subscribe(params => {
+        this.id = params.id;
+        this.searchService.getOrderByID(this.token, params.id)
+          .subscribe(data => {
+            console.log(data);
+            this.geometry = data.order_restaurant.position;
+            this.deliveryGeometry = {
+              lat: data.delivery_lat, lng: data.delivery_lng
+            };
+            this.setMarker(this.geometry, this.deliveryGeometry);
+            console.log(this.geometry, this.deliveryGeometry);
+          });
+    });
   }
 
 
