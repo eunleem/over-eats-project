@@ -45,7 +45,7 @@ export class SearchService {
   }
   // 키워드 서치
   getRestaurantsByKeyword(geometry, search_text): Observable<any> {
-    console.log('getting restaurants from db');
+    console.log('getting restaurants by keyword from db', geometry, search_text);
     const {lat, lng} = geometry;
     return this.http.get(`${this.URL}/restaurant/?lat=${lat}&lng=${lng}&search_text=${search_text}`);
   }
@@ -59,10 +59,10 @@ export class SearchService {
   }
 
   getCategory(): Observable<any> {
-    return this.http.get('https://www.overeats.kr/api/restaurant/category/?page_size=10');
+    return this.http.get(`${this.URL}/restaurant/category/?page_size=10`);
   }
   getMoreCategory(): Observable<any> {
-    return this.http.get('https://www.overeats.kr/api/restaurant/category/?page_size=40');
+    return this.http.get(`${this.URL}/restaurant/category/?page_size=40`);
   }
   // get menu
   getProducts(uuid): Observable<any> {
