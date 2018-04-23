@@ -127,6 +127,17 @@ export class SearchService {
     });
   }
 
+  // TODOS: url fix
+  getOrder(token, id): Observable<any> {
+    const tokenstr = `token ${token}`;
+    return this.http.get<any>(`${this.URL}/order/list/past?page_size=20`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': tokenstr
+      })
+    });
+  }
+
   cancelOrder(token, id): Observable<any> {
     const tokenstr = `token ${token}`;
     return this.http.put(`${this.URL}/order/${id}/`, null, {
