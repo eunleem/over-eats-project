@@ -59,18 +59,29 @@ export class AuthService {
   }
 
   // 로컬에 있는 유저 정보 가져오기
-  getUser(): Observable<User> {
+  getUser(): User {
     return JSON.parse(localStorage.getItem(this.USER));
   }
 
   // 서버에 있는 유저 정보 가지고 오기
-  getUserFromServer() {
-    const user = JSON.parse(localStorage.getItem(this.USER));
-    const token = this.getToken();
-    const headers = new HttpHeaders({
-      'Authorization': `token ${token}`
+  // getUserFromServer() {
+  //   const user = JSON.parse(localStorage.getItem(this.USER));
+  //   const token = this.getToken();
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `token ${token}`
+  //   });
+  //   return this.http.get<any>(`${this.URL}/member/user/${user.pk}`, {headers: headers} )
+  // }
+
+
+  getUserFromServer(token, pk) {
+    const tokenstr = `token ${token}`;
+    return this.http.get<any>(`${this.URL}/member/user/${pk}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': tokenstr
+      })
     });
-    return this.http.get<any>(`${this.URL}/member/user/${user.pk}`, {headers: headers} )
   }
 
   setUser(user: any): void {

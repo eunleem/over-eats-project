@@ -97,6 +97,16 @@ export class SearchService {
     });
   }
 
+  getOrderByID(token, id): Observable<any> {
+    const tokenstr = `token ${token}`;
+    return this.http.get<Order>(`${this.URL}/order/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': tokenstr
+      })
+    });
+  }
+
   getPrepareOrder(token): Observable<any> {
     const tokenstr = `token ${token}`;
     return this.http.get<any>(`${this.URL}/order/list/prepare?page_size=5`, {
@@ -108,6 +118,17 @@ export class SearchService {
   }
 
   getPastOrder(token): Observable<any> {
+    const tokenstr = `token ${token}`;
+    return this.http.get<any>(`${this.URL}/order/list/past?page_size=20`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': tokenstr
+      })
+    });
+  }
+
+  // TODOS: url fix
+  getOrder(token, id): Observable<any> {
     const tokenstr = `token ${token}`;
     return this.http.get<any>(`${this.URL}/order/list/past?page_size=20`, {
       headers: new HttpHeaders({
