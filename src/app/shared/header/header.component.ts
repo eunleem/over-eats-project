@@ -33,9 +33,6 @@ export class HeaderComponent implements OnInit {
         this.thisUrl = data.urlAfterRedirects;
       }
     });
-    if (this.auth.isAuthenticated()) {
-      this.user = this.auth.getUser();
-    }
   }
 
   ngOnInit() {
@@ -43,10 +40,14 @@ export class HeaderComponent implements OnInit {
     this.cartSubscription = this.cart.subscribe(cart => {
       this.itemCount = cart.items.map(i => i.quantity).reduce((prev, current) => prev + current, 0);
     });
+    if (this.auth.isAuthenticated()) {
+      this.user = this.auth.getUser();
+    }
   }
 
   connectUser() {
-    this.router.navigate(['/user', `${this.user.pk}`]);
+    const pk = this.auth.getUser().pk;
+    this.router.navigate(['user', `${pk}`]);
   }
 
   signout() {

@@ -25,10 +25,10 @@ import { FormBuilder, FormGroup, Validator, Validators, NgForm } from '@angular/
           <span class="error" *ngIf="username.errors.pattern">
             이메일 형식에 맞게 입력해 주세요.
           </span>
-          <span class="error" *ngIf="error">
+          </ng-container>
+          <span class="error" *ngIf="error == true">
             정보가 틀렸습니다.
           </span>
-        </ng-container>
       </div>
       <div class="form-group">
         <label>
@@ -177,7 +177,6 @@ export class AuthFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
       this.submitted.emit(this.form);
     }
   }

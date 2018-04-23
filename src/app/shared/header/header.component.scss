@@ -127,6 +127,7 @@ button {
     text-align: left;
     padding-left: 20px;
     line-height: 40px;
+    cursor: pointer;
 
     &:hover {
       background: $uber-green-hover;

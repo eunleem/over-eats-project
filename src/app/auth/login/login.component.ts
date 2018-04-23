@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
   template: `
     <div class="centered">
         <app-auth-form
-          [error]="error"
+          [error]="loginError"
           (submitted)="loginUser($event)" #authForm>
           <h1 class="form-title">로그인하기</h1>
           <p class="form-sub">이메일 계정으로
@@ -33,7 +33,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   message: string;
-  error: boolean;
+  loginError: boolean;
 
 
   constructor(
@@ -56,9 +56,9 @@ export class LoginComponent implements OnInit {
           console.log(this.auth.isAuthenticated());
           this.router.navigate(['home']);
         },
-        ( error ) => {
+        ( {error} ) => {
           console.log('error', error);
-          this.error = true;
+          this.loginError = true;
         }
       );
   }
