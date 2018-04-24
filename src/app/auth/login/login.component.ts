@@ -6,6 +6,7 @@ import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
+  styleUrls: ['./login.component.scss'],
   template: `
     <div class="centered">
         <app-auth-form

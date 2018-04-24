@@ -6,6 +6,7 @@ import { AuthFormComponent } from '../shared/auth-form/auth-form.component';
 
 @Component({
   selector: 'app-signup',
+  styleUrls: ['../login/login.component.scss'],
   template: `
     <div class="centered signup">
         <app-auth-form
@@ -43,13 +44,12 @@ export class SignupComponent implements OnInit {
   ngOnInit() {}
 
   signupUser(event: FormGroup) {
-    console.log(event.value);
     this.auth.signup(event.value)
       .subscribe(
         () => {
-          console.log('sign up');
+          const pk = this.auth.getUser().pk;
           this.auth.signin(event.value)
-            .subscribe(() => this.router.navigate(['user']));
+            .subscribe(() => this.router.navigate(['user', '${pk}']));
         },
         ( {error} ) => {
           console.log('sign up error', error);

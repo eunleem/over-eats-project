@@ -100,7 +100,7 @@ export class AuthService {
 
   updateUser(user, pk, token) {
     const tokenstr = `token ${token}`;
-    return this.http.put<User>(`${this.URL}/member/user/${pk}`, user , {
+    return this.http.put<User>(`${this.URL}/member/user/${pk}`, {user} , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': tokenstr
