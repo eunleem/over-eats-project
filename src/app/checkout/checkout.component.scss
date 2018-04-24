@@ -35,6 +35,11 @@
   }
 }
 
+.fa-clock {
+  color: $grey;
+  margin-right: 5px;
+}
+
 .form-title {
   font-size: 1.6em;
   margin: 0;
@@ -116,34 +121,90 @@
   }
 }
 
+
+.modal {
+  width: 30%;
+  height: 420px;
+  padding: 30px;
+  .button {
+    margin-top: 20px;
+  }
+}
+
 .group3 {
   .input-group {
     display: flex;
   }
-  label {
-    display: flex;
-  }
+
   input {
     margin: 10px;
     text-align: center;
     margin: 10px;
     text-align: left;
-    padding: 0 20px;
+    padding: 0 10px;
     letter-spacing: 6px;
+    position: relative;
   }
+
   .selector-group {
-    height: 120px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 }
 
+.error {
+  position: absolute;
+  top: 50px;
+
+  small {
+  padding: 0 4px;
+  font-size: 0.8em;
+  }
+}
+
+.card-text {
+  padding-left: 10px;
+  letter-spacing: 1px;
+
+  .fa-credit-card {
+    // padding-right: 10px;
+    color: $grey;
+  }
+}
+
+.row {
+  width: 100%;
+  margin: 20px 0;
+
+  .input-name {
+    padding-left: 10px;
+  }
+  label[for="num"] {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+.additional-group {
+  display: flex;
+  label {
+    position: relative;
+    width: 140px;
+    margin-right: 20px;
+  }
+}
 // cart
 .cart-group {
   margin-top: 80px;
   min-width: 360px;
 
   @media only screen and (min-width: $large) {
-    width: 380px;
-    min-width: 380px;
+    width: 460px;
+    min-width: 460px;
   }
 }
 

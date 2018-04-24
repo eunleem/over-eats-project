@@ -14,3 +14,31 @@ $border: 2px;
 $m-large: 1024px;
 $large: 1200px;
 $medium: 640px;
+
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1)
+  }
+}
+
+@keyframes errorIn {
+  0% {
+    transform: translateX(-2px);
+  }
+  100%{
+    transform: translateX(2px);
+  }
+}
