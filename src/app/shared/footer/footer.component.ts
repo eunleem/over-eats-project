@@ -44,7 +44,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
             </ul>
           </div>
         </div>
-        <div class="news constraint">
+        <div class="news">
           <h3>궁금하신 점이 있다면 이메일을 보내주세요!</h3>
           <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="formGroup">

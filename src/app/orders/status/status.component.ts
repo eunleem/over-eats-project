@@ -30,7 +30,6 @@ export class StatusComponent implements OnInit {
   markers: Imarker[];
   status = ['준비중', '조리중', '배달중', '배달완료', '주문완료', '주문취소'];
   selectedStatus: string;
-  dir;
 
   mapClicked($event: MouseEvent) {
     this.markers.push({
@@ -64,10 +63,6 @@ export class StatusComponent implements OnInit {
                 lat: data.delivery_lat, lng: data.delivery_lng
               };
               this.setMarker(this.geometry, this.deliveryGeometry);
-              this.dir = {
-                origin: {lat: this.geometry.latitude, lng: this.geometry.longtitude},
-                destination: this.deliveryGeometry
-              };
               this.selectedStatus = data.order_status;
             });
         });

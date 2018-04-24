@@ -47,13 +47,11 @@ export class MenuListComponent implements OnInit {
             .subscribe(data => {
               this.restaurantInfo = data;
               this.selectedRes = data;
-              console.log('restaurant info', this.restaurantInfo);
             });
         this.searchService.getProducts(params.id)
           .subscribe((data: any) => {
             this.products = data;
             this.categories = data.map(item => item.title);
-            console.log(data);
           });
         });
   }

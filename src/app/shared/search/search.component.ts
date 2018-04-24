@@ -87,8 +87,9 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.addresses = results.result;
         this.isShow = false;
         console.log('result', this.addresses);
-      }, error => {
+      }, (error) => {
         this.isShow = false;
+        this.terms = '';
       });
   }
 
