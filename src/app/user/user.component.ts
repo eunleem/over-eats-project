@@ -46,7 +46,7 @@ import { ActivatedRoute } from '@angular/router';
           <div class="first-name"> 이름
             <input type="text"
             formControlName="first_name">
-            <ng-container>
+            <ng-container *ngIf="firstName.invalid && (firstName.touched || firstName.dirty)">
               <span class="error" *ngIf="firstName.errors.required">
                 이름을 입력해 주세요.
               </span>
@@ -59,9 +59,14 @@ import { ActivatedRoute } from '@angular/router';
         <div class="phone-number user">휴대전화 번호
           <input type="text"
             formControlName="phone_number">
-            <span class="error" *ngIf="phoneNumber.errors.required">
-            전화번호를 입력해 주세요.
-          </span>
+             <ng-container *ngIf="phoneNumber.invalid && (phoneNumber.touched || phoneNumber.dirty)">
+              <span class="error" *ngIf="phoneNumber.errors.required">
+                전화번호를 입력해 주세요.
+              </span>
+              <span class="error" *ngIf="phoneNumber.errors.pattern">
+                숫자를 입력하세요.
+              </span>
+            </ng-container>
         </div>
 
       </div>
