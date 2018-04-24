@@ -119,12 +119,11 @@ export class RestaurantsComponent implements OnInit {
     return this.cartService.selectedRestaurant;
   }
   set selectedRes(res) {
-    console.log('res', res);
     this.cartService.selectedRestaurant = res;
   }
+
   selectedRestaurant(restaurant) {
     this.selectedRes = restaurant;
-    console.log('selec', this.selectedRes);
     this.router.navigate(['/restaurant', `${restaurant.uuid}`]);
   }
 

@@ -7,6 +7,7 @@ import { CartModule } from '../cart/cart.module';
 import { SelectorModule } from '../cart/selector/selector.module';
 import { SharedModule } from '../auth/shared/shared.module';
 import { PipeModule } from '../pipe/pipe.module';
+import { ScrollToModule } from '../directives/scrollTo';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { PipeModule } from '../pipe/pipe.module';
     CartModule,
     SelectorModule,
     SharedModule,
-    PipeModule.forRoot()
+    PipeModule.forRoot(),
+    ScrollToModule.forRoot()
   ],
   declarations: [
     MenuListComponent,

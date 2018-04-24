@@ -7,30 +7,44 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   template: `
     <footer>
       <div class="constraint footer-content">
-        <div class="name">Participants Github</div>
         <div class="participants-container">
+          <div class="footer-title">
+            OverEats
+          </div>
           <div>
             <ul>
               <li class="learn">OverEats</li>
-              <a href="https://github.com/FastCampusTeamTwo"><li>Project Github</li></a>
+              <li><a href="https://github.com/FastCampusTeamTwo">Github</a></li>
+              <li>about</li>
+              <li>blog</li>
+              <li>press</li>
             </ul>
           </div>
           <div>
             <ul>
               <li class="learn">Frontend</li>
-              <a href="https://github.com/yogicat"><li>Dahe Oh</li></a>
-              <a href="https://github.com/bluelion2"><li>Seunghun Kang</li></a>
+              <li><a href="https://github.com/yogicat">Dahe Oh</a></li>
+              <li><a href="https://github.com/bluelion2">Seunghun Kang</a></li>
             </ul>
           </div>
           <div>
             <ul>
-              <li class="learn">Backend </li>
-              <a href="https://github.com/archomai"><li>Seungri Cho</li></a>
-              <a href="https://github.com/callorange"><li>JeongYeob Song</li></a>
+              <li class="learn">Backend</li>
+              <li><a href="https://github.com/archomai">Seungri Cho</a></li>
+              <li><a href="https://github.com/callorange">Jeongyeob Song</a></li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="learn">Follow us</li>
+              <li>instagram</li>
+              <li>twitter</li>
+              <li>snapchat</li>
+              <li>facebook</li>
             </ul>
           </div>
         </div>
-        <div class="news constraint">
+        <div class="news">
           <h3>궁금하신 점이 있다면 이메일을 보내주세요!</h3>
           <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="formGroup">

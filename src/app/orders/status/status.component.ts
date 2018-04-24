@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 import { SearchService } from '../../core/search.service';
 import { AuthService } from '../../auth/services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 interface Imarker {
@@ -21,16 +22,14 @@ export class StatusComponent implements OnInit {
 
   // google maps zoom level
   zoom = 16;
-  token;
-  orderList;
+  token: string;
+  id: number;
   geometry;
   deliveryGeometry;
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
   markers: Imarker[];
-
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`);
-  }
+  status = ['준비중', '조리중', '배달중', '배달완료', '주문완료', '주문취소'];
+  selectedStatus: string;
 
   mapClicked($event: MouseEvent) {
     this.markers.push({
@@ -46,23 +45,27 @@ export class StatusComponent implements OnInit {
 
   constructor(
     private searchService: SearchService,
-    private auth: AuthService
+    private auth: AuthService,
+    private activateRoute: ActivatedRoute
   ) {
     this.token = this.auth.getToken();
   }
 
   ngOnInit() {
     if (this.auth.isAuthenticated()) {
-      this.searchService.getPrepareOrder(this.token)
-        .subscribe(data => {
-          this.geometry = data.orders[0].order_restaurant.position;
-          this.deliveryGeometry = {
-            lat: data.orders[0].delivery_lat, lng: data.orders[0].delivery_lng
-          };
-          this.setMarker(this.geometry, this.deliveryGeometry);
-          console.log(this.geometry, this.deliveryGeometry);
-        },
-          (err) => console.log('error occured'));
+      this.activateRoute
+        .params.subscribe(params => {
+          this.id = params.id;
+          this.searchService.getOrderByID(this.token, this.id)
+            .subscribe(data => {
+              this.geometry = data.order_restaurant.position;
+              this.deliveryGeometry = {
+                lat: data.delivery_lat, lng: data.delivery_lng
+              };
+              this.setMarker(this.geometry, this.deliveryGeometry);
+              this.selectedStatus = data.order_status;
+            });
+        });
     }
   }
 

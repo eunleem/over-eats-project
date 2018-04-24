@@ -1,31 +1,5 @@
 @import '../../../sass/_variables';
 
-@keyframes show {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes pop {
-  from {
-    transform: scale(0)
-  }
-  to {
-    transform: scale(1)
-  }
-}
-
-@keyframes errorIn {
-  0% {
-    transform: translateX(-2px);
-  }
-  100%{
-    transform: translateX(2px);
-  }
-}
 
 .warning-modal-background {
   animation: show 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);

@@ -16,7 +16,7 @@ import { DetailComponent } from './detail/detail.component';
     MomentModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCNB8ZRuDznOg8uoMyn1nqkCqIWneUup5A',
-    })
+    }),
   ],
   declarations: [
     OrdersComponent,

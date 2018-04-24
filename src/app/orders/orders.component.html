@@ -1,6 +1,13 @@
 <div class="detail-background" *ngIf="!hide">
   <div class="detail-modal">
-    <p>{{ list.delivery_address }}</p>
+    <p>배달 주소<em>{{list.delivery_address}}</em></p>
+    <p>배달 주소<em>{{list.delivery_address_detail}}</em></p>
+    <p>배달시 요청 사항<em>{{list.delivery_comment}}</em></p>
+    <p>레스토랑<em>{{list.order_restaurant.title}}</em></p>
+    <p>주문 아이템<em *ngFor="let item of list.order_items">{{item.title}}</em></p>
+    <p>주문 상태<em>{{list.order_status}}</em></p>
+    <p>주문 가격<em>{{list.price_total}}</em></p>
+    <p>결제 방법<em>{{list.payment_method}}</em></p>
     <button class="button uber" (click)="hide = true">닫기</button>
   </div>
 </div>
@@ -18,7 +25,7 @@
       *ngFor="let list of (orderList.orders | orderFilter: selectedNavItem)">
       <div class="image" [ngStyle]="{'background-image':'url('+ list.order_restaurant.logo +')'}"></div>
       <div class="ordercontents">
-        <p>주문 레스토랑 <em><a routerLink="/status">{{ list.order_restaurant.title | korean }}</a></em></p>
+        <p>주문 레스토랑 <em><a [routerLink]="['/restaurant', list.order_restaurant.uuid]">{{ list.order_restaurant.title | korean }}</a></em></p>
         <p>주문 일시 <em>{{ list.order_create_at | amLocal:'ko' | amDateFormat: 'YYYY-MM-DD HH:mm' }}</em></p>
         <p>결제 금액 <em>{{ list.price_total | currency:'KRW' : 'symbol' : '1.0'}}</em></p>
         <p>배송지 <em>{{ list.delivery_address }}</em></p>

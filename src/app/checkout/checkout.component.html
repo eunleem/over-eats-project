@@ -5,7 +5,7 @@
       <label>
         <h3 class="form-title">로그인</h3>
         <div class="selector-group">
-          <span>회원만 이용 가능합니다.</span>
+          <span>오버이츠는 처음이신가요? 등록은 잠깐이면 끝납니다.이미 사용 중인 경우 해당 계정으로 로그인하세요.</span>
           <div class="button-group">
             <button class="button">
               <a routerLink="/login">로그인</a>
@@ -25,8 +25,8 @@
           <div class="selector-group"  *ngIf="this.isAuth">
             <span>배달 시간을 선택해 주세요</span>
             <div class="selectors">
-              <span>ASAP 최대한 빨리</span>
-              <button class="button uber small">수정하기</button>
+              <span><i class="far fa-clock"></i>최대한 빨리</span>
+              <button class="uber small">예약</button>
             </div>
           </div>
         </label>
@@ -68,25 +68,62 @@
       <div class="form-group group3" formGroupName="payment">
           <h3 class="form-title">3. 결제</h3>
           <div class="selector-group" *ngIf="this.isAuth">
-            <label for="num">
-              <input
-                formControlName="num"
-                name="num"
-                class="input"
-                type="text"
-                [textMask]="{mask: mask, guide: false, keepCharPositions: false}"
-                [(ngModel)]="cardNum"
-                required
-                minlength="19"
-                placeholder="0000-0000-0000-0000">
-            </label>
-            <div class="error" *ngIf="num.invalid && (num.dirty || num.touched)">
-              <small *ngIf="num.errors.required">
-                카드 번호는 필수 입력 사항입니다.
-              </small>
-              <small *ngIf="num.errors.minlength">
-                카드 번호를 전부 입력 해 주세요.
-              </small>
+            <button class="button uber" (click)="isOpen = true">카드 정보</button>
+            <p class="card-text" *ngIf="cardNum">
+              <i class="far fa-credit-card"></i>
+              {{ cardNum }}
+            </p>
+            <div class="modal-bg" *ngIf="isOpen == true">
+              <div class="modal">
+                <button class="closeButton" (click)="isOpen = !isOpen">
+                  <svg viewBox="0 0 64 64" width="20px" height="20px" class="closeButtonBase_ b4 bw a7z u8 kz l0 a80 a81 a82 a83 a84 closeButtonLight_ a3 ds">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M34.828 32l18.385 18.385-2.828 2.828L32 34.83 13.615 53.213l-2.828-2.828L29.172 32 10.787 13.616l2.828-2.829L32 29.172l18.385-18.385 2.828 2.829L34.828 32z">
+                    </path>
+                  </svg>
+                </button>
+                <h3>카드 정보 입력</h3>
+              <div class="row">
+                <label for="num">
+                  <span class="input-name">카드번호</span>
+                  <input
+                    formControlName="num"
+                    name="num"
+                    class="input"
+                    type="text"
+                    [textMask]="{mask: mask, guide: false, keepCharPositions: false}"
+                    required
+                    minlength="19"
+                    placeholder="0000-0000-0000-0000">
+                    <span class="error" *ngIf="num.invalid && (num.dirty || num.touched)">
+                      <small *ngIf="num.errors.required">
+                        카드 번호는 필수 입력 사항입니다.
+                      </small>
+                      <small *ngIf="num.errors.minlength">
+                        카드 번호를 전부 입력 해 주세요.
+                      </small>
+                    </span>
+                </label>
+              </div>
+              <div class="row additional-group">
+                <label for="cvc">
+                  <span class="input-name">CVC</span>
+                  <input
+                    class="input"
+                    [textMask]="{mask: maskNumber, guide: false}"
+                    type="text"
+                    placeholder="CVC">
+                </label>
+                <label for="date">
+                  <span class="input-name">유효기간</span>
+                  <input class="input" 
+                    [textMask]="{mask: maskDate, guide: true}" 
+                    type="text" name="date" placeholder="01/2018">
+                </label>
+              </div>
+              <button 
+                (click)="getCardNum()"
+                class="button button-fluid uber">입력하기</button>
+            </div>
             </div>
           </div>
       </div>
@@ -103,8 +140,8 @@
         </a>
         <button 
         (click)="goCheckout()"
-        [class.disabled]="!auth.isAuthenticated()"
-        [disabled]="!auth.isAuthenticated()"
+        [class.disabled]="!auth.isAuthenticated() || !this.form.valid"
+        [disabled]="!auth.isAuthenticated() || !this.form.valid"
         class="button uber button-fluid">주문하기</button>
       </div>
     </app-cart>
