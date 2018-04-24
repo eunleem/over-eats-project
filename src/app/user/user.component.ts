@@ -3,7 +3,7 @@ import { AuthService } from '../auth/services/auth.service';
 import { User } from '../auth/user';
 import { environment } from '../../environments/environment';
 
-import { FormBuilder, FormGroup, Validators, controlNameBinding } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-user',
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   <form [formGroup]="userform" (ngSubmit)="saveUser()" novalidate *ngIf="user">
     <div class="user-container">
       <div class="user-picture">
-        <p><img [src]="user.img_profile"></p>
+        <img [src]="user.img_profile">
       </div>
       <div class="user-info">
         <p> 기본 정보 </p>
@@ -35,12 +35,12 @@ import { ActivatedRoute } from '@angular/router';
             <input type="text"
             formControlName="last_name">
             <ng-container *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
-            <span class="error" *ngIf="lastName.errors.required">
-              성을 입력해 주세요.
-            </span>
-            <span class="error" *ngIf="lastName.errors.pattern">
-              영문을 입력해주세요.
-            </span>
+              <span class="error" *ngIf="lastName.errors.required">
+                성을 입력해 주세요.
+              </span>
+              <span class="error" *ngIf="lastName.errors.pattern">
+                영문을 입력해주세요.
+              </span>
             </ng-container>
           </div>
           <div class="first-name"> 이름
@@ -75,10 +75,6 @@ import { ActivatedRoute } from '@angular/router';
   `
 })
 export class UserComponent implements OnInit {
-  // ------ TODO ----
-  // user내용 변경되었을때반 저장 버튼 활성화
-  // validator 정확하게 처리
-  // 이메일 유저네임 동일한건지 개별적인건지 확인 하고 변경할 수 있게 할건지 결정할것
 
   user: any;
   userform: FormGroup;
