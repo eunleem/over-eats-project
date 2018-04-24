@@ -41,7 +41,7 @@ interface SearchResult {
         [(ngModel)]="terms"
         (ngModelChange)="searchAddress(terms)"
         (keyup)="onKeyDown($event)"
-        placeholder="배달 주소를 입력하세요">
+        placeholder="배달 주소를 입력하세요" autofocus>
       <ul
         *ngIf="addresses"
         class="search-list">
@@ -103,7 +103,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   searchAddress(terms) {
     const filteredString = terms.replace(/[a-z]/gi, '');
-    console.log(filteredString);
     if (filteredString && filteredString.length > 1) {
       this.searchTerm$.next(terms);
     }

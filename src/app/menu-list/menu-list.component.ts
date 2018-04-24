@@ -35,7 +35,7 @@ export class MenuListComponent implements OnInit {
     private searchService: SearchService,
     private cartService: CartService,
     private activateRoute: ActivatedRoute,
-    private el: ElementRef
+    private el: ElementRef,
   ) { }
 
 

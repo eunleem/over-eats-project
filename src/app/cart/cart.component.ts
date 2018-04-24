@@ -49,6 +49,7 @@ interface ICartItemWithProduct extends CartItem {
             </span>
         </li>
     </ul>
+    <ng-content select=".input-group"></ng-content>
     <div class="price-group">
       <p *ngIf="itemCount">
         <span>총 {{ itemCount }} 개 아이템</span>

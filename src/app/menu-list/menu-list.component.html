@@ -26,10 +26,9 @@
   <ul class="constraint">
     <li
       *ngFor="let category of categories; let i = index"
+      [scrollTo]="'#a'+i" [scrollDuration]="1000" [scrollOffset]="-140"
       class="category-item">
-      <a
-      (click)="navigateCategory(category,i)" 
-      [class.active]="category.active" >{{ category | korean }}</a></li>
+      <a [class.active]="category.active" >{{ category | korean }}</a></li>
   </ul>
 </div>
 <div class="menu-wrapper constraint">
@@ -37,8 +36,7 @@
     <div 
       class="group" 
       *ngFor="let group of products; let i = index"
-      #div
-      [id]="i">
+      [id]="'a'+i">
       <h2>{{ group.title | korean }}</h2>
       <ul class="menu-group">
         <li 

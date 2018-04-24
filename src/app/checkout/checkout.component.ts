@@ -24,12 +24,15 @@ export class CheckoutComponent implements OnInit {
   order: ShoppingCart;
 
   restaurantInfo;
-  cardNum = '';
   mask = [/[0-9]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  maskNumber = [/[0-9]/, /\d/, /\d/];
+  maskDate = [/[0-9]/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
   image;
   address;
   token: string;
   isAuth: boolean;
+  isOpen = false;
+  cardNum: string;
 
   constructor(
     private fb: FormBuilder,
@@ -79,6 +82,11 @@ export class CheckoutComponent implements OnInit {
 
   get num() { return this.form.get('payment.num'); }
 
+  getCardNum() {
+    this.isOpen = false;
+    this.cardNum = this.num.value;
+  }
+
   generateOrder(order) {
     const items = order.items.map(item => {
       return Object.assign({}, { item: item.product.uuid }, {comment: item.comment}, {cnt: item.quantity});
@@ -89,7 +97,7 @@ export class CheckoutComponent implements OnInit {
   goCheckout() {
     const order = this.generateOrder(this.order);
     this.orderForm = Object.assign({}, this.orderForm, { order: order});
-    if (this.auth.isAuthenticated()) {
+    if (this.auth.isAuthenticated() && this.form.valid) {
       this.searchService.sendOrder(this.orderForm, this.token)
         .subscribe(
           (data) => {
@@ -100,8 +108,7 @@ export class CheckoutComponent implements OnInit {
         , (error) => console.log('error!!')
       );
     } else {
-      alert('you have to login first');
-      this.router.navigate(['login']);
+      alert('error');
     }
   }
 }

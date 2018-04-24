@@ -52,7 +52,7 @@ export class OrdersComponent implements OnInit {
   showDetail(list) {
     this.list = list;
     this.hide = false;
-    console.log('show order');
+    console.log('show order', list);
   }
 
   cancelOrder(id) {
