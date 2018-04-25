@@ -18,14 +18,7 @@ export class MenuListComponent implements OnInit {
   restaurantInfo;
   onClick = false;
   restaurantID: string;
-
-  get selectedRes() {
-    return this.cartService.selectedRestaurant;
-  }
-
-  set selectedRes(res) {
-    this.cartService.selectedRestaurant = res;
-  }
+  today = new Date().getDay();
 
   set selectedProduct(item) {
     this.cartService.selectedProduct = item;
@@ -46,7 +39,7 @@ export class MenuListComponent implements OnInit {
           this.searchService.getRestaurant(params.id)
             .subscribe(data => {
               this.restaurantInfo = data;
-              this.selectedRes = data;
+              console.log(this.restaurantInfo);
             });
         this.searchService.getProducts(params.id)
           .subscribe((data: any) => {
@@ -54,6 +47,14 @@ export class MenuListComponent implements OnInit {
             this.categories = data.map(item => item.title);
           });
         });
+  }
+
+  getOpenHour(arr) {
+    if (this.today > 5) { this.today = 0; }
+    const time = arr.map(item => item.end_time)[this.today];
+    const hour = Math.floor(time / 60);
+    const min = Math.floor(time % 60);
+    return `${hour} : ${min === 0 ? '00' : min}`;
   }
 
   clickItem(item: Product) {

@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AuthFormComponent } from '../shared/auth-form/auth-form.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
@@ -38,7 +39,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit() {}
@@ -47,9 +49,13 @@ export class SignupComponent implements OnInit {
     this.auth.signup(event.value)
       .subscribe(
         () => {
-          const pk = this.auth.getUser().pk;
           this.auth.signin(event.value)
-            .subscribe(() => this.router.navigate(['user', '${pk}']));
+          .subscribe(() => {
+              // const pk = this.auth.getUser().pk;
+              // go to user page
+              // this.router.navigate(['user', '${pk}']);
+              this.location.back();
+            });
         },
         ( {error} ) => {
           console.log('sign up error', error);

@@ -39,20 +39,13 @@ export class OrdersComponent implements OnInit {
     this.searchService.getAllOrder(this.token)
       .subscribe(data => {
         this.orderList = data;
-        console.log('prepare', data);
       },
         (err) => console.log('error occured'));
-    // this.searchService.getPastOrder(this.token)
-    //   .subscribe(data => {
-    //     this.pastOrderList = data;
-    //     console.log('past', data);
-    //   });
   }
 
   showDetail(list) {
     this.list = list;
     this.hide = false;
-    console.log('show order', list);
   }
 
   cancelOrder(id) {
@@ -60,7 +53,6 @@ export class OrdersComponent implements OnInit {
     const token = this.auth.getToken();
     this.searchService.cancelOrder(token, id)
       .subscribe(data => {
-        console.log(data);
         this.getLists();
       });
   }

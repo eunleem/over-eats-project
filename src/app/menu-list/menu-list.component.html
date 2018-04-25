@@ -16,6 +16,8 @@
           {{ tag.name }}
         </span>
       </div>
+      <p class="desc-text">{{ restaurantInfo.address.address1 }} | 영업시간 {{ getOpenHour(restaurantInfo.open_time) }}까지</p>
+      <p class="endore-text">{{ restaurantInfo.endorsement.text }} </p>
       <p class="cooking-time" *ngIf="restaurantInfo.eta_range">
         {{ restaurantInfo.eta_range.min }}분 ~ {{ restaurantInfo.eta_range.max }}분
       </p>
