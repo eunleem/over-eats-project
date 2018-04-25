@@ -1,3 +1,79 @@
-<p>
-  user works!
-</p>
+<div class="constraint">
+  <h2>기본 정보</h2>
+  <form [formGroup]="userform" (ngSubmit)="saveUser()" novalidate *ngIf="user">
+    <div class="user-container">
+      <div class="user-picture">
+        <img [src]="user.img_profile">
+      </div>
+      <div class="user-info">
+        <div class="user-name user">
+          <h3>아이디 <small>아이디는 바꿀 수 없습니다.</small></h3>
+          <input 
+            class="line-input disabled"
+            type="text"
+            formControlName="username"
+            disabled>
+        </div>
+        <div class="user-password user">
+          <h3>비밀번호</h3>
+          <input 
+            class="line-input"
+            type="password"
+            placeholder="영문,숫자로 5자 이상 입력하세요"
+            formControlName="password">
+          <ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
+            <span class="error" *ngIf="password.errors.required">
+              비밀번호를 입력해주세요.
+            </span>
+          </ng-container>
+        </div>
+        <div class="name user">
+          <div class="last-name">
+            <h3>성</h3>
+            <input class="line-input" type="text" formControlName="last_name">
+            <ng-container *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+              <span class="error" *ngIf="lastName.errors.required">
+                성을 입력해 주세요.
+              </span>
+              <span class="error" *ngIf="lastName.errors.pattern">
+                영문을 입력해주세요.
+              </span>
+            </ng-container>
+          </div>
+          <div class="first-name">
+            <h3>이름</h3>
+            <input class="line-input" type="text" formControlName="first_name">
+            <ng-container *ngIf="firstName.invalid && (firstName.touched || firstName.dirty)">
+              <span class="error" *ngIf="firstName.errors.required">
+                이름을 입력해 주세요.
+              </span>
+              <span class="error" *ngIf="firstName.errors.pattern">
+                영문을 입력해 주세요.
+              </span>
+            </ng-container>
+          </div>
+        </div>
+        <div class="phone-number user">
+          <h3>휴대전화번호</h3>
+          <input
+            class="line-input"
+            type="text"
+            [textMask]="{mask: mask, guide: false, keepCharPosition: true}"
+            formControlName="phone_number">
+          <ng-container *ngIf="phoneNumber.invalid && (phoneNumber.touched || phoneNumber.dirty)">
+            <span class="error" *ngIf="phoneNumber.errors.required">
+              전화번호를 입력해 주세요.
+            </span>
+            <span class="error" *ngIf="phoneNumber.errors.minlength">
+              10자 이상이어야 합니다.
+            </span>
+          </ng-container>
+        </div>
+        <div class="save" *ngIf="this.userform.dirty">
+          <button class="button button-fluid" type="submit"> 저장하기 </button>
+        </div>
+      </div>
+    </div>
+    
+  </form>
+</div>
