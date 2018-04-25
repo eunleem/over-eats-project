@@ -6,9 +6,9 @@
   <h3>주문 가능한 지역을 더 알아보세요!</h3>
   <section>
     <a
-      [routerLink]="['/restaurants', 37.51723630000001, 127.0473248]"
-      *ngFor="let location of ['강남역', '도곡동', '반포역', '신사동', '압구정동', '청담동', '한남동', '가로수길', '논현동', '이태원', '한강진역', '압구정 로데오']" 
-      class="select">{{ location }} <i class="fas fa-angle-right"></i></a>
+      *ngFor="let location of ['강남역', '도곡동', '반포역', '신사동', '압구정동', '청담동', '한남동', '가로수길', '논현동', '이태원', '한강진역', '압구정 로데오']"
+      class="select"
+      (click)="getLocation(location)">{{ location }} <i class="fas fa-angle-right"></i></a>
   </section>
 </div>
 <app-footer></app-footer>
