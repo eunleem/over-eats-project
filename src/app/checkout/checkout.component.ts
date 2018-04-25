@@ -32,6 +32,7 @@ export class CheckoutComponent implements OnInit {
   token: string;
   isAuth: boolean;
   isOpen = false;
+  isDateOpen = false;
   cardNum: string;
 
   constructor(
