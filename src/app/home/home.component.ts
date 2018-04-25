@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from '../core/cart.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SearchService } from '../core/search.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   lng: string;
   constructor(
     private http: HttpClient,
-    public router: Router
+    public router: Router,
+    private searchService: SearchService
     // private cartService: CartService
   ) { }
 
@@ -34,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.lat = (res.results[0].geometry.location.lat).toString();
       this.lng = (res.results[0].geometry.location.lng).toString();
       console.log('lat', this.lat, 'lng', this.lng);
+      // this.searchService.saveAddress(address);
       this.router.navigate(['/restaurants', `${this.lat}`, `${this.lng}`]);
       }
     );

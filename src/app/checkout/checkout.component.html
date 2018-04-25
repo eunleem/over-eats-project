@@ -1,4 +1,6 @@
 <div class="constraint">
+  <app-preloader *ngIf="isLoading">
+  </app-preloader>
   <section class="checkout">
     <h2 class="page-title">체크아웃</h2>
     <div class="form-group group0" *ngIf="!this.isAuth">

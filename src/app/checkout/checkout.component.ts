@@ -9,6 +9,8 @@ import { SearchService } from '../core/search.service';
 import { AuthService } from '../auth/services/auth.service';
 import { Router } from '@angular/router';
 
+import 'rxjs/add/operator/map';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -33,6 +35,7 @@ export class CheckoutComponent implements OnInit {
   isAuth: boolean;
   isOpen = false;
   cardNum: string;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -43,6 +46,7 @@ export class CheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.isAuth = this.auth.isAuthenticated();
     this.token = this.auth.getToken();
     this.address = this.searchService.getAddress();
@@ -51,6 +55,7 @@ export class CheckoutComponent implements OnInit {
     this.cart.subscribe(data => {
       this.order = data;
       this.restaurantInfo = data.restaurant;
+      this.isLoading = false;
     });
     this.form = this.fb.group({
       delivery: this.fb.group({
@@ -95,18 +100,17 @@ export class CheckoutComponent implements OnInit {
   }
 
   goCheckout() {
+    this.isLoading = true;
     const order = this.generateOrder(this.order);
     this.orderForm = Object.assign({}, this.orderForm, { order: order});
     if (this.auth.isAuthenticated() && this.form.valid) {
       this.searchService.sendOrder(this.orderForm, this.token)
-        .subscribe(
-          (data) => {
-            this.cartService.emptyCart();
-            this.router.navigate(['orders']);
-            console.log('order has been made', data);
-          }
-        , (error) => console.log('error!!')
-      );
+        .subscribe({ error: e => console.error(e) });
+        setTimeout(() => {
+        this.cartService.emptyCart();
+        this.router.navigate(['orders']);
+        this.isLoading = false;
+      }, 3000);
     } else {
       alert('error');
     }

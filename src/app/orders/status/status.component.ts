@@ -3,6 +3,7 @@ import { MouseEvent } from '@agm/core';
 import { SearchService } from '../../core/search.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 
 interface Imarker {
@@ -29,7 +30,8 @@ export class StatusComponent implements OnInit {
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
   markers: Imarker[];
   status = ['준비중', '조리중', '배달중', '배달완료', '주문완료', '주문취소'];
-  selectedStatus: string;
+  selectedStatus: Observable<string>;
+  interval;
 
   mapClicked($event: MouseEvent) {
     this.markers.push({
@@ -64,10 +66,20 @@ export class StatusComponent implements OnInit {
               };
               this.setMarker(this.geometry, this.deliveryGeometry);
               this.selectedStatus = data.order_status;
+              // this.getStatus(this.token, this.id);
             });
-        });
-    }
-  }
+          });
+        }
+      }
+
+
+    // getStatus(token, id) {
+    //   this.interval = setInterval(() => {
+    //     this.searchService.getOrderByID(this.token, this.id)
+    //       .filter(data => data.order_status)
+    //       .subscribe(data => this.selectedStatus);
+    //     }, 5000);
+    // }
 
 
   setMarker(geometry, deliveryGeometry) {

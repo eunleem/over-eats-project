@@ -19,8 +19,17 @@ body {
   }
 
   &.onMain {
-    width: 50px;
-    height: 55px;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 10;
+    background: #fafafaa8;
+  
+    .loader{
+      width: 30px;
+    }
   }
 }
 
@@ -37,15 +46,12 @@ body {
 }
 
 .onHeader {
+
   .loader{
     width: 18px;
   }
 }
-.onMain {
-  .loader{
-    width: 22px;
-  }
-}
+
 
 .circular {
   animation: rotate 2s linear infinite;

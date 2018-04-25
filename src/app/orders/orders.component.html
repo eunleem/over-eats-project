@@ -40,10 +40,10 @@
       <div class="button-group">
         <button class="button" (click)="showDetail(list)">영수증 보기</button>
         <button class="button" *ngIf="list.order_status === '준비중'" (click)="cancelOrder(list.id)"><a>주문 취소</a></button>
-        <button class="button uber" *ngIf="list.order_status === '준비중'">
+        <button class="button uber" *ngIf="list.order_status !== '주문취소'">
           <a [routerLink]="['/status', list.id]">{{ list.order_status }}</a>
         </button>
-        <button class="button dark" *ngIf="list.order_status !== '준비중'" [class.disabled]="true">
+        <button class="button dark" *ngIf="list.order_status === '주문취소'" [class.disabled]="true">
           {{ list.order_status }}
         </button>
       </div>

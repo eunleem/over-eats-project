@@ -17,6 +17,8 @@ export class OrdersComponent implements OnInit {
   hide = true;
   navItems = ['전체', '준비중', '주문취소', '완료'];
   selectedNavItem = '전체';
+  interval;
+  selectedStatus: string;
 
   constructor(
     private searchService: SearchService,
@@ -42,6 +44,15 @@ export class OrdersComponent implements OnInit {
       },
         (err) => console.log('error occured'));
   }
+
+  // getStatus(token) {
+  //   this.interval = setInterval(() => {
+  //     console.log(this.selectedStatus);
+  //     this.searchService.getAllOrder(this.token)
+  //       .filter(data => data.orderList.orders)
+  //       .subscribe(data => this.selectedStatus);
+  //   }, 3000);
+  // }
 
   showDetail(list) {
     this.list = list;

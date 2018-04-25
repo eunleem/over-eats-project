@@ -62,8 +62,8 @@ export class UserComponent implements OnInit {
     });
   }
   saveUser() {
-    this.userform.value.phone_number = this.userform.value.phone_number.replace(/ +/g, '');
     if (this.userform.valid) {
+      this.userform.value.phone_number = this.userform.value.phone_number.replace(/ +/g, '');
       this.auth.updateUser(this.userform.value, this.pk, this.token)
         .subscribe(data => console.log('update user', data));
     }
