@@ -1,10 +1,11 @@
 ![Logo of the project](./readme/logo.png)
 
-# OVER EATS &middot; [![Build Status](https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square)](https://travis-ci.org/npm/npm) [![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/npm) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/your/your-project/blob/master/LICENSE)
+# OVER EATS
+
 > 패스트캠퍼스 프론트앤드 스쿨 팀프로젝트
 
 Over Eats not Uber Eats!
-FDS : 오다혜 강승훈 나은해
+FDS : 오다혜 강승훈 
 
 ---
 
