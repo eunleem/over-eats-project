@@ -16,6 +16,8 @@ import { FormBuilder, FormGroup, Validator, Validators, NgForm } from '@angular/
             type="username"
             placeholder="이메일주소"
             autocomplete="email"
+            (blur)="isBlur = true"
+            (focus)="isBlur = false"
             formControlName="username">
         </label>
         <ng-container *ngIf="username.invalid && (username.dirty || username.touched)">
@@ -26,7 +28,7 @@ import { FormBuilder, FormGroup, Validator, Validators, NgForm } from '@angular/
             이메일 형식에 맞게 입력해 주세요.
           </span>
           </ng-container>
-          <span class="error" *ngIf="error == true">
+          <span class="error" *ngIf="isBlur && error == true">
             정보가 틀렸습니다.
           </span>
       </div>
@@ -123,6 +125,7 @@ export class AuthFormComponent implements OnInit {
   formValid: boolean;
   usernameExist: boolean;
   isshow = false;
+  isBlur: boolean;
 
   @Input()
   error: boolean;

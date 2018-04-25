@@ -8,7 +8,7 @@
           (keyup.enter)="search(value)"
           [(ngModel)]="value"
           placeholder="{{isClick ? '검색' : '레스토랑 또는 음식으로 검색'}}">
-        <div class="input-value" *ngIf= "value">검색할 값을 입력하세요.</div>
+        <div class="input-value" *ngIf= "value">값을 입력후 엔터를 누르세요</div>
         <button
           *ngIf="isClick == true"
           (click)="closeContainer()">
@@ -17,10 +17,10 @@
       </div>
     </div>
     <section *ngIf="isClick == true">
-      <div *ngIf="value?.length > 0">
+      <!-- <div *ngIf="value?.length > 0">
         <p>{{ value }}</p>
-      </div>
-      <div class="category-group" *ngIf="!value">
+      </div> -->
+      <div class="category-group">
         <div class="category-container">
           <h1 class="category-title">상위 카테고리</h1>
           <div class="category-list">
