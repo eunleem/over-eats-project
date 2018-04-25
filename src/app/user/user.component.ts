@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   template: `
   <div class="constraint">
   <form [formGroup]="userform" (ngSubmit)="saveUser()" novalidate *ngIf="user">
-    <div class="user-container">
+    <div class="user-container constraint">
       <div class="user-picture">
         <img [src]="user.img_profile">
       </div>
@@ -46,7 +46,7 @@ import { ActivatedRoute } from '@angular/router';
           <div class="first-name"> 이름
             <input type="text"
             formControlName="first_name">
-            <ng-container>
+            <ng-container *ngIf="firstName.invalid && (firstName.touched || firstName.dirty)">
               <span class="error" *ngIf="firstName.errors.required">
                 이름을 입력해 주세요.
               </span>
@@ -59,17 +59,20 @@ import { ActivatedRoute } from '@angular/router';
         <div class="phone-number user">휴대전화 번호
           <input type="text"
             formControlName="phone_number">
+          <ng-container *ngIf="phoneNumber.invalid && (phoneNumber.touched || phoneNumber.dirty)">
             <span class="error" *ngIf="phoneNumber.errors.required">
-            전화번호를 입력해 주세요.
-          </span>
+              전화번호를 입력해 주세요.
+            </span>
+            <span class="error" *ngIf="phoneNumber.errors.pattern">
+              숫자를 입력하세요.
+            </span>
+          </ng-container>
         </div>
-
       </div>
     </div>
     <div class="save" *ngIf="this.userform.dirty">
       <button type="submit"> 저장하기 </button>
     </div>
-    <pre>{{ this.userform.value | json}}</pre>
     </form>
   </div>
   `
@@ -113,7 +116,6 @@ export class UserComponent implements OnInit {
       first_name: [this.user.first_name, [
         Validators.required,
         Validators.pattern(/[a-zA-z]/),
-        Validators.minLength(1)
       ]],
       last_name: [this.user.last_name, [
         Validators.required,
@@ -132,27 +134,6 @@ export class UserComponent implements OnInit {
       .subscribe(data => console.log('update user', data));
     console.log(this.userform.value);
   }
-
-
-  // get passwordInvalid() {
-  //   const control = this.userform.get('password');
-  //   return control.hasError('required');
-  // }
-
-  // get firstNameInvalid() {
-  //   const control = this.userform.get('first_name')
-  //   return control.hasError('required');
-  // }
-
-  // get lastNameInvalid() {
-  //   const control = this.userform.get('last_name');
-  //   return control.hasError('required');
-  // }
-
-  // get phoneNumberInvalid() {
-  //   const control = this.userform.get('');
-  //   return control.hasError('required');
-  // }
 
   get password() {
     return this.userform.get('password');

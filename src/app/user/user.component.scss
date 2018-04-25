@@ -3,6 +3,11 @@
     .user-container {
         border: 1px solid black;
         display: flex;
+        min-height: 350px;
+    }
+
+    .user-picture {
+        padding-top: 14px;
     }
 
     .user-info {
