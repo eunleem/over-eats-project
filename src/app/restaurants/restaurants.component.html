@@ -53,7 +53,7 @@
   <div class="restaraunt-component-container" *ngIf="!isClick">
     <app-preloader
       *ngIf="isLoading"
-      [ngStyle]="{ 'top': '25%', 'left': '50%', 'position': 'absolute' }">
+      [onPage]="true">
     </app-preloader>
     <div class="restaraunt-container">
       <div class="main-container" *ngIf="restaurants">

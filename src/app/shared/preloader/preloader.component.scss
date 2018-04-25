@@ -18,7 +18,7 @@ body {
     height: 35px;
   }
 
-  &.onMain {
+  &.onPage {
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -29,6 +29,17 @@ body {
   
     .loader{
       width: 30px;
+    }
+  }
+
+  &.onMain {
+    width: 56px;
+    height: 56px;
+    top: 0;
+    left: 0;
+  
+    .loader{
+      width: 24px;
     }
   }
 }

@@ -72,6 +72,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   arrowKeyLocation = 0;
   searchTerm$ = new Subject<string>();
   addresses: any[];
+  onSearchBar = true;
 
   set addressResult(address) {
     this.searchService.addressResult = address;
