@@ -49,9 +49,9 @@ export class SignupComponent implements OnInit {
     this.auth.signup(event.value)
       .subscribe(
         () => {
-          const pk = this.auth.getUser().pk;
           this.auth.signin(event.value)
-            .subscribe(() => {
+          .subscribe(() => {
+              // const pk = this.auth.getUser().pk;
               // go to user page
               // this.router.navigate(['user', '${pk}']);
               this.location.back();
