@@ -30,7 +30,7 @@ export class StatusComponent implements OnInit {
   iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
   markers: Imarker[];
   status = ['준비중', '조리중', '배달중', '배달완료', '주문완료', '주문취소'];
-  selectedStatus: Observable<string>;
+  selectedStatus: string;
   interval;
 
   mapClicked($event: MouseEvent) {

@@ -86,7 +86,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private auth: AuthService,
+    public auth: AuthService,
     private cartService: CartService
   ) {
     this.router.events.subscribe(data => {
