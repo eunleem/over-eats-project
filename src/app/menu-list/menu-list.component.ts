@@ -20,6 +20,14 @@ export class MenuListComponent implements OnInit {
   restaurantID: string;
   today = new Date().getDay();
 
+  get selectedRes() {
+    return this.cartService.selectedRestaurant;
+  }
+
+  set selectedRes(res) {
+    this.cartService.selectedRestaurant = res;
+  }
+
   set selectedProduct(item) {
     this.cartService.selectedProduct = item;
   }
@@ -39,7 +47,7 @@ export class MenuListComponent implements OnInit {
           this.searchService.getRestaurant(params.id)
             .subscribe(data => {
               this.restaurantInfo = data;
-              console.log(this.restaurantInfo);
+              this.selectedRes = data;
             });
         this.searchService.getProducts(params.id)
           .subscribe((data: any) => {

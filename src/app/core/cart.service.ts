@@ -62,7 +62,6 @@ export class CartService {
     // this.calculateCart(cart);
     this.save(cart);
     this.dispatch(cart);
-    console.log('add to cart', cart);
   }
 
 

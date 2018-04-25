@@ -106,6 +106,10 @@ export class SelectorComponent implements OnInit {
     return this.cartService.selectedRestaurant;
   }
 
+  set selectedRes(res) {
+    this.cartService.selectedRestaurant = res;
+  }
+
   constructor(
     private cartService: CartService
   ) {}
@@ -119,7 +123,6 @@ export class SelectorComponent implements OnInit {
     this.cartService.get().subscribe(data => {
       this.cart = data;
     });
-    console.log('selected item is ', this.item);
   }
 
   increment() {
