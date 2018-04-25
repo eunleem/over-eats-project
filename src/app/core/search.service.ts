@@ -45,7 +45,7 @@ export class SearchService {
   }
   // 키워드 서치
   getRestaurantsByKeyword(geometry, search_text): Observable<any> {
-    console.log('getting restaurants by keyword from db', geometry, search_text);
+    console.log('getting restaurants by keyword from db');
     const {lat, lng} = geometry;
     return this.http.get(`${this.URL}/restaurant/?lat=${lat}&lng=${lng}&search_text=${search_text}`);
   }

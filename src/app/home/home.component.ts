@@ -26,20 +26,19 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   getLocation(location: string) {
-    this.http.get<any>('https://maps.googleapis.com/maps/api/geocode/json', {
-      params: {
-        address: location,
-        key: 'AIzaSyCWNHncRx3LgQURlXOHMkN_vbpQxZGqISU'
-      }
-    })
-    .subscribe((res) => {
-      this.lat = (res.results[0].geometry.location.lat).toString();
-      this.lng = (res.results[0].geometry.location.lng).toString();
-      console.log('lat', this.lat, 'lng', this.lng);
-      // this.searchService.saveAddress(address);
-      this.router.navigate(['/restaurants', `${this.lat}`, `${this.lng}`]);
-      }
-    );
+    // this.http.get<any>('https://maps.googleapis.com/maps/api/geocode/json', {
+    //   params: {
+    //     address: location,
+    //     key: 'AIzaSyCWNHncRx3LgQURlXOHMkN_vbpQxZGqISU'
+    //   }
+    // })
+    this.searchService.searchAddress(location)
+      .subscribe((res) => {
+        const { lat, lng } = res.result[0].geometry;
+        this.searchService.saveAddress(res.result[0]);
+        this.router.navigate(['/restaurants', `${lat}`, `${lng}`]);
+        }
+      );
   }
 
   ngOnDestroy() {

@@ -2,14 +2,14 @@
   <div class="detail-modal">
     <div class="detail-content">
       <h3>영수증</h3>
-      <p>배달 주소<em>{{list.delivery_address}}</em></p>
-      <p>배달 주소<em>{{list.delivery_address_detail}}</em></p>
-      <p>배달시 요청 사항<em>{{list.delivery_comment}}</em></p>
-      <p>레스토랑<em>{{list.order_restaurant.title}}</em></p>
-      <p>주문 아이템<em *ngFor="let item of list.order_items">{{item.title}}</em></p>
-      <p>주문 상태<em>{{list.order_status}}</em></p>
-      <p>주문 가격<em>{{list.price_total}}</em></p>
-      <p>결제 방법<em>{{list.payment_method}}</em></p>
+      <p><span>배달 주소</span><em>{{list.delivery_address}}</em></p>
+      <p><span>배달 주소</span><em>{{list.delivery_address_detail}}</em></p>
+      <p><span>배달시 요청 사항</span><em>{{list.delivery_comment}}</em></p>
+      <p><span>레스토랑</span><em>{{list.order_restaurant.title}}</em></p>
+      <p><span>주문 아이템</span><em *ngFor="let item of list.order_items">{{ item.item.title | korean }}, </em></p>
+      <p><span>주문 상태</span><em>{{list.order_status}}</em></p>
+      <p><span>주문 가격</span><em>{{list.price_total}}</em></p>
+      <p><span>결제 방법</span><em>{{list.payment_method}}</em></p>
     </div>
     <button class="button button-fluid uber" (click)="hide = true">닫기</button>
   </div>
@@ -40,8 +40,11 @@
       <div class="button-group">
         <button class="button" (click)="showDetail(list)">영수증 보기</button>
         <button class="button" *ngIf="list.order_status === '준비중'" (click)="cancelOrder(list.id)"><a>주문 취소</a></button>
-        <button class="button uber" *ngIf="list.order_status !== '주문취소'">
+        <button class="button uber" *ngIf="list.order_status !== ('주문취소' && '배달완료')">
           <a [routerLink]="['/status', list.id]">{{ list.order_status }}</a>
+        </button>
+        <button class="button dark" *ngIf="list.order_status === '배달완료'" [class.disabled]="true">
+          {{ list.order_status }}
         </button>
         <button class="button dark" *ngIf="list.order_status === '주문취소'" [class.disabled]="true">
           {{ list.order_status }}

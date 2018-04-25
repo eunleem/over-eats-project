@@ -68,7 +68,7 @@
                 </div>
                 <div class="ready" *ngIf="!restaurant.r_status">준비중</div>
                 <div class="text-group">
-                  <h3 class="name">{{restaurant.title}}</h3>
+                  <h3 class="name">{{restaurant.title | korean }}</h3>
                   <div class="food-types">
                     <span *ngFor="let type of restaurant.tags">
                         {{type.name}}

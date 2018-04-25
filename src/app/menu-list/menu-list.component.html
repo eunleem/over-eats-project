@@ -27,7 +27,7 @@
   <ul class="constraint">
     <li
       *ngFor="let category of categories; let i = index"
-      [scrollTo]="'#a'+i" [scrollDuration]="1000" [scrollOffset]="-140"
+      [scrollTo]="'#a'+i" [scrollDuration]="500" [scrollOffset]="-140"
       class="category-item">
       <a [class.active]="category.active" >{{ category | korean }}</a></li>
   </ul>

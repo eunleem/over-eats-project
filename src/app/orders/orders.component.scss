@@ -118,8 +118,9 @@ section {
   
   @media only screen and (min-width: $medium) {
     width: 70%;
-    max-width: 460px;
+    max-width: 600px;
     height: 650px;
+    overflow: hidden;
 	}
 }
 
@@ -129,13 +130,18 @@ section {
     font-weight: 400;
   }
   p {
-    line-height: 38px;
+    line-height: 30px;
     font-weight: 400;
     border-bottom: 1px solid $light-grey;
     display: flex;
   }
+  span {
+    width: 130px;
+    font-size: 0.9em;
+  }
   em {
-    margin-left: 70px;
+    // margin-left: auto;
+    font-size: 0.9em;
   }
 }
 
