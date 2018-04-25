@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -54,8 +56,7 @@ export class LoginComponent implements OnInit {
     this.auth.signin(user)
       .subscribe(
         () => {
-          console.log(this.auth.isAuthenticated());
-          this.router.navigate(['home']);
+          this.location.back();
         },
         ( {error} ) => {
           console.log('error', error);
