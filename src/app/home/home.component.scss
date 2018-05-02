@@ -34,6 +34,19 @@
     background-position-x: -20%, 110%;
   }
 }
+@keyframes bgInBig {
+  0% {
+    opacity: 0;
+    background-position-x: -100%, 200%;
+  }
+  50% {
+    background-position-x: 0%, 200%;
+  }
+  100% {
+    opacity: 1;
+    background-position-x: 0%, 100%;
+  }
+}
 .home-group {
   background-image: url("../../assets/images/bg-left.png"),
     url("../../assets/images/bg-right.png");
@@ -41,7 +54,7 @@
   // height: calc(100vh - 72px);
   height: 600px;
   // background-position-x: -10%, 110%;
-  background-size: 30% auto;
+  background-size: 40% auto;
   background-repeat: no-repeat, no-repeat;
   margin: 0 auto;
   display: flex;
@@ -56,7 +69,11 @@
   @media only screen and (min-width: 1600px) {
     padding: 0 0;
     background-position-x: 0%, 100%;
-    max-width: 1900px;
+    background-size: 30% auto;
+    max-width: 1200px;
+    animation: bgInBig 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) 1;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
   }
 }
 
