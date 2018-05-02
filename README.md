@@ -1,16 +1,20 @@
 ![Logo of the project](./readme/logo.png)
 
 # OVER EATS
-[Overeats](https://overeats.ohda.fun)
+
+> 사이트 보기 : [Overeats](https://overeats.ohda.fun)
 
 > 패스트캠퍼스 프론트앤드 스쿨 팀프로젝트
+
 Over Eats not Uber Eats!
 FDS : 오다혜 강승훈 
 
 ---
 
 ## Result Snippet
+
 ![screenshot](./readme/screen.gif)
+
 
 
 
