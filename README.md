@@ -7,6 +7,7 @@
 > 패스트캠퍼스 프론트앤드 스쿨 팀프로젝트
 
 Over Eats not Uber Eats!
+
 FDS : 오다혜 강승훈 
 
 ---
@@ -16,7 +17,13 @@ FDS : 오다혜 강승훈
 ![screenshot](./readme/screen.gif)
 
 
+---
 
+## Result Video
+
+<iframe width="630" height="394" src="https://www.useloom.com/embed/9fbbe7f948ea46eb952d9185f6b49289" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+---
 
 ## Installing / Getting started
 
