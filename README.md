@@ -21,7 +21,7 @@ FDS : 오다혜 강승훈
 
 ## Result Video
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/9fbbe7f948ea46eb952d9185f6b49289" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+[video](https://www.useloom.com/share/9fbbe7f948ea46eb952d9185f6b49289)
 
 ---
 
