@@ -17,11 +17,7 @@ FDS : 오다혜 강승훈
 ![screenshot](./readme/screen.gif)
 
 
----
-
-## Result Video
-
-[![screenshot](./readme/screen.gif)](https://www.useloom.com/share/9fbbe7f948ea46eb952d9185f6b49289)
+[영상보기](https://www.useloom.com/share/9fbbe7f948ea46eb952d9185f6b49289)
 
 
 ---
